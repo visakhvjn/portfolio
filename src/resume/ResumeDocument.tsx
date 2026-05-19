@@ -82,7 +82,7 @@ export function ResumeDocument({ content }: Props) {
       <Page size="A4" style={s.page} wrap>
         <View style={s.headerRow}>
           {content.profileImagePath ? (
-            <Image src={content.profileImagePath} style={s.avatar} alt="" />
+            <Image src={content.profileImagePath} style={s.avatar} />
           ) : null}
           <View style={s.headerText}>
             <Text style={s.name}>{content.name}</Text>
