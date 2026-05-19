@@ -9,6 +9,8 @@ export const site = {
   profileImage: "/images/profile.png",
   resumePath: "/resume/Visakh_Vijayan_Resume.pdf",
   resumeDownloadName: "Visakh_Vijayan_Resume.pdf",
+  coverLetterPath: "/cover-letter/Visakh_Vijayan_Cover_Letter.pdf",
+  coverLetterDownloadName: "Visakh_Vijayan_Cover_Letter.pdf",
   intro:
     "I deliver reliable full-stack software across dynamic products—working closely with clients, customers, and technical stakeholders. Adaptable under pressure, from payments and migrations to AI integrations and team leadership.",
   links: {
