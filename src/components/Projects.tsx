@@ -9,14 +9,32 @@ import { SectionHeading } from "./SectionHeading";
 
 type Filter = "all" | "office" | "personal";
 
+function hasProjectLink(project: Project) {
+  return !!(project.demoUrl || project.repoUrl);
+}
+
 export function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
   const [filter, setFilter] = useState<Filter>("all");
 
+  const sortedProjects = useMemo(
+    () =>
+      projects
+        .map((project, index) => ({ project, index }))
+        .sort((a, b) => {
+          const aHasLink = hasProjectLink(a.project);
+          const bHasLink = hasProjectLink(b.project);
+          if (aHasLink !== bHasLink) return aHasLink ? -1 : 1;
+          return a.index - b.index;
+        })
+        .map(({ project }) => project),
+    [],
+  );
+
   const filtered = useMemo(() => {
-    if (filter === "all") return projects;
-    return projects.filter((p) => p.type === filter);
-  }, [filter]);
+    if (filter === "all") return sortedProjects;
+    return sortedProjects.filter((p) => p.type === filter);
+  }, [filter, sortedProjects]);
 
   return (
     <section className="py-14 sm:py-20">

@@ -50,7 +50,7 @@ export const experience: ExperienceEntry[] = [
       "Recco Joy — team lead on recommendations, ad performance dashboards, and offer disbursement for businesses.",
     ],
     tech: ["React", "TypeScript", "Node", "OpenAI", "NLP"],
-    relatedSlugs: ["nesh", "pinch-life"],
+    relatedSlugs: ["nesh", "pinch-life", "recco-joy"],
   },
   {
     id: "seenit",
