@@ -106,6 +106,13 @@ export function Navbar({ onContactClick }: NavbarProps) {
           >
             Resume
           </a>
+          <a
+            href={site.coverLetterPath}
+            download={site.coverLetterDownloadName}
+            className="rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-slate-200 transition hover:border-emerald-500/40 hover:bg-white/5"
+          >
+            Cover letter
+          </a>
           <button
             type="button"
             onClick={onContactClick}
@@ -152,6 +159,13 @@ export function Navbar({ onContactClick }: NavbarProps) {
               className="mt-2 rounded-lg border border-white/10 px-3 py-3 text-center text-sm font-medium text-slate-200"
             >
               Download Resume
+            </a>
+            <a
+              href={site.coverLetterPath}
+              download={site.coverLetterDownloadName}
+              className="mt-2 rounded-lg border border-white/10 px-3 py-3 text-center text-sm font-medium text-slate-200"
+            >
+              Download Cover Letter
             </a>
             <button
               type="button"
