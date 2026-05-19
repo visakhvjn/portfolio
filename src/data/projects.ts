@@ -102,9 +102,26 @@ export const projects: Project[] = [
     reason:
       "Facility management at scale is coordination under pressure—vendors, sites, tickets, and clients all expecting the platform to keep up. The Pinch Life is a widely used SaaS in that space in India, and I served as team lead while we shipped features, stabilized delivery, and kept the product usable for operations teams who live in the tool daily. Leading here meant more than assigning tasks: aligning engineers on priorities, unblocking integration and UI work, and maintaining a bar for quality across a codebase that serves real businesses with real SLAs. The product succeeds when FM teams stop fighting the software and start relying on it for everyday workflows—which is the standard we held the team to.",
     tech: ["React", "Node", "TypeScript", "MongoDB"],
+    demoUrl: "https://pinch.co.in/",
     futureWork: [
       "Mobile-first workflows for on-site facility staff",
       "Reporting modules for enterprise clients",
+    ],
+  },
+  {
+    slug: "recco-joy",
+    heading: "Recco Joy",
+    type: "office",
+    featured: true,
+    summary:
+      "Team lead on recommendations, ad performance dashboards, and offer disbursement for businesses. Shipped tooling that helps brands measure campaigns and reward customers with clearer operational visibility.",
+    reason:
+      "Recco Joy sits at the intersection of social proof, creator-style profiles, and business outcomes—recommendations that matter, ads that need honest performance numbers, and offers that have to land without manual chaos. As team lead, I helped drive delivery across recommendation flows, ad performance dashboards, and offer disbursement so businesses could see what was working and act on it in one place. The work was less about a single flashy feature and more about reliable pipelines: data that stakeholders trust, UIs that ops teams can run weekly, and engineering rhythm that kept shipping as requirements shifted. Public-facing product marketing lives on the main site; my focus was the business and growth tooling behind it.",
+    tech: ["React", "TypeScript", "Node"],
+    demoUrl: "https://reccojoy.com/",
+    futureWork: [
+      "Deeper campaign attribution and cohort reporting",
+      "Self-serve offer configuration for business accounts",
     ],
   },
   {
@@ -157,6 +174,7 @@ export const projects: Project[] = [
     reason:
       "Schools in India collect fees through fragmented channels—cash, cards, different gateways—while admins need one place to see what was paid, what failed, and what is overdue. Before a unified module, that reconciliation work fell on staff with spreadsheets and phone calls. I designed and built the payments module and aggregator panel so schools could run all major transaction types through integrated gateways, with company and school admins sharing a single operational view. The outcome was practical: fee collection became a product feature instead of a manual process, and the company could onboard schools onto digital payments with far less custom work per site.",
     tech: ["Node", "Payment gateways", "MongoDB"],
+    demoUrl: "https://vawsum.com/",
     futureWork: [],
   },
   {
