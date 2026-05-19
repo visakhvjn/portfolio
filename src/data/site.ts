@@ -11,6 +11,9 @@ export const site = {
   resumeDownloadName: "Visakh_Vijayan_Resume.pdf",
   coverLetterPath: "/cover-letter/Visakh_Vijayan_Cover_Letter.pdf",
   coverLetterDownloadName: "Visakh_Vijayan_Cover_Letter.pdf",
+  portfolioUrl: "https://visakhvijayan.com",
+  resumeBio:
+    "With over 8 years of hands-on experience as a software engineer, I have a strong track record of delivering innovative and reliable software solutions across dynamic projects. I've collaborated closely with clients, customers, and technical stakeholders, making me highly adaptable under pressure.",
   intro:
     "I deliver reliable full-stack software across dynamic products—working closely with clients, customers, and technical stakeholders. Adaptable under pressure, from payments and migrations to AI integrations and team leadership.",
   links: {

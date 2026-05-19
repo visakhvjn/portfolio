@@ -5,6 +5,8 @@ export type Project = {
   heading: string;
   type: ProjectType;
   summary: string;
+  /** One-line blurb for the generated resume PDF. */
+  resumeLine?: string;
   reason: string;
   tech: string[];
   demoUrl?: string;
@@ -30,6 +32,8 @@ export type ExperienceEntry = {
 
 export type EducationEntry = {
   degree: string;
+  /** Shorter label for the generated resume PDF. */
+  resumeDegree?: string;
   institution: string;
   period: string;
   detail: string;
