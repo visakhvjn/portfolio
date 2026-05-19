@@ -30,7 +30,7 @@ export const experience: ExperienceEntry[] = [
       "Postgres",
       "AWS",
     ],
-    relatedSlugs: ["remus", "relaxx-ai", "summit", "lvpei"],
+    relatedSlugs: ["remus", "unify-domains", "unify-trust", "relaxx-ai", "summit", "lvpei"],
   },
   {
     id: "better",
@@ -63,8 +63,7 @@ export const experience: ExperienceEntry[] = [
     summary:
       "Modernized a legacy commerce stack and improved B2C performance for high-end retail integrations.",
     bullets: [
-      "Led StyleAde migration from PHP to the MERN stack.",
-      "Built a vendor onboarding flow connecting luxury brand CRMs to low-latency B2C storefronts.",
+      "Led StyleAde migration from PHP to MERN and built vendor onboarding connecting luxury brand CRMs to low-latency B2C storefronts.",
       "Improved search and faceted browse with Elasticsearch.",
     ],
     tech: ["React", "Node", "MongoDB", "PHP", "Elasticsearch"],
