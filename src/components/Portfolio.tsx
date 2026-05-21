@@ -11,6 +11,7 @@ import { TechStack } from "./TechStack";
 import { Hero } from "./Hero";
 import { Navbar } from "./Navbar";
 import { Projects } from "./Projects";
+import { Recommendations } from "./Recommendations";
 
 export function Portfolio() {
   const [contactOpen, setContactOpen] = useState(false);
@@ -25,6 +26,7 @@ export function Portfolio() {
         />
         <Experience />
         <TechStack />
+        <Recommendations />
         <Projects />
         <Education />
         <Blog />
