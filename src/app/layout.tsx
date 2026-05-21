@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { PersonJsonLd } from "@/components/PersonJsonLd";
 import { site } from "@/data/site";
 import "./globals.css";
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body className="mesh-bg min-h-full antialiased">
         <PersonJsonLd />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
