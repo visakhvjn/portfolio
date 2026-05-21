@@ -1,13 +1,19 @@
 "use client";
 
 import { projects } from "@/data/projects";
+import {
+  projectTypeBadgeClass,
+  projectTypeFilterLabel,
+  projectTypeLabel,
+} from "@/lib/projectType";
 import type { Project } from "@/types";
 import { useMemo, useState } from "react";
 import { AnimateIn } from "./AnimateIn";
 import { ProjectModal } from "./ProjectModal";
 import { SectionHeading } from "./SectionHeading";
 
-type Filter = "all" | "office" | "personal";
+const filters = ["all", "office", "personal", "ai"] as const;
+type Filter = (typeof filters)[number];
 
 function hasProjectLink(project: Project) {
   return !!(project.demoUrl || project.repoUrl);
@@ -43,10 +49,14 @@ export function Projects() {
       </AnimateIn>
       <AnimateIn delay={100}>
         <div className="mt-8 flex flex-wrap gap-2">
-          {(["all", "office", "personal"] as const).map((f) => (
-            <button key={f} type="button" onClick={() => setFilter(f)}
-              className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition ${filter === f ? "bg-emerald-500 text-slate-950" : "bg-white/5 text-slate-400 hover:text-white"}`}>
-              {f === "all" ? "All" : f === "office" ? "Work" : "Personal"}
+          {filters.map((f) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => setFilter(f)}
+              className={`rounded-lg px-4 py-2 text-sm font-medium transition ${filter === f ? "bg-emerald-500 text-slate-950" : "bg-white/5 text-slate-400 hover:text-white"}`}
+            >
+              {f === "all" ? "All" : projectTypeFilterLabel(f)}
             </button>
           ))}
         </div>
@@ -64,7 +74,9 @@ export function Projects() {
                   <h3 className="line-clamp-2 font-semibold leading-snug text-white group-hover:text-emerald-300">
                     {project.heading}
                   </h3>
-                  <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase ${project.type === "personal" ? "bg-sky-500/20 text-sky-300" : "bg-violet-500/20 text-violet-300"}`}>{project.type === "personal" ? "Personal" : "Work"}</span>
+                  <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase ${projectTypeBadgeClass(project.type)}`}>
+                    {projectTypeLabel(project.type)}
+                  </span>
                 </div>
                 <p className="clamp-3 min-h-[4.5rem] text-sm leading-6 text-slate-400">
                   {project.summary}

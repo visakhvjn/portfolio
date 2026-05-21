@@ -1,5 +1,6 @@
 "use client";
 
+import { projectTypeBadgeClass, projectTypeLabel } from "@/lib/projectType";
 import type { Project } from "@/types";
 import { Modal } from "./Modal";
 
@@ -8,8 +9,8 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
   return (
     <Modal open={!!project} onClose={onClose} title={project.heading} wide>
       <div className="mb-4 flex flex-wrap gap-2">
-        <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${project.type === "personal" ? "bg-sky-500/20 text-sky-300" : "bg-violet-500/20 text-violet-300"}`}>
-          {project.type === "personal" ? "Personal" : "Professional"}
+        <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${projectTypeBadgeClass(project.type)}`}>
+          {projectTypeLabel(project.type)}
         </span>
         {project.type === "office" && (
           <span className="rounded-full bg-amber-500/20 px-2.5 py-0.5 text-xs font-medium text-amber-300">
