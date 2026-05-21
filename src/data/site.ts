@@ -33,8 +33,8 @@ export const navItems = [
   { id: "me", label: "Me" },
   { id: "experience", label: "Experience" },
   { id: "skills", label: "Skills" },
-  { id: "recommendations", label: "Reviews" },
   { id: "projects", label: "Projects" },
   { id: "education", label: "Education" },
+  { id: "recommendations", label: "Reviews" },
   { id: "blog", label: "Blog" },
 ] as const;

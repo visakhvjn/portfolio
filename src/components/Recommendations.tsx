@@ -13,7 +13,7 @@ export function Recommendations() {
         <SectionHeading
           id="recommendations"
           title="Recommendations"
-          subtitle="Colleagues, managers, and mentors on LinkedIn — professional work, not freelance gigs."
+          subtitle="Written recommendations from colleagues, managers, and mentors I've worked with."
         />
       </AnimateIn>
       <AnimateIn delay={80}>

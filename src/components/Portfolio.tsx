@@ -26,9 +26,9 @@ export function Portfolio() {
         />
         <Experience />
         <TechStack />
-        <Recommendations />
         <Projects />
         <Education />
+        <Recommendations />
         <Blog />
         <footer className="mt-10 border-t border-white/10 pt-8 text-center text-sm text-slate-500">
           <p>
