@@ -44,9 +44,9 @@ export const skillCategories: SkillCategory[] = [
       "OpenAI",
       "RAG",
       "LangChain",
+      "LangGraph",
       "Vector databases",
       "Cursor",
-      "Claude Code",
     ],
   },
   {

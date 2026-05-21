@@ -44,23 +44,25 @@ export function Experience() {
                       )}
                     </div>
                     <p className="mt-4 text-sm leading-relaxed text-slate-400">{isOpen || job.current ? job.summary : job.collapsedPreview}</p>
-                    {(isOpen || job.current) && (
-                      <>
-                        <ul className="mt-4 space-y-2">
-                          {job.bullets.map((b) => (
-                            <li key={b.slice(0, 40)} className="flex gap-2 text-sm text-slate-300">
-                              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-emerald-400" />
-                              {b}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {job.tech.map((t) => (
-                            <span key={t} className="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-400">{t}</span>
-                          ))}
-                        </div>
-                      </>
-                    )}
+                    <ul
+                      className={`mt-4 space-y-2 ${isOpen || job.current ? "" : "sr-only"}`}
+                      aria-hidden={!(isOpen || job.current)}
+                    >
+                      {job.bullets.map((b) => (
+                        <li key={b.slice(0, 40)} className="flex gap-2 text-sm text-slate-300">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-emerald-400" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                    <div
+                      className={`mt-4 flex flex-wrap gap-2 ${isOpen || job.current ? "" : "sr-only"}`}
+                      aria-hidden={!(isOpen || job.current)}
+                    >
+                      {job.tech.map((t) => (
+                        <span key={t} className="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-400">{t}</span>
+                      ))}
+                    </div>
                   </article>
                 </li>
               </AnimateIn>
