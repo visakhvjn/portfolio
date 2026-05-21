@@ -1,4 +1,4 @@
-export type ProjectType = "office" | "personal";
+export type ProjectType = "office" | "personal" | "ai";
 
 export type Project = {
   slug: string;

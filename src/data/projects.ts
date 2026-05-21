@@ -228,9 +228,28 @@ export const projects: Project[] = [
     futureWork: ["More scenario presets", "Exportable reports"],
   },
   {
+    slug: "chat-and-more",
+    heading: "Chat & More",
+    type: "ai",
+    featured: true,
+    summary:
+      "ChatGPT-style learning assistant powered by Gemini and LangGraph: each question triggers a graph that returns an answer, a summary, MCQs to check understanding, and follow-up prompts to go deeper.",
+    resumeLine:
+      "Gemini + LangGraph learning chat with answers, summaries, quizzes, and follow-up questions.",
+    reason:
+      "Most chat tools stop at a single reply. Chat & More is built for actually learning from a question—first a clear answer, then a short summary, then multiple-choice questions to verify you understood it, and finally suggested follow-ups for the next thing to ask. LangGraph orchestrates that multi-step pipeline so each stage runs in order with clear handoffs; Gemini generates the content at each step. The flow mirrors how people study: read, recap, test yourself, then continue. I built it as a product experiment in graph-based AI workflows and UX beyond a one-shot completion, deployed on Vercel for fast iteration.",
+    tech: ["Next.js", "TypeScript", "React", "Gemini", "LangGraph", "Vercel"],
+    demoUrl: "https://chat-and-more.vercel.app/",
+    futureWork: [
+      "Session history and saved study threads",
+      "Difficulty levels for generated quizzes",
+      "Export or share summary + MCQ sets",
+    ],
+  },
+  {
     slug: "ai-debator",
     heading: "AI Debator",
-    type: "personal",
+    type: "ai",
     summary:
       "Multi-agent AI debate experience with opposing viewpoints and turn-taking. Experiments with prompt roles, real-time interaction, and UI patterns beyond single-assistant chat.",
     resumeLine:
