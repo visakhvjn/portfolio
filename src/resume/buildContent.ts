@@ -3,56 +3,22 @@ import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import { skillCategories } from "@/data/skills";
 import { site } from "@/data/site";
-import {
-  experienceProductExtras,
-  experienceProductOrder,
-} from "./experienceProducts";
 import type { Project } from "@/types";
+import { buildLinkedBulletsForJob } from "./linkBullets";
 import type {
   ResumeContent,
-  ResumeProductLine,
   ResumeProjectEntry,
   ResumeWorkEntry,
 } from "./types";
 
-const projectsBySlug = Object.fromEntries(
-  projects.map((p) => [p.slug, p]),
-);
-
-function resolveProductLine(
-  experienceId: string,
-  item: { slug?: string; extraIndex?: number },
-): ResumeProductLine | null {
-  if (item.slug) {
-    const project = projectsBySlug[item.slug];
-    if (!project) return null;
-    return {
-      name: project.heading,
-      description: project.summary,
-      url: project.demoUrl,
-    };
-  }
-  if (item.extraIndex !== undefined) {
-    const extras = experienceProductExtras[experienceId];
-    return extras?.[item.extraIndex] ?? null;
-  }
-  return null;
-}
-
 function buildWorkExperience(): ResumeWorkEntry[] {
-  return experience.map((entry) => {
-    const order = experienceProductOrder[entry.id] ?? [];
-    const products = order
-      .map((item) => resolveProductLine(entry.id, item))
-      .filter((line): line is ResumeProductLine => line !== null);
-
-    return {
-      company: entry.company,
-      location: entry.location,
-      period: entry.period,
-      products,
-    };
-  });
+  return experience.map((entry) => ({
+    company: entry.company,
+    location: entry.location,
+    role: entry.role,
+    period: entry.period,
+    bullets: buildLinkedBulletsForJob(entry),
+  }));
 }
 
 function buildEducation() {
@@ -88,7 +54,7 @@ function buildResumeProjects(): ResumeProjectEntry[] {
     .map((p) => ({
       name: p.heading,
       description: resumeOneLiner(p),
-      url: p.demoUrl,
+      url: p.demoUrl ?? p.repoUrl,
     }));
 }
 
@@ -105,8 +71,9 @@ export function buildResumeContent(
     portfolioUrl: site.portfolioUrl,
     links: [
       { label: "LinkedIn", url: site.links.linkedin },
+      { label: "GitHub", url: site.links.github },
       { label: "Medium", url: site.links.medium },
-      { label: "Leet Code", url: site.links.leetcode },
+      { label: "LeetCode", url: site.links.leetcode },
     ],
     skillCategories: skillCategories.map((cat) => ({
       title: cat.title,

@@ -107,6 +107,14 @@ export function Navbar({ onContactClick }: NavbarProps) {
             Resume
           </a>
           <a
+            href={site.resumeNoPhotoPath}
+            download={site.resumeNoPhotoDownloadName}
+            title="ATS-friendly resume without photo"
+            className="rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-slate-400 transition hover:border-emerald-500/40 hover:bg-white/5"
+          >
+            Resume (no photo)
+          </a>
+          <a
             href={site.coverLetterPath}
             download={site.coverLetterDownloadName}
             className="rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-slate-200 transition hover:border-emerald-500/40 hover:bg-white/5"
@@ -159,6 +167,13 @@ export function Navbar({ onContactClick }: NavbarProps) {
               className="mt-2 rounded-lg border border-white/10 px-3 py-3 text-center text-sm font-medium text-slate-200"
             >
               Download Resume
+            </a>
+            <a
+              href={site.resumeNoPhotoPath}
+              download={site.resumeNoPhotoDownloadName}
+              className="mt-2 rounded-lg border border-white/10 px-3 py-3 text-center text-sm font-medium text-slate-400"
+            >
+              Resume (no photo)
             </a>
             <a
               href={site.coverLetterPath}

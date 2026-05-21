@@ -46,7 +46,6 @@ export const skillCategories: SkillCategory[] = [
       "LangChain",
       "Vector databases",
       "Cursor",
-      "Claude Code",
     ],
   },
   {

@@ -47,8 +47,20 @@ export const resumeStyles = StyleSheet.create({
     marginBottom: 8,
     textAlign: "justify",
   },
-  linkRow: {
+  linkGrid: {
+    marginTop: 2,
+  },
+  linkGridRow: {
+    flexDirection: "row",
     marginBottom: 2,
+  },
+  linkCell: {
+    width: "50%",
+    paddingRight: 8,
+  },
+  linkCellText: {
+    fontSize: 8.5,
+    lineHeight: 1.3,
   },
   linkLabel: {
     fontFamily: "Helvetica-Bold",
@@ -85,6 +97,11 @@ export const resumeStyles = StyleSheet.create({
   },
   experienceCompanyName: {
     fontSize: 11.5,
+  },
+  experienceRoleLine: {
+    fontSize: 10,
+    marginBottom: 6,
+    color: "#333",
   },
   bulletRow: {
     flexDirection: "row",

@@ -9,6 +9,8 @@ export const site = {
   profileImage: "/images/profile.png",
   resumePath: "/resume/Visakh_Vijayan_Resume.pdf",
   resumeDownloadName: "Visakh_Vijayan_Resume.pdf",
+  resumeNoPhotoPath: "/resume/Visakh_Vijayan_Resume_No_Photo.pdf",
+  resumeNoPhotoDownloadName: "Visakh_Vijayan_Resume_No_Photo.pdf",
   coverLetterPath: "/cover-letter/Visakh_Vijayan_Cover_Letter.pdf",
   coverLetterDownloadName: "Visakh_Vijayan_Cover_Letter.pdf",
   portfolioUrl: "https://visakhvijayan.com",
