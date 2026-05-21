@@ -1,7 +1,9 @@
 "use client";
 
 import { howIWork, serviceIntro, services } from "@/data/services";
+import { testimonials } from "@/data/testimonials";
 import { Modal } from "./Modal";
+import { TestimonialSlider } from "./TestimonialSlider";
 
 type ServicesModalProps = {
   open: boolean;
@@ -57,6 +59,8 @@ export function ServicesModal({
           </li>
         ))}
       </ul>
+
+      <TestimonialSlider testimonials={testimonials} embedded title="Client reviews" />
 
       <div className="mt-6 border-t border-white/10 pt-6">
         <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
