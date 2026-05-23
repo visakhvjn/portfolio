@@ -29,6 +29,18 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Contact form
+
+Submissions from the **Contact me** modal are sent to `vjnvisakh@gmail.com` via the `/api/contact` route.
+
+1. Copy `.env.example` to `.env.local`
+2. Sign up at [Resend](https://resend.com), create an API key, and set `RESEND_API_KEY`
+3. For production, add the same variable in **Vercel → Project → Settings → Environment Variables**, then redeploy
+
+On Resend’s free tier without a verified domain, use the default sender (`onboarding@resend.dev`) and ensure your Resend account email matches the inbox you want to receive mail at. After verifying a domain, set `RESEND_FROM` to something like `Portfolio <contact@visakhvijayan.com>`.
+
+Alternatively, set `WEB3FORMS_ACCESS_KEY` from [Web3Forms](https://web3forms.com) (register with `vjnvisakh@gmail.com`).
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
