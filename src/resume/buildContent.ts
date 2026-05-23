@@ -34,6 +34,7 @@ function buildEducation() {
 const resumePersonalProjectSlugs = [
   "dumpd",
   "rolush",
+  "innovative-strategic",
   "startup-stress-tester",
   "ai-debator",
   "daily-motivation-ai",
