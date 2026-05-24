@@ -32,7 +32,7 @@ export const projects: Project[] = [
     reason:
       "Accounting and tax firms need a site that earns trust before the first call—clear services, compliance signals, and a simple path to book a consultation. Innovative & Strategic F.Z.E needed that for their Ajman Free Zone practice: corporate tax, VAT, audit, bookkeeping, AML, and advisory work across the UAE, UK, and Georgia. I built the marketing site end-to-end—navigation across seven practice areas, packages and FAQ pages, client testimonials, track-record highlights, and contact and consultation flows so prospects see what they offer and how to reach the team. The design leans into credibility for regulated industries: readable service copy, FTA and compliance cues, and mobile-friendly layouts on Vercel so the firm can iterate as services and regulations change.",
     tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
-    demoUrl: "https://ka-website-dusky.vercel.app/",
+    demoUrl: "https://www.innovativestrategic.com/",
     futureWork: [
       "Insights or blog section for UAE tax and VAT updates",
       "Integrated online consultation scheduling",
