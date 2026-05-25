@@ -247,6 +247,46 @@ export const projects: Project[] = [
     futureWork: ["More scenario presets", "Exportable reports"],
   },
   {
+    slug: "blog-mcp",
+    heading: "Blog MCP",
+    type: "ai",
+    featured: true,
+    summary:
+      "AI-native blogging platform with an MCP server for Cursor and other clients — draft and publish markdown posts from your IDE, claim a public blog at /username, and manage drafts from a dashboard.",
+    resumeLine:
+      "MCP-powered blog platform: publish from Cursor, public /username portfolio, drafts, and Google sign-in.",
+    reason:
+      "Dumpd! proved automated AI publishing could attract readers; Blog MCP tackles the other half of the problem—builders who already live in Cursor but never ship a public presence because publishing is a context switch. I built Blog MCP as a full product loop: Google sign-in, API keys for MCP clients, tools like create_post with draft vs published status, markdown posts, and a dashboard when you want to edit by hand. Each user gets a clean public blog at /username so the output is a portfolio you maintain, not a pile of local drafts. The Hobby tier keeps onboarding honest (free start, no credit card), with room to grow into premium features like custom domains and analytics. It is my bet on MCP as a real distribution surface—not just chat in the editor, but shipping live on the web from the same session where you write.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "MCP",
+      "Google OAuth",
+      "Markdown",
+      "Vercel",
+    ],
+    demoUrl: "https://blog-mcp-five.vercel.app/",
+    futureWork: [
+      "Custom domain support",
+      "Post analytics",
+      "Additional MCP tools for scheduling and SEO",
+    ],
+  },
+  {
+    slug: "ai-debator",
+    heading: "AI Debator",
+    type: "ai",
+    summary:
+      "Multi-agent AI debate experience with opposing viewpoints and turn-taking. Experiments with prompt roles, real-time interaction, and UI patterns beyond single-assistant chat.",
+    resumeLine:
+      "Multi-agent AI debate app with opposing viewpoints and turn-taking beyond single-chat UIs.",
+    reason:
+      "Single-agent chat UIs hide a lot of interesting AI design space. AI Debator explores multi-perspective conversation: opposing arguments, turn-taking, and the feeling of a live debate rather than one assistant agreeing with you. I built it to experiment with prompt structure, agent roles, and real-time interaction patterns in a UI that is fun enough to share and technical enough to learn from. It is a product sketch for how structured disagreement and transparency might work in tools that go beyond Q&A—useful for interviews, demos, and sharpening my instincts on conversational product design.",
+    tech: ["Next.js", "OpenAI", "TypeScript"],
+    demoUrl: "https://ai-debator-liart.vercel.app/",
+    futureWork: ["Topic packs", "Shareable debate transcripts"],
+  },
+  {
     slug: "chat-and-more",
     heading: "Chat & More",
     type: "ai",
@@ -264,20 +304,6 @@ export const projects: Project[] = [
       "Difficulty levels for generated quizzes",
       "Export or share summary + MCQ sets",
     ],
-  },
-  {
-    slug: "ai-debator",
-    heading: "AI Debator",
-    type: "ai",
-    summary:
-      "Multi-agent AI debate experience with opposing viewpoints and turn-taking. Experiments with prompt roles, real-time interaction, and UI patterns beyond single-assistant chat.",
-    resumeLine:
-      "Multi-agent AI debate app with opposing viewpoints and turn-taking beyond single-chat UIs.",
-    reason:
-      "Single-agent chat UIs hide a lot of interesting AI design space. AI Debator explores multi-perspective conversation: opposing arguments, turn-taking, and the feeling of a live debate rather than one assistant agreeing with you. I built it to experiment with prompt structure, agent roles, and real-time interaction patterns in a UI that is fun enough to share and technical enough to learn from. It is a product sketch for how structured disagreement and transparency might work in tools that go beyond Q&A—useful for interviews, demos, and sharpening my instincts on conversational product design.",
-    tech: ["Next.js", "OpenAI", "TypeScript"],
-    demoUrl: "https://ai-debator-liart.vercel.app/",
-    futureWork: ["Topic packs", "Shareable debate transcripts"],
   },
   {
     slug: "daily-motivation-ai",

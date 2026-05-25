@@ -45,6 +45,7 @@ export const skillCategories: SkillCategory[] = [
       "RAG",
       "LangChain",
       "LangGraph",
+      "MCP",
       "Vector databases",
       "Cursor",
     ],
