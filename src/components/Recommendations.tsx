@@ -14,6 +14,7 @@ export function Recommendations() {
           id="recommendations"
           title="Recommendations"
           subtitle="Written recommendations from colleagues, managers, and mentors I've worked with."
+          subtitleNoWrap
         />
       </AnimateIn>
       <AnimateIn delay={80}>

@@ -3,6 +3,16 @@ import type { Testimonial } from "@/types/testimonial";
 /** LinkedIn recommendations — newest first. */
 export const linkedinRecommendations: Testimonial[] = [
   {
+    id: "komati-sai-vardhan",
+    clientName: "Komati Sai Vardhan",
+    headline:
+      "SDET at Unify Technologies · QA & automation · Selenium · Appium · Cucumber",
+    relationship: "Worked on the same team · May 2026",
+    review:
+      "I worked with Visakh for around 1 year at Unify Technologies. He is very hardworking, supportive, and good at what he does. He is very cooperative with the team. He is easy to work with and always ready to help others when needed. I really enjoyed working with him and would definitely recommend him. Any team would be lucky to have him.",
+    source: "LinkedIn",
+  },
+  {
     id: "annapurna-chowdhury",
     clientName: "Annapurna Chowdhury",
     headline: "Building Muller Luggage Industries | Ex-StockEdge",
