@@ -25,13 +25,15 @@ export function Navbar({ onContactClick }: NavbarProps) {
 
     let current: NavId = navItems[0].id;
 
-    for (const { id } of navItems) {
-      const el = document.getElementById(id);
+    for (const item of navItems) {
+      if ("href" in item && item.href) continue;
+
+      const el = document.getElementById(item.id);
       if (!el) continue;
 
       const top = el.getBoundingClientRect().top;
       if (top <= HEADER_OFFSET) {
-        current = id;
+        current = item.id;
       }
     }
 
@@ -82,20 +84,32 @@ export function Navbar({ onContactClick }: NavbarProps) {
         </button>
 
         <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => scrollTo(item.id)}
-              className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                active === item.id
-                  ? "bg-white/10 text-white"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
+          {navItems.map((item) =>
+            "href" in item && item.href ? (
+              <a
+                key={item.id}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:text-white"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => scrollTo(item.id)}
+                className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                  active === item.id
+                    ? "bg-white/10 text-white"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                {item.label}
+              </button>
+            ),
+          )}
         </nav>
 
         <div className="hidden items-center gap-2 sm:flex">
@@ -149,18 +163,31 @@ export function Navbar({ onContactClick }: NavbarProps) {
       {menuOpen && (
         <div className="border-t border-white/5 bg-[#070b14] px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-1">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => scrollTo(item.id)}
-                className={`rounded-lg px-3 py-3 text-left text-sm font-medium ${
-                  active === item.id ? "bg-white/10 text-white" : "text-slate-400"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) =>
+              "href" in item && item.href ? (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-lg px-3 py-3 text-left text-sm font-medium text-slate-400 hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => scrollTo(item.id)}
+                  className={`rounded-lg px-3 py-3 text-left text-sm font-medium ${
+                    active === item.id ? "bg-white/10 text-white" : "text-slate-400"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ),
+            )}
             <a
               href={site.resumePath}
               download={site.resumeDownloadName}

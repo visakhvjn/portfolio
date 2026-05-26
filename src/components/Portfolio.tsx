@@ -2,7 +2,6 @@
 
 import { site } from "@/data/site";
 import { useState } from "react";
-import { Blog } from "./Blog";
 import { ContactModal } from "./ContactModal";
 import { ServicesModal } from "./ServicesModal";
 import { Education } from "./Education";
@@ -29,7 +28,6 @@ export function Portfolio() {
         <Projects />
         <Education />
         <Recommendations />
-        <Blog />
         <footer className="mt-10 border-t border-white/10 pt-8 text-center text-sm text-slate-500">
           <p>
             <a
