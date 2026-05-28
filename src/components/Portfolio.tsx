@@ -2,7 +2,6 @@
 
 import { site } from "@/data/site";
 import { useState } from "react";
-import { CalendlyPopup } from "./CalendlyPopup";
 import { ContactModal } from "./ContactModal";
 import { ServicesModal } from "./ServicesModal";
 import { Education } from "./Education";
@@ -53,7 +52,6 @@ export function Portfolio() {
         onClose={() => setServicesOpen(false)}
         onContactClick={() => setContactOpen(true)}
       />
-      <CalendlyPopup />
     </>
   );
 }

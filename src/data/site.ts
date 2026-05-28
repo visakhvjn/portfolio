@@ -38,6 +38,5 @@ export const navItems = [
   { id: "projects", label: "Projects" },
   { id: "education", label: "Education" },
   { id: "recommendations", label: "Reviews" },
-  { id: "book", label: "Book", opensCalendly: true },
   { id: "blog", label: "Blog", href: site.links.blog },
 ] as const;

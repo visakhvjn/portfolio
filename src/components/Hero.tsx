@@ -31,17 +31,10 @@ export function Hero({ onContactClick, onServicesClick }: HeroProps) {
               {site.intro}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a
-                href={site.resumePath}
-                download={site.resumeDownloadName}
-                className="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
-              >
-                Download Resume
-              </a>
               <button
                 type="button"
                 onClick={onContactClick}
-                className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
               >
                 Contact me
               </button>

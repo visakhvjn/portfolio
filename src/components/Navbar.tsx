@@ -2,7 +2,7 @@
 
 import { navItems, site } from "@/data/site";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { CalendlyBookButton } from "./CalendlyBookButton";
+import { DownloadResumeDropdown } from "./DownloadResumeDropdown";
 
 type NavbarProps = {
   onContactClick: () => void;
@@ -28,7 +28,6 @@ export function Navbar({ onContactClick }: NavbarProps) {
 
     for (const item of navItems) {
       if ("href" in item && item.href) continue;
-      if ("opensCalendly" in item && item.opensCalendly) continue;
 
       const el = document.getElementById(item.id);
       if (!el) continue;
@@ -97,12 +96,6 @@ export function Navbar({ onContactClick }: NavbarProps) {
               >
                 {item.label}
               </a>
-            ) : "opensCalendly" in item && item.opensCalendly ? (
-              <CalendlyBookButton
-                key={item.id}
-                text={item.label}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:text-white"
-              />
             ) : (
               <button
                 key={item.id}
@@ -121,28 +114,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
         </nav>
 
         <div className="hidden items-center gap-2 sm:flex">
-          <a
-            href={site.resumePath}
-            download={site.resumeDownloadName}
-            className="rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-slate-200 transition hover:border-emerald-500/40 hover:bg-white/5"
-          >
-            Resume
-          </a>
-          <a
-            href={site.resumeNoPhotoPath}
-            download={site.resumeNoPhotoDownloadName}
-            title="ATS-friendly resume without photo"
-            className="rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-slate-400 transition hover:border-emerald-500/40 hover:bg-white/5"
-          >
-            Resume (no photo)
-          </a>
-          <a
-            href={site.coverLetterPath}
-            download={site.coverLetterDownloadName}
-            className="rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-slate-200 transition hover:border-emerald-500/40 hover:bg-white/5"
-          >
-            Cover letter
-          </a>
+          <DownloadResumeDropdown />
           <button
             type="button"
             onClick={onContactClick}
@@ -183,12 +155,6 @@ export function Navbar({ onContactClick }: NavbarProps) {
                 >
                   {item.label}
                 </a>
-              ) : "opensCalendly" in item && item.opensCalendly ? (
-                <CalendlyBookButton
-                  key={item.id}
-                  text={item.label}
-                  className="w-full rounded-lg px-3 py-3 text-left text-sm font-medium text-slate-400 hover:text-white"
-                />
               ) : (
                 <button
                   key={item.id}
@@ -202,27 +168,11 @@ export function Navbar({ onContactClick }: NavbarProps) {
                 </button>
               ),
             )}
-            <a
-              href={site.resumePath}
-              download={site.resumeDownloadName}
-              className="mt-2 rounded-lg border border-white/10 px-3 py-3 text-center text-sm font-medium text-slate-200"
-            >
-              Download Resume
-            </a>
-            <a
-              href={site.resumeNoPhotoPath}
-              download={site.resumeNoPhotoDownloadName}
-              className="mt-2 rounded-lg border border-white/10 px-3 py-3 text-center text-sm font-medium text-slate-400"
-            >
-              Resume (no photo)
-            </a>
-            <a
-              href={site.coverLetterPath}
-              download={site.coverLetterDownloadName}
-              className="mt-2 rounded-lg border border-white/10 px-3 py-3 text-center text-sm font-medium text-slate-200"
-            >
-              Download Cover Letter
-            </a>
+            <DownloadResumeDropdown
+              fullWidth
+              className="mt-2"
+              onSelect={() => setMenuOpen(false)}
+            />
             <button
               type="button"
               onClick={() => {
