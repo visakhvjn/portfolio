@@ -6,6 +6,7 @@ export const site = {
   phone: "+91-7980-544-891",
   whatsapp: "7980544891",
   whatsappUrl: "https://wa.me/9179805444891",
+  calendlyUrl: "https://calendly.com/vjnvisakh/discussion",
   profileImage: "/images/profile.png",
   resumePath: "/resume/Visakh_Vijayan_Resume.pdf",
   resumeDownloadName: "Visakh_Vijayan_Resume.pdf",
@@ -37,5 +38,6 @@ export const navItems = [
   { id: "projects", label: "Projects" },
   { id: "education", label: "Education" },
   { id: "recommendations", label: "Reviews" },
+  { id: "book", label: "Book", opensCalendly: true },
   { id: "blog", label: "Blog", href: site.links.blog },
 ] as const;

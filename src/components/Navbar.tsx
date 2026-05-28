@@ -2,6 +2,7 @@
 
 import { navItems, site } from "@/data/site";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { CalendlyBookButton } from "./CalendlyBookButton";
 
 type NavbarProps = {
   onContactClick: () => void;
@@ -27,6 +28,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
 
     for (const item of navItems) {
       if ("href" in item && item.href) continue;
+      if ("opensCalendly" in item && item.opensCalendly) continue;
 
       const el = document.getElementById(item.id);
       if (!el) continue;
@@ -95,6 +97,12 @@ export function Navbar({ onContactClick }: NavbarProps) {
               >
                 {item.label}
               </a>
+            ) : "opensCalendly" in item && item.opensCalendly ? (
+              <CalendlyBookButton
+                key={item.id}
+                text={item.label}
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:text-white"
+              />
             ) : (
               <button
                 key={item.id}
@@ -175,6 +183,12 @@ export function Navbar({ onContactClick }: NavbarProps) {
                 >
                   {item.label}
                 </a>
+              ) : "opensCalendly" in item && item.opensCalendly ? (
+                <CalendlyBookButton
+                  key={item.id}
+                  text={item.label}
+                  className="w-full rounded-lg px-3 py-3 text-left text-sm font-medium text-slate-400 hover:text-white"
+                />
               ) : (
                 <button
                   key={item.id}

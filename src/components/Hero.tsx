@@ -3,6 +3,7 @@
 import { site } from "@/data/site";
 import Image from "next/image";
 import { AnimateIn } from "./AnimateIn";
+import { CalendlyBookButton } from "./CalendlyBookButton";
 
 type HeroProps = {
   onContactClick: () => void;
@@ -44,6 +45,10 @@ export function Hero({ onContactClick, onServicesClick }: HeroProps) {
               >
                 Contact me
               </button>
+              <CalendlyBookButton
+                text="Book a call"
+                className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              />
               <button
                 type="button"
                 onClick={onServicesClick}
