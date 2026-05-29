@@ -1,6 +1,6 @@
 export const site = {
   name: "Visakh Vijayan",
-  title: "Full-Stack Developer",
+  title: "Senior Full-Stack Engineer",
   tagline: "8+ years building SaaS, fintech, health & edtech products",
   email: "vjnvisakh@gmail.com",
   phone: "+91-7980-544-891",

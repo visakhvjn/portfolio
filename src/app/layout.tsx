@@ -14,14 +14,14 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.portfolioUrl),
-  title: "Visakh Vijayan | Full-Stack Developer",
+  title: "Visakh Vijayan | Senior Full-Stack Engineer",
   description:
-    "Portfolio of Visakh Vijayan — full-stack developer with 8+ years building SaaS, fintech, health, and AI-powered products.",
+    "Portfolio of Visakh Vijayan — senior full-stack engineer with 8+ years building SaaS, fintech, health, and AI-powered products.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Visakh Vijayan | Full-Stack Developer",
+    title: "Visakh Vijayan | Senior Full-Stack Engineer",
     description:
       "8+ years across React, Node, Next.js, cloud, and AI integrations.",
     type: "website",
