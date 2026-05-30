@@ -319,4 +319,23 @@ export const projects: Project[] = [
     demoUrl: "https://daily-motivation-ai-qfin.vercel.app/",
     futureWork: ["Personalization by mood/goals", "Push notifications"],
   },
+  {
+    slug: "guess-the-pic",
+    heading: "Guess the Pic",
+    type: "games",
+    featured: true,
+    summary:
+      "One photo, one word — a quick picture-guessing game where you decode the image and type the answer. Built for fast rounds and shareable “can you get it?” moments.",
+    resumeLine:
+      "Picture-guessing word game: one image, one answer, built for quick playable rounds on the web.",
+    reason:
+      "I wanted a small game that is easy to open and hard to put down — no account, no tutorial wall, just a photo and a single word to figure out. Guess the Pic is that loop: show a striking image, let the player guess, and keep the UI light enough to work on mobile. I built it on Next.js and deployed to Vercel so I could iterate on image sourcing, difficulty, and feedback without overbuilding backend infrastructure. It sits in my portfolio as a contrast to dashboards and agents: product craft focused on delight, pacing, and clarity in a few seconds of play.",
+    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
+    demoUrl: "https://guess-the-pic.vercel.app/",
+    futureWork: [
+      "Daily challenge mode and streaks",
+      "Difficulty tiers and hint system",
+      "Shareable score cards",
+    ],
+  },
 ];

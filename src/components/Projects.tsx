@@ -12,7 +12,7 @@ import { AnimateIn } from "./AnimateIn";
 import { ProjectModal } from "./ProjectModal";
 import { SectionHeading } from "./SectionHeading";
 
-const filters = ["all", "office", "personal", "ai"] as const;
+const filters = ["all", "office", "personal", "ai", "games"] as const;
 type Filter = (typeof filters)[number];
 
 function hasProjectLink(project: Project) {

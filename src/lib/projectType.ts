@@ -8,6 +8,8 @@ export function projectTypeLabel(type: ProjectType): string {
       return "Personal";
     case "ai":
       return "AI";
+    case "games":
+      return "Games";
   }
 }
 
@@ -25,5 +27,7 @@ export function projectTypeBadgeClass(type: ProjectType): string {
       return "bg-sky-500/20 text-sky-300";
     case "ai":
       return "bg-fuchsia-500/20 text-fuchsia-300";
+    case "games":
+      return "bg-amber-500/20 text-amber-300";
   }
 }
