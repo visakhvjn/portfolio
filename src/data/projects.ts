@@ -40,6 +40,35 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "ident-dental",
+    heading: "iDent Dental",
+    type: "personal",
+    featured: true,
+    summary:
+      "Marketing site for a Kochi dental speciality and cosmetic centre — services across general, cosmetic, orthodontic, and implant care, before-and-after testimonials, doctor profiles, and appointment booking.",
+    resumeLine:
+      "Dental clinic marketing site with services, before/after testimonials, doctor profiles, and appointment booking in Kochi.",
+    reason:
+      "Dental clinics need a site that builds trust before the first visit—clear services, real patient outcomes, and an easy path to book. iDent Dental Speciality & Cosmetic Centre in Panampilly Nagar, Kochi needed that for a practice spanning preventive care, cosmetic transformations, orthodontics, implants, pediatric dentistry, and emergency visits. I built the marketing site end-to-end: navigation across service areas, a testimonials section with before-and-after transformations, specialist doctor profiles, and appointment booking so patients understand what the clinic offers and how to reach the team. The design leans into credibility for healthcare: readable service copy, social proof from real cases, and mobile-friendly layouts on Vercel so the practice can iterate as services and seasons change.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "Vercel",
+      "S3",
+      "CloudFront",
+      "Certificate Manager",
+      "IAM",
+    ],
+    demoUrl: "https://www.identdentalcare.com/",
+    futureWork: [
+      "Online appointment scheduling with calendar integration",
+      "Patient resources or blog for oral health tips",
+      "Multilingual support (English / Malayalam)",
+    ],
+  },
+  {
     slug: "dumpd",
     heading: "Dumpd!",
     type: "personal",
