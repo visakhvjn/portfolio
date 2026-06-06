@@ -21,6 +21,8 @@ function sourceBadgeClass(source?: string): string {
   return "bg-emerald-500/15 text-emerald-300/90";
 }
 
+const AUTO_SCROLL_INTERVAL_MS = 4500;
+
 export function TestimonialSlider({
   testimonials,
   title = "Client reviews",
@@ -31,6 +33,15 @@ export function TestimonialSlider({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [autoPaused, setAutoPaused] = useState(false);
+
+  const getScrollStep = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return 0;
+    const card = el.querySelector<HTMLElement>("[data-testimonial-card]");
+    const gap = 12;
+    return card ? card.offsetWidth + gap : el.clientWidth * 0.88;
+  }, []);
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
@@ -38,6 +49,26 @@ export function TestimonialSlider({
     setCanScrollLeft(el.scrollLeft > 4);
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
   }, []);
+
+  const scrollBy = useCallback(
+    (direction: -1 | 1) => {
+      const el = scrollRef.current;
+      if (!el) return;
+      el.scrollBy({ left: direction * getScrollStep(), behavior: "smooth" });
+    },
+    [getScrollStep],
+  );
+
+  const scrollNext = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+    if (atEnd) {
+      el.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      scrollBy(1);
+    }
+  }, [scrollBy]);
 
   useEffect(() => {
     updateScrollState();
@@ -52,14 +83,13 @@ export function TestimonialSlider({
     };
   }, [updateScrollState, testimonials.length]);
 
-  function scrollBy(direction: -1 | 1) {
-    const el = scrollRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-testimonial-card]");
-    const gap = 12;
-    const amount = card ? card.offsetWidth + gap : el.clientWidth * 0.88;
-    el.scrollBy({ left: direction * amount, behavior: "smooth" });
-  }
+  useEffect(() => {
+    if (testimonials.length <= 1 || autoPaused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const id = window.setInterval(scrollNext, AUTO_SCROLL_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [testimonials.length, autoPaused, scrollNext]);
 
   if (testimonials.length === 0) return null;
 
@@ -69,7 +99,17 @@ export function TestimonialSlider({
     : "w-[min(100%,20rem)] sm:w-[18rem]";
 
   return (
-    <div className={embedded ? "mt-6 border-t border-white/10 pt-6" : "mt-10"}>
+    <div
+      className={embedded ? "mt-6 border-t border-white/10 pt-6" : "mt-10"}
+      onMouseEnter={() => setAutoPaused(true)}
+      onMouseLeave={() => setAutoPaused(false)}
+      onFocusCapture={() => setAutoPaused(true)}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setAutoPaused(false);
+        }
+      }}
+    >
       <div className="flex items-center justify-between gap-3">
         <h4
           className={
