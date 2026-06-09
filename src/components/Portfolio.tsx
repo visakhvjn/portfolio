@@ -4,6 +4,7 @@ import { site } from "@/data/site";
 import { useState } from "react";
 import { ContactModal } from "./ContactModal";
 import { ServicesModal } from "./ServicesModal";
+import { Certificates } from "./Certificates";
 import { Education } from "./Education";
 import { Experience } from "./Experience";
 import { TechStack } from "./TechStack";
@@ -28,6 +29,7 @@ export function Portfolio() {
         <Projects />
         <Education />
         <Recommendations />
+        <Certificates />
         <footer className="mt-10 border-t border-white/10 pt-8 text-center text-sm text-slate-500">
           <p>
             <a

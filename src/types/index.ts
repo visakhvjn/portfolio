@@ -38,3 +38,13 @@ export type EducationEntry = {
   period: string;
   detail: string;
 };
+
+export type Certificate = {
+  id: string;
+  title: string;
+  issuer: string;
+  instructor?: string;
+  completedOn: string;
+  duration?: string;
+  credentialUrl?: string;
+};

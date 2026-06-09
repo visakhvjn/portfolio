@@ -38,5 +38,6 @@ export const navItems = [
   { id: "projects", label: "Projects" },
   { id: "education", label: "Education" },
   { id: "recommendations", label: "Reviews" },
+  { id: "certificates", label: "Certificates" },
   { id: "blog", label: "Blog", href: site.links.blog },
 ] as const;
