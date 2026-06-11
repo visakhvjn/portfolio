@@ -14,6 +14,7 @@ import { SectionHeading } from "./SectionHeading";
 
 const filters = ["all", "office", "personal", "ai", "games"] as const;
 type Filter = (typeof filters)[number];
+const INITIAL_VISIBLE = 6;
 
 function hasProjectLink(project: Project) {
   return !!(project.demoUrl || project.repoUrl);
@@ -22,6 +23,7 @@ function hasProjectLink(project: Project) {
 export function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
   const [filter, setFilter] = useState<Filter>("all");
+  const [showAll, setShowAll] = useState(false);
 
   const sortedProjects = useMemo(
     () =>
@@ -42,6 +44,13 @@ export function Projects() {
     return sortedProjects.filter((p) => p.type === filter);
   }, [filter, sortedProjects]);
 
+  const visibleProjects = useMemo(
+    () => (showAll ? filtered : filtered.slice(0, INITIAL_VISIBLE)),
+    [filtered, showAll],
+  );
+
+  const hasMore = filtered.length > INITIAL_VISIBLE;
+
   return (
     <section className="py-14 sm:py-20">
       <AnimateIn>
@@ -53,7 +62,10 @@ export function Projects() {
             <button
               key={f}
               type="button"
-              onClick={() => setFilter(f)}
+              onClick={() => {
+                setFilter(f);
+                setShowAll(false);
+              }}
               className={`rounded-lg px-4 py-2 text-sm font-medium transition ${filter === f ? "bg-emerald-500 text-slate-950" : "bg-white/5 text-slate-400 hover:text-white"}`}
             >
               {f === "all" ? "All" : projectTypeFilterLabel(f)}
@@ -62,7 +74,7 @@ export function Projects() {
         </div>
       </AnimateIn>
       <ul className="mt-10 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((project, i) => (
+        {visibleProjects.map((project, i) => (
           <AnimateIn key={project.slug} delay={i * 50} className="h-full">
             <li className="h-full">
               <button
@@ -91,6 +103,17 @@ export function Projects() {
           </AnimateIn>
         ))}
       </ul>
+      {hasMore && (
+        <div className="mt-8 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setShowAll((open) => !open)}
+            className="rounded-xl border border-white/10 px-6 py-2.5 text-sm font-medium text-slate-300 transition hover:border-emerald-500/30 hover:bg-white/5 hover:text-white"
+          >
+            {showAll ? "Show less" : "Show more"}
+          </button>
+        </div>
+      )}
       <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   );
