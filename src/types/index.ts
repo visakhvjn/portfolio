@@ -46,5 +46,9 @@ export type Certificate = {
   instructor?: string;
   completedOn: string;
   duration?: string;
+  /** Topics and skills covered by the certificate. */
+  keywords: string[];
+  /** Optional blog post reflecting on what you learned. */
+  blogUrl?: string;
   credentialUrl?: string;
 };

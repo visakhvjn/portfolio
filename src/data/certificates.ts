@@ -8,6 +8,15 @@ export const certificates: Certificate[] = [
     instructor: "Anthony Alicea",
     completedOn: "June 2026",
     duration: "2 hours",
+    keywords: [
+      "JSX",
+      "Components",
+      "Props & state",
+      "Hooks",
+      "Virtual DOM",
+      "Reconciliation",
+    ],
+    blogUrl: "https://blog-mcp-five.vercel.app/vjnvisakh/topics/reactjs",
     credentialUrl: "https://ude.my/UC-377896ba-6311-46e9-9e33-e9b21ab30ce5",
   },
 ];

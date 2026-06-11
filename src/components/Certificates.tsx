@@ -19,7 +19,7 @@ export function Certificates() {
 
       <AnimateIn delay={60}>
         <div className="mt-6 overflow-x-auto rounded-xl border border-white/10">
-          <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
+          <table className="w-full min-w-[48rem] border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-white/10 bg-white/[0.04]">
                 <th
@@ -48,6 +48,18 @@ export function Certificates() {
                 </th>
                 <th
                   scope="col"
+                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-500 sm:px-5 sm:min-w-[12rem]"
+                >
+                  Keywords
+                </th>
+                <th
+                  scope="col"
+                  className="whitespace-nowrap px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-500 sm:px-5 sm:w-20"
+                >
+                  Blog
+                </th>
+                <th
+                  scope="col"
                   className="whitespace-nowrap px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-500 sm:px-5 sm:w-24"
                 >
                   Credential
@@ -72,15 +84,32 @@ export function Certificates() {
                   <td className="whitespace-nowrap px-4 py-2.5 text-slate-400 sm:px-5">
                     {item.completedOn}
                   </td>
+                  <td className="px-4 py-2.5 leading-snug text-slate-400 sm:px-5">
+                    {item.keywords.join(" · ")}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2.5 sm:px-5">
+                    {item.blogUrl ? (
+                      <a
+                        href={item.blogUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-400/90 hover:text-emerald-300"
+                      >
+                        Read
+                      </a>
+                    ) : (
+                      <span className="text-slate-600">—</span>
+                    )}
+                  </td>
                   <td className="whitespace-nowrap px-4 py-2.5 sm:px-5">
                     {item.credentialUrl ? (
                       <a
                         href={item.credentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-500 hover:text-emerald-400/80"
+                        className="text-emerald-400/90 hover:text-emerald-300"
                       >
-                        Verify →
+                        Verify
                       </a>
                     ) : (
                       <span className="text-slate-600">—</span>
