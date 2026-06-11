@@ -61,38 +61,20 @@ function ExperienceBullet({ bullet }: { bullet: ResumeBullet }) {
   );
 }
 
-function linkDisplayUrl(url: string): string {
-  return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-}
-
-function chunkPairs<T>(items: T[]): T[][] {
-  const rows: T[][] = [];
-  for (let i = 0; i < items.length; i += 2) {
-    rows.push(items.slice(i, i + 2));
-  }
-  return rows;
-}
-
-function HeaderLinkGrid({
+function HeaderLinks({
   links,
 }: {
   links: { label: string; url: string }[];
 }) {
   return (
-    <View style={s.linkGrid}>
-      {chunkPairs(links).map((row, rowIndex) => (
-        <View key={rowIndex} style={s.linkGridRow}>
-          {row.map((link) => (
-            <View key={link.url} style={s.linkCell}>
-              <Text style={s.linkCellText}>
-                <Text style={s.linkLabel}>{link.label}: </Text>
-                <Link src={link.url}>{linkDisplayUrl(link.url)}</Link>
-              </Text>
-            </View>
-          ))}
-        </View>
+    <Text style={s.linkRow}>
+      {links.map((link, i) => (
+        <Text key={link.url}>
+          {i > 0 ? " · " : ""}
+          <Link src={link.url}>{link.label}</Link>
+        </Text>
       ))}
-    </View>
+    </Text>
   );
 }
 
@@ -112,12 +94,14 @@ export function ResumeDocument({ content }: Props) {
           ) : null}
           <View style={s.headerText}>
             <Text style={s.name}>{content.name}</Text>
-            <Text style={s.titleLine}>{content.title}</Text>
+            <Text style={s.titleLine} wrap={false}>
+              {content.title}
+            </Text>
             <Text style={s.contactLine}>
               {content.email} | {content.phone}
             </Text>
             <Text style={s.bio}>{content.bio}</Text>
-            <HeaderLinkGrid links={headerLinks} />
+            <HeaderLinks links={headerLinks} />
           </View>
         </View>
 
@@ -161,7 +145,7 @@ export function ResumeDocument({ content }: Props) {
             </Text>
           ))}
           <Text style={s.numberedBlock}>
-            {content.projects.length + 1}. More projects at{" "}
+            {content.projects.length + 1}. Many more at{" "}
             <Link src={content.portfolioUrl}>{portfolioHost}</Link>
           </Text>
         </Section>

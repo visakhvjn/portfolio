@@ -32,12 +32,9 @@ function buildEducation() {
 
 /** Personal projects included in the resume PROJECTS section (order preserved). */
 const resumePersonalProjectSlugs = [
-  "dumpd",
-  "rolush",
   "innovative-strategic",
-  "startup-stress-tester",
   "ai-debator",
-  "daily-motivation-ai",
+  "ident-dental",
 ] as const;
 
 function resumeOneLiner(project: Project): string {
@@ -65,7 +62,7 @@ export function buildResumeContent(
   return {
     profileImagePath,
     name: site.name,
-    title: site.title,
+    title: site.resumeTitle,
     email: site.email,
     phone: site.phone,
     bio: site.resumeBio,
@@ -76,10 +73,12 @@ export function buildResumeContent(
       { label: "Medium", url: site.links.medium },
       { label: "LeetCode", url: site.links.leetcode },
     ],
-    skillCategories: skillCategories.map((cat) => ({
-      title: cat.title,
-      items: cat.items.join(", "),
-    })),
+    skillCategories: skillCategories
+      .filter((cat) => cat.title !== "Also worked with")
+      .map((cat) => ({
+        title: cat.title,
+        items: cat.items.join(", "),
+      })),
     workExperience: buildWorkExperience(),
     education: buildEducation(),
     projects: buildResumeProjects(),

@@ -5,7 +5,7 @@ export const experience: ExperienceEntry[] = [
     id: "unify",
     company: "Unify Technologies",
     location: "Hyderabad, India",
-    role: "Full-Stack Developer",
+    role: "Senior Software Engineer",
     period: "Jun 2025 – Present",
     current: true,
     collapsedPreview:
@@ -36,7 +36,7 @@ export const experience: ExperienceEntry[] = [
     id: "better",
     company: "Better Software",
     location: "Bangalore, India",
-    role: "Full-Stack Engineer · Team Lead",
+    role: "Senior Software Engineer",
     period: "Oct 2021 – Mar 2025",
     collapsedPreview:
       "NLP/RAG platform engineering, contractual automation UI, and team lead on facility-management and ad-analytics products.",
@@ -56,7 +56,7 @@ export const experience: ExperienceEntry[] = [
     id: "seenit",
     company: "SeenIt Online",
     location: "Kolkata, India",
-    role: "Full-Stack Engineer",
+    role: "Senior Software Engineer",
     period: "Feb 2020 – Sep 2021",
     collapsedPreview:
       "MERN migration, luxury e-commerce onboarding, and Elasticsearch-powered search.",
@@ -74,7 +74,7 @@ export const experience: ExperienceEntry[] = [
     company: "Vawsum Schools",
     location: "India",
     role: "Software Engineer",
-    period: "Oct 2016 – Jan 2020",
+    period: "Oct 2017 – Jan 2020",
     collapsedPreview:
       "School payments, admissions tooling, RFID attendance, bus tracking, and internal ops panels.",
     summary:

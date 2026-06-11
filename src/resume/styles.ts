@@ -33,10 +33,10 @@ export const resumeStyles = StyleSheet.create({
     lineHeight: 1.2,
   },
   titleLine: {
-    fontSize: 13,
+    fontSize: 10.5,
     fontFamily: "Helvetica-Bold",
     marginBottom: 2,
-    lineHeight: 1.4,
+    lineHeight: 1.3,
   },
   contactLine: {
     fontSize: 9.5,
@@ -47,23 +47,10 @@ export const resumeStyles = StyleSheet.create({
     marginBottom: 8,
     textAlign: "justify",
   },
-  linkGrid: {
+  linkRow: {
     marginTop: 2,
-  },
-  linkGridRow: {
-    flexDirection: "row",
-    marginBottom: 2,
-  },
-  linkCell: {
-    width: "50%",
-    paddingRight: 8,
-  },
-  linkCellText: {
-    fontSize: 8.5,
-    lineHeight: 1.3,
-  },
-  linkLabel: {
-    fontFamily: "Helvetica-Bold",
+    fontSize: 9.5,
+    lineHeight: 1.4,
   },
   section: {
     marginTop: 10,

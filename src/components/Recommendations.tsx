@@ -24,16 +24,16 @@ export function Recommendations() {
           wideCards
           ariaLabel="LinkedIn recommendations"
         />
-        <p className="mt-6 text-center text-sm text-slate-500">
+        <div className="mt-8 flex justify-center">
           <a
             href={site.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-emerald-400/90 hover:text-emerald-300 hover:underline"
+            className="rounded-xl border border-white/10 px-6 py-2.5 text-sm font-medium text-slate-300 transition hover:border-emerald-500/30 hover:bg-white/5 hover:text-white"
           >
-            View profile on LinkedIn →
+            View profile on LinkedIn
           </a>
-        </p>
+        </div>
       </AnimateIn>
     </section>
   );
