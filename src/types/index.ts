@@ -26,6 +26,10 @@ export type ExperienceEntry = {
   collapsedPreview: string;
   summary: string;
   bullets: string[];
+  /** Richer bullets for the generated resume PDF (ATS-friendly). Falls back to bullets. */
+  resumeBullets?: string[];
+  /** Extra linkable names in resume bullets (name → URL). */
+  resumeLinkAliases?: { name: string; url: string }[];
   tech: string[];
   relatedSlugs?: string[];
 };

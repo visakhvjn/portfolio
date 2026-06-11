@@ -16,7 +16,7 @@ export const certificates: Certificate[] = [
       "Virtual DOM",
       "Reconciliation",
     ],
-    blogUrl: "https://blog-mcp-five.vercel.app/vjnvisakh/topics/reactjs",
+    blogUrl: "https://dumpd.in/vjnvisakh/topics/reactjs",
     credentialUrl: "https://ude.my/UC-377896ba-6311-46e9-9e33-e9b21ab30ce5",
   },
 ];

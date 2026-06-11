@@ -71,28 +71,27 @@ export const projects: Project[] = [
   {
     slug: "dumpd",
     heading: "Dumpd!",
-    type: "personal",
+    type: "ai",
     featured: true,
     summary:
-      "Self-sustaining AI blog where OpenAI generates articles, voices, and media on a schedule. Express and MongoDB backend with cron automation, LinkedIn distribution via Make.com, and Google Analytics — now serving 100+ daily active users.",
+      "Content engine with an MCP server for AI assistants — draft, publish, and manage markdown posts from Cursor and other clients; public blogs at /username and a dashboard for manual edits.",
     resumeLine:
-      "Self-sustaining AI blog with automated content, cron publishing, and 100+ daily active users.",
+      "MCP-powered content engine: manage drafts and publishing from AI assistants, with public /username blogs and a creator dashboard.",
     reason:
-      "Most side projects stop at a demo. I wanted to see whether an AI-native publication could run itself in production—generating articles, voices, and media on a schedule, publishing without manual effort, and still attracting real readers. Dumpd! is that experiment: a full product loop from OpenAI-driven content creation through Express and MongoDB, automated cron jobs, LinkedIn distribution via Make.com, and Google Analytics to measure what actually lands. It now serves 100+ daily active users, which validated both the technical pipeline and the idea that AI-assisted content can sustain an audience when the ops layer is treated as seriously as the model calls.",
+      "Builders who live in Cursor and other AI assistants still treat publishing as a context switch—drafts pile up in the editor while nothing ships publicly. Dumpd is a content engine built around that workflow: an MCP server so assistants can create, draft, and publish markdown posts; a dashboard when you want to edit by hand; and a public blog at /username so output becomes a portfolio you maintain, not local files. Google sign-in, API keys for MCP clients, and tools like create_post with draft vs published status complete the loop. It is my bet on AI assistants as a real management surface for content—not just generation in chat, but operating a live publication from the same session where you work.",
     tech: [
-      "Node.js",
-      "Express",
-      "EJS",
-      "Tailwind",
-      "OpenAI",
-      "MongoDB",
-      "Mongoose",
+      "Next.js",
+      "TypeScript",
+      "MCP",
+      "Google OAuth",
+      "Markdown",
+      "Vercel",
     ],
+    demoUrl: "https://dumpd.in/",
     futureWork: [
-      "Add auth and an admin dashboard for content moderation",
-      "Improve cost controls and caching for OpenAI calls",
-      "Migrate templating from EJS to a component-based frontend",
-      "Richer analytics beyond GA for content performance",
+      "Custom domain support",
+      "Post analytics",
+      "Additional MCP tools for scheduling and SEO",
     ],
   },
   {
@@ -102,10 +101,10 @@ export const projects: Project[] = [
     nda: true,
     featured: true,
     summary:
-      "AI-powered personal health assistant where OpenAI is wired into the frontend for real-time, conversational guidance. Focus on responsive UX, streaming flows, and integration patterns that make AI feel native to the product.",
+      "ChatGPT wrapper for health — upload prescriptions, generate medical reports, and discuss them conversationally with context preserved across the session.",
     reason:
-      "Health guidance products fail when AI feels bolted on—slow, disconnected from the UI, or hard to trust in the moment. Relaxx.AI needed the opposite: a personal health assistant where OpenAI and related AI services are wired directly into the frontend so users get responsive, conversational help as they move through the app. My work focused on integrating those APIs cleanly with the client experience—handling real-time flows, error states, and the product patterns that make AI output feel like part of the product rather than a chat widget pasted on the side. The goal was accessible, immediate guidance for everyday wellness questions while keeping the architecture ready for stricter safety and disclaimer requirements as the product matures.",
-    tech: ["React", "TypeScript", "OpenAI", "Node"],
+      "Relaxx.AI helps users make sense of medical information without feeling like they are fighting a chatbot. I built a ChatGPT/OpenAI wrapper where patients upload prescriptions and the system generates clearer medical reports they can then talk through like a conversation—voice and text—with context preserved so follow-up questions stay grounded in what was already shared. The work spanned API integration, report generation flows, and frontend patterns that keep the experience continuous rather than a series of disconnected prompts.",
+    tech: ["React", "TypeScript", "OpenAI", "ChatGPT", "Node"],
     demoUrl: "https://relaxx.ai/",
     futureWork: [
       "Stronger medical disclaimers and safety guardrails",
@@ -119,10 +118,10 @@ export const projects: Project[] = [
     type: "office",
     featured: true,
     summary:
-      "Enterprise platform that ingests documents and lets users query them in natural language via OpenAI and NLP. Work spanned retrieval pipelines, grounded answers, and a frontend that surfaces trust and context.",
+      "Q&A platform for chemical sales companies — ingest product documents and let sales teams ask questions to understand offerings and close deals.",
     reason:
-      "Teams sitting on large document corpora often cannot search them in the way they think—they need answers, not ten blue links. Nesh was built for that gap: ingest structured and unstructured information, then let users ask questions in natural language and get responses grounded in what was actually stored. As an engineer on the platform, I worked on the path from ingested data through NLP and OpenAI retrieval—making sure queries returned useful, context-aware results rather than generic completions. The product sits at the intersection of search, RAG-style retrieval, and conversational UI, which meant balancing model behavior, retrieval quality, and a frontend that makes trust and provenance obvious to the user.",
-    tech: ["Node", "OpenAI", "NLP", "React", "TypeScript"],
+      "Chemical sales teams need fast, accurate product knowledge—not another document dump. Nesh is a Q&A platform where company documents are ingested and salespeople ask questions in natural language to understand what they are selling. I was on a large engineering team and owned backend work to build ingestion repositories for new companies—pipelines that take chemical product information in and make it queryable for the sales workflow. The goal was grounded answers that help reps move conversations forward, not generic AI completions.",
+    tech: ["Node.js", "OpenAI", "NLP", "RAG"],
     futureWork: [
       "Expand evaluation metrics for retrieval quality",
       "Fine-tune chunking and embedding strategies",
@@ -135,10 +134,10 @@ export const projects: Project[] = [
     type: "office",
     nda: true,
     summary:
-      "Compliance management tool for chemical companies in regulated markets. Redesigned review workflows so teams can move through regulatory reports faster and surface violations with clearer UI/UX.",
+      "Compliance dashboard built from scratch — React UI wired to Python compliance APIs with TanStack Query for caching, retries, and state preservation.",
     reason:
-      "For chemical companies in regulated environments, compliance is not a back-office checkbox—it is hours spent reading reports, cross-checking rules, and catching violations before they become liabilities. SUMMIT exists to compress that work: a compliance management tool where reviewers can move through regulatory reports with less friction and spot issues earlier. A large part of my contribution was UI/UX—redesigning flows so reviewers spend less time hunting for context and more time making decisions. That meant clearer information hierarchy, better workflows for report review, and interfaces that surface violations and status without forcing users through unnecessary steps. Good compliance software is boring in the right way: predictable, auditable, and fast when the stakes are high.",
-    tech: ["React", "TypeScript", "Node"],
+      "For chemical companies in regulated environments, compliance means hours reading reports, cross-checking rules, and catching violations before they become liabilities. I built SUMMIT’s dashboard UI from scratch—a React front end that connects multiple compliance APIs from a Python backend. TanStack Query handled caching, retries, and state preservation so reviewers could move through regulatory data without losing context or hammering the server. The goal was predictable, auditable workflows: surface violations and report status fast when the stakes are high.",
+    tech: ["React", "TypeScript", "TanStack Query", "Python"],
     demoUrl: "https://lemon-mud-07e985e0f.6.azurestaticapps.net/",
     futureWork: [
       "Deeper violation detection dashboards",
@@ -152,9 +151,9 @@ export const projects: Project[] = [
     type: "office",
     featured: true,
     summary:
-      "Team lead on a widely used facility-management SaaS in India. Coordinated delivery, unblocked engineers, and kept quality high for operations teams who rely on the platform every day.",
+      "Team lead for a 3-engineer squad on a facility-management SaaS in India — client requirements, sprint planning, and delivery for operations teams who rely on the platform every day.",
     reason:
-      "Facility management at scale is coordination under pressure—vendors, sites, tickets, and clients all expecting the platform to keep up. The Pinch Life is a widely used SaaS in that space in India, and I served as team lead while we shipped features, stabilized delivery, and kept the product usable for operations teams who live in the tool daily. Leading here meant more than assigning tasks: aligning engineers on priorities, unblocking integration and UI work, and maintaining a bar for quality across a codebase that serves real businesses with real SLAs. The product succeeds when FM teams stop fighting the software and start relying on it for everyday workflows—which is the standard we held the team to.",
+      "Facility management at scale is coordination under pressure—vendors, sites, tickets, and clients all expecting the platform to keep up. The Pinch Life is a widely used SaaS in that space in India, and I led a team of three engineers while we shipped features, stabilized delivery, and kept the product usable for operations teams who live in the tool daily. Leading here meant talking to clients to understand requirements, running sprints end to end, aligning the squad on priorities, and maintaining a bar for quality across a codebase that serves real businesses with real SLAs. The product succeeds when FM teams stop fighting the software and start relying on it for everyday workflows—which is the standard we held the team to.",
     tech: ["React", "Node", "TypeScript", "MongoDB"],
     demoUrl: "https://pinch.co.in/",
     futureWork: [
@@ -168,10 +167,10 @@ export const projects: Project[] = [
     type: "office",
     featured: true,
     summary:
-      "Team lead on recommendations, ad performance dashboards, and offer disbursement for businesses. Shipped tooling that helps brands measure campaigns and reward customers with clearer operational visibility.",
+      "Closed social app for recommending nearby products from your nearest circle. Owned the entire backend.",
     reason:
-      "Recco Joy sits at the intersection of social proof, creator-style profiles, and business outcomes—recommendations that matter, ads that need honest performance numbers, and offers that have to land without manual chaos. As team lead, I helped drive delivery across recommendation flows, ad performance dashboards, and offer disbursement so businesses could see what was working and act on it in one place. The work was less about a single flashy feature and more about reliable pipelines: data that stakeholders trust, UIs that ops teams can run weekly, and engineering rhythm that kept shipping as requirements shifted. Public-facing product marketing lives on the main site; my focus was the business and growth tooling behind it.",
-    tech: ["React", "TypeScript", "Node"],
+      "Recco Joy is a closed social network built around trust in your nearest circle—not open feeds, but recommendations from people close to you for products nearby. I owned the full backend: APIs, data models, and services that power location-aware recommendations and the social graph behind them. The challenge was making nearby, circle-based recommendations feel relevant without the noise of a public social app.",
+    tech: ["Node.js", "React", "TypeScript", "MongoDB"],
     demoUrl: "https://reccojoy.com/",
     futureWork: [
       "Deeper campaign attribution and cohort reporting",
@@ -184,9 +183,9 @@ export const projects: Project[] = [
     type: "office",
     nda: true,
     summary:
-      "Micro-investment app that makes spare-change investing simple for first-time users. Built for low friction, clear money flows, and UX that feels trustworthy on the very first screen.",
+      "Micro-investment app for spare-change investing. Led technical research and documentation and aligned client and engineering leadership on requirements and system design.",
     reason:
-      "Traditional investing apps assume users already have capital, confidence, and time to learn markets. Remus targets a different moment: spare change and small amounts, invested simply enough that the barrier to starting feels low. The product is a micro-investment app focused on making that first step accessible—clear flows, minimal friction, and UX that does not overwhelm people who are new to investing. My work supported building and refining that experience on the stack side, with an emphasis on reliability and clarity where money movement and trust are involved. Fintech for beginners only works if the product feels safe and understandable on the first screen.",
+      "Traditional investing apps assume users already have capital, confidence, and time to learn markets. Remus targets a different moment: spare change and small amounts, invested simply enough that the barrier to starting feels low. I researched the product space, documented the full engineering approach—requirements, architecture, flows, and delivery plan—and walked client stakeholders and engineering management through each decision so the team could build with clarity. The product only works for beginners if it feels safe and understandable on the first screen; that alignment work was as important as the implementation.",
     tech: ["React", "React Native", "Node", "TypeScript"],
     futureWork: [
       "Onboarding flows for first-time investors",
@@ -198,10 +197,10 @@ export const projects: Project[] = [
     heading: "Unify Domains",
     type: "office",
     summary:
-      "Domain search and registration platform with instant availability checks, WHOIS privacy, and global DNS—built for a clean, focused domain management experience without upsells.",
+      "Full-stack domain reseller on NameSilo — registration flows, Stripe/Razorpay escrow payments, payment-failure UX, and an admin panel for purchases, renewals, and activity.",
     reason:
-      "Domain management products often bury search behind upsells and cluttered dashboards. Unify Domains is a domain aggregation platform where users can find, register, and manage names with instant availability checks, recommended TLD guidance, WHOIS privacy, and low-latency global DNS. My work sits in the full-stack delivery of that experience—search and registration flows, account management, and the product surfaces that keep domain operations simple for businesses and creators who need reliability without noise.",
-    tech: ["React", "TypeScript", "Node", "NestJS"],
+      "Unify Domains is a domain reseller built on NameSilo. I worked across frontend and backend with a product manager and QA to ship the full reseller journey—availability and registration, back-and-forth integration with the NameSilo team, and payment flows that had to handle real money carefully. That included revamping the UI for payment failures, Stripe and Razorpay escrow accounts, and hold-and-authorize payment logic, plus an admin panel that gives operations a 360° view of purchases, renewals, and account activity. Domain products fail when checkout or renewals are opaque; we optimized for clarity when payments stall and when staff need full visibility into what customers bought and when.",
+    tech: ["React", "TypeScript", "Node", "NestJS", "Stripe", "Razorpay", "NameSilo"],
     demoUrl: "https://unify.domains/",
     futureWork: [
       "Bulk domain import and portfolio dashboards",
@@ -229,10 +228,10 @@ export const projects: Project[] = [
     type: "office",
     nda: true,
     summary:
-      "Large-scale learning platform on Open edX extended with a microservices architecture. Supports reliable course delivery, integrations, and independent deployment of services across enrollment peaks.",
+      "Open edX LMS stood up on Kubernetes with DevOps — dockerized services and platform setup for reliable institutional course delivery.",
     reason:
-      "Large institutions cannot run learning on a monolith that buckles every enrollment season. LVPEI’s LMS is built on Open edX but extended with a microservices architecture so course delivery, integrations, and scale can evolve independently. The motivation is straightforward: learners and faculty need a stable platform; engineering needs services that can be deployed, monitored, and changed without risking the entire system. I contributed within that architecture—working across the edX ecosystem and supporting services that keep learning paths, content, and institutional requirements aligned. Edtech at this level is as much about operational resilience as it is about classroom features.",
-    tech: ["Open edX", "Python", "Microservices", "React"],
+      "LVPEI needed a learning platform that could run reliably at institutional scale. I worked with the DevOps team to set up Open edX on a Kubernetes cluster—learning new tools along the way, dockerizing components, and getting services running on k8s. The work was as much about deployment and operations as about the LMS itself: making sure course delivery had a stable foundation engineering could iterate on without relearning the stack every release.",
+    tech: ["Open edX", "Docker", "Kubernetes", "Python"],
     futureWork: [
       "Service observability and deployment automation",
       "Learner analytics dashboards",
@@ -254,10 +253,10 @@ export const projects: Project[] = [
     heading: "Vawsum Payments",
     type: "office",
     summary:
-      "School fee collection module and admin aggregator across multiple payment gateways. Replaced manual reconciliation with a single panel for schools and company ops to track every transaction type.",
+      "Introduced school fee payments single-handedly—backend, mobile, and gateway integration replacing a fully manual collection process, plus stakeholder training.",
     reason:
-      "Schools in India collect fees through fragmented channels—cash, cards, different gateways—while admins need one place to see what was paid, what failed, and what is overdue. Before a unified module, that reconciliation work fell on staff with spreadsheets and phone calls. I designed and built the payments module and aggregator panel so schools could run all major transaction types through integrated gateways, with company and school admins sharing a single operational view. The outcome was practical: fee collection became a product feature instead of a manual process, and the company could onboard schools onto digital payments with far less custom work per site.",
-    tech: ["Node", "Payment gateways", "MongoDB"],
+      "Before this module, school fee collection at Vawsum was handled entirely by hand—staff, parents, and schools juggling cash, calls, and spreadsheets. I single-handedly introduced the payments product: major changes across backend and mobile, integration with payment gateways, and an aggregator view for schools and ops. Rollout also meant training parents and school stakeholders so adoption stuck. Fee collection became a product capability instead of a manual process schools had to run on their own.",
+    tech: ["Node.js", "Mobile", "Payment gateways", "MongoDB"],
     demoUrl: "https://vawsum.com/",
     futureWork: [],
   },
@@ -274,32 +273,6 @@ export const projects: Project[] = [
     tech: ["Next.js", "TypeScript"],
     demoUrl: "https://startup-stress-tester.vercel.app/",
     futureWork: ["More scenario presets", "Exportable reports"],
-  },
-  {
-    slug: "blog-mcp",
-    heading: "Blog MCP",
-    type: "ai",
-    featured: true,
-    summary:
-      "AI-native blogging platform with an MCP server for Cursor and other clients — draft and publish markdown posts from your IDE, claim a public blog at /username, and manage drafts from a dashboard.",
-    resumeLine:
-      "MCP-powered blog platform: publish from Cursor, public /username portfolio, drafts, and Google sign-in.",
-    reason:
-      "Dumpd! proved automated AI publishing could attract readers; Blog MCP tackles the other half of the problem—builders who already live in Cursor but never ship a public presence because publishing is a context switch. I built Blog MCP as a full product loop: Google sign-in, API keys for MCP clients, tools like create_post with draft vs published status, markdown posts, and a dashboard when you want to edit by hand. Each user gets a clean public blog at /username so the output is a portfolio you maintain, not a pile of local drafts. The Hobby tier keeps onboarding honest (free start, no credit card), with room to grow into premium features like custom domains and analytics. It is my bet on MCP as a real distribution surface—not just chat in the editor, but shipping live on the web from the same session where you write.",
-    tech: [
-      "Next.js",
-      "TypeScript",
-      "MCP",
-      "Google OAuth",
-      "Markdown",
-      "Vercel",
-    ],
-    demoUrl: "https://blog-mcp-five.vercel.app/",
-    futureWork: [
-      "Custom domain support",
-      "Post analytics",
-      "Additional MCP tools for scheduling and SEO",
-    ],
   },
   {
     slug: "ai-debator",

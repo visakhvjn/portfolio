@@ -12,10 +12,11 @@ const slugAliases: Record<string, string[]> = {
   summit: ["SUMMIT"],
   lvpei: ["LVPEI"],
   "relaxx-ai": ["Relaxx.AI"],
+  remus: ["Remus"],
   "pinch-life": ["The Pinch Life"],
   "recco-joy": ["Recco Joy"],
   styleade: ["StyleAde"],
-  "vawsum-payments": ["Vawsum Payments"],
+  "vawsum-payments": ["Vawsum Payments", "Vawsum"],
 };
 
 function projectUrl(slug: string): string | undefined {
@@ -43,6 +44,10 @@ function linkCandidatesForJob(entry: ExperienceEntry): LinkCandidate[] {
     for (const alias of slugAliases[slug] ?? []) {
       add(alias, url);
     }
+  }
+
+  for (const { name, url } of entry.resumeLinkAliases ?? []) {
+    add(name, url);
   }
 
   return candidates;

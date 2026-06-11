@@ -14,6 +14,7 @@ export const skillCategories: SkillCategory[] = [
       "Next.js",
       "React",
       "NestJS",
+      "Golang",
     ],
   },
   {
@@ -36,7 +37,6 @@ export const skillCategories: SkillCategory[] = [
     title: "Also worked with",
     items: [
       "PHP",
-      "Golang",
       "Azure",
       "GCP",
       "Elasticsearch",

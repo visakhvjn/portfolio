@@ -12,13 +12,16 @@ import type {
 } from "./types";
 
 function buildWorkExperience(): ResumeWorkEntry[] {
-  return experience.map((entry) => ({
-    company: entry.company,
-    location: entry.location,
-    role: entry.role,
-    period: entry.period,
-    bullets: buildLinkedBulletsForJob(entry),
-  }));
+  return experience.map((entry) => {
+    const bullets = entry.resumeBullets ?? entry.bullets;
+    return {
+      company: entry.company,
+      location: entry.location,
+      role: entry.role,
+      period: entry.period,
+      bullets: buildLinkedBulletsForJob({ ...entry, bullets }),
+    };
+  });
 }
 
 function buildEducation() {
@@ -32,6 +35,7 @@ function buildEducation() {
 
 /** Personal projects included in the resume PROJECTS section (order preserved). */
 const resumePersonalProjectSlugs = [
+  "dumpd",
   "innovative-strategic",
   "ai-debator",
   "ident-dental",

@@ -150,21 +150,20 @@ export function ResumeDocument({ content }: Props) {
           </Text>
         </Section>
 
-        <Section title="ACHIEVEMENTS">
-          {content.achievements.map((item, i) => (
-            <Text key={item} style={s.numberedBlock}>
-              {i + 1}. {item}
-            </Text>
-          ))}
-        </Section>
-
-        <Section title="LANGUAGES">
-          <Text style={s.muted}>{content.languages}.</Text>
-        </Section>
-
-        <Section title="INTERESTS">
-          <Text style={s.muted}>{content.interests}.</Text>
-        </Section>
+        <View style={s.compactMeta}>
+          <Text style={s.compactMetaLine}>
+            <Text style={s.compactMetaLabel}>ACHIEVEMENTS — </Text>
+            {content.achievements.join(" · ")}
+          </Text>
+          <Text style={s.compactMetaLine}>
+            <Text style={s.compactMetaLabel}>LANGUAGES — </Text>
+            {content.languages}
+          </Text>
+          <Text style={s.compactMetaLine}>
+            <Text style={s.compactMetaLabel}>INTERESTS — </Text>
+            {content.interests}
+          </Text>
+        </View>
       </Page>
     </Document>
   );

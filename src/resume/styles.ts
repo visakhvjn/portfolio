@@ -104,4 +104,17 @@ export const resumeStyles = StyleSheet.create({
   muted: {
     color: "#333",
   },
+  compactMeta: {
+    marginTop: 10,
+  },
+  compactMetaLine: {
+    marginBottom: 2,
+    fontSize: 9.5,
+    color: "#333",
+  },
+  compactMetaLabel: {
+    fontFamily: "Helvetica-Bold",
+    fontSize: 9,
+    letterSpacing: 0.3,
+  },
 });

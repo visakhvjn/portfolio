@@ -18,11 +18,11 @@ export const site = {
   coverLetterDownloadName: "Visakh_Vijayan_Cover_Letter.pdf",
   portfolioUrl: "https://visakhvijayan.com",
   resumeBio:
-    "With over 8 years of hands-on experience as a software engineer, I have a strong track record of delivering innovative and reliable software solutions across dynamic projects. I've collaborated closely with clients, customers, and technical stakeholders, making me highly adaptable under pressure.",
+    "Senior full-stack engineer with 8+ years building fintech, SaaS, healthtech, and edtech products. Strong in requirements research, technical documentation, client and stakeholder communication, team leadership, and shipping production systems with React, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, and AI integrations.",
   intro:
     "I deliver reliable full-stack software across dynamic products—working closely with clients, customers, and technical stakeholders. Adaptable under pressure, from payments and migrations to AI integrations and team leadership.",
   links: {
-    blog: "https://blog-mcp-five.vercel.app/vjnvisakh",
+    blog: "https://dumpd.in/vjnvisakh",
     linkedin: "https://www.linkedin.com/in/vjnvisakh",
     medium: "https://medium.com/@vjnvisakh",
     leetcode: "https://leetcode.com/u/vjnvisakh",
