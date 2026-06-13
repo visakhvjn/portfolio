@@ -13,6 +13,7 @@ export const projects: Project[] = [
     reason:
       "Rolush needed more than a static menu online: a real storefront where customers in Kannur could explore cakes by occasion, see featured picks, customise orders, and reach the studio without friction. I built the web app end-to-end — product browsing by category (birthdays, weddings, anniversaries, and more), detailed cake pages, cart flows, a customise-your-cake path, and WhatsApp as the primary conversion channel for orders and questions. The site reflects how I approach small-business products: clear UX for non-technical owners, mobile-friendly layouts, and a stack that is fast to deploy and easy to extend as the menu and seasons change.",
     tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
+    thumbnail: "/images/projects/rolush.png",
     demoUrl: "https://rolush-web-app.vercel.app/",
     futureWork: [
       "Online payment integration beyond WhatsApp-led orders",
@@ -32,6 +33,7 @@ export const projects: Project[] = [
     reason:
       "Accounting and tax firms need a site that earns trust before the first call—clear services, compliance signals, and a simple path to book a consultation. Innovative & Strategic F.Z.E needed that for their Ajman Free Zone practice: corporate tax, VAT, audit, bookkeeping, AML, and advisory work across the UAE, UK, and Georgia. I built the marketing site end-to-end—navigation across seven practice areas, packages and FAQ pages, client testimonials, track-record highlights, and contact and consultation flows so prospects see what they offer and how to reach the team. The design leans into credibility for regulated industries: readable service copy, FTA and compliance cues, and mobile-friendly layouts on Vercel so the firm can iterate as services and regulations change.",
     tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
+    thumbnail: "/images/projects/innovative-strategic.png",
     demoUrl: "https://www.innovativestrategic.com/",
     futureWork: [
       "Insights or blog section for UAE tax and VAT updates",
@@ -61,6 +63,7 @@ export const projects: Project[] = [
       "Certificate Manager",
       "IAM",
     ],
+    thumbnail: "/images/projects/ident-dental.png",
     demoUrl: "https://www.identdentalcare.com/",
     futureWork: [
       "Online appointment scheduling with calendar integration",
@@ -87,6 +90,7 @@ export const projects: Project[] = [
       "Markdown",
       "Vercel",
     ],
+    thumbnail: "/images/projects/dumpd.png",
     demoUrl: "https://dumpd.in/",
     futureWork: [
       "Custom domain support",
@@ -105,6 +109,7 @@ export const projects: Project[] = [
     reason:
       "Relaxx.AI helps users make sense of medical information without feeling like they are fighting a chatbot. I built a ChatGPT/OpenAI wrapper where patients upload prescriptions and the system generates clearer medical reports they can then talk through like a conversation—voice and text—with context preserved so follow-up questions stay grounded in what was already shared. The work spanned API integration, report generation flows, and frontend patterns that keep the experience continuous rather than a series of disconnected prompts.",
     tech: ["React", "TypeScript", "OpenAI", "ChatGPT", "Node"],
+    thumbnail: "/images/projects/relaxx-ai.png",
     demoUrl: "https://relaxx.ai/",
     futureWork: [
       "Stronger medical disclaimers and safety guardrails",
@@ -138,6 +143,7 @@ export const projects: Project[] = [
     reason:
       "For chemical companies in regulated environments, compliance means hours reading reports, cross-checking rules, and catching violations before they become liabilities. I built SUMMIT’s dashboard UI from scratch—a React front end that connects multiple compliance APIs from a Python backend. TanStack Query handled caching, retries, and state preservation so reviewers could move through regulatory data without losing context or hammering the server. The goal was predictable, auditable workflows: surface violations and report status fast when the stakes are high.",
     tech: ["React", "TypeScript", "TanStack Query", "Python"],
+    thumbnail: "/images/projects/summit.png",
     demoUrl: "https://lemon-mud-07e985e0f.6.azurestaticapps.net/",
     futureWork: [
       "Deeper violation detection dashboards",
@@ -155,6 +161,7 @@ export const projects: Project[] = [
     reason:
       "Facility management at scale is coordination under pressure—vendors, sites, tickets, and clients all expecting the platform to keep up. The Pinch Life is a widely used SaaS in that space in India, and I led a team of three engineers while we shipped features, stabilized delivery, and kept the product usable for operations teams who live in the tool daily. Leading here meant talking to clients to understand requirements, running sprints end to end, aligning the squad on priorities, and maintaining a bar for quality across a codebase that serves real businesses with real SLAs. The product succeeds when FM teams stop fighting the software and start relying on it for everyday workflows—which is the standard we held the team to.",
     tech: ["React", "Node", "TypeScript", "MongoDB"],
+    thumbnail: "/images/projects/pinch-life.png",
     demoUrl: "https://pinch.co.in/",
     futureWork: [
       "Mobile-first workflows for on-site facility staff",
@@ -171,6 +178,7 @@ export const projects: Project[] = [
     reason:
       "Recco Joy is a closed social network built around trust in your nearest circle—not open feeds, but recommendations from people close to you for products nearby. I owned the full backend: APIs, data models, and services that power location-aware recommendations and the social graph behind them. The challenge was making nearby, circle-based recommendations feel relevant without the noise of a public social app.",
     tech: ["Node.js", "React", "TypeScript", "MongoDB"],
+    thumbnail: "/images/projects/recco-joy.png",
     demoUrl: "https://reccojoy.com/",
     futureWork: [
       "Deeper campaign attribution and cohort reporting",
@@ -201,6 +209,7 @@ export const projects: Project[] = [
     reason:
       "Unify Domains is a domain reseller built on NameSilo. I worked across frontend and backend with a product manager and QA to ship the full reseller journey—availability and registration, back-and-forth integration with the NameSilo team, and payment flows that had to handle real money carefully. That included revamping the UI for payment failures, Stripe and Razorpay escrow accounts, and hold-and-authorize payment logic, plus an admin panel that gives operations a 360° view of purchases, renewals, and account activity. Domain products fail when checkout or renewals are opaque; we optimized for clarity when payments stall and when staff need full visibility into what customers bought and when.",
     tech: ["React", "TypeScript", "Node", "NestJS", "Stripe", "Razorpay", "NameSilo"],
+    thumbnail: "/images/projects/unify-domains.png",
     demoUrl: "https://unify.domains/",
     futureWork: [
       "Bulk domain import and portfolio dashboards",
@@ -216,6 +225,7 @@ export const projects: Project[] = [
     reason:
       "Unify’s public site is the front door for enterprise clients evaluating digital engineering partners. I contributed to revamping unifytech.com with a redesigned UI—clearer information architecture for services and industry expertise, updated visual language, and layouts that surface the scale of Unify’s client work without overwhelming visitors. The goal was a credible, contemporary marketing presence that matches the quality of delivery behind the brand.",
     tech: ["React", "TypeScript", "Next.js"],
+    thumbnail: "/images/projects/unify-trust.png",
     demoUrl: "https://www.unifytech.com/",
     futureWork: [
       "Case-study templates for featured client work",
@@ -257,6 +267,7 @@ export const projects: Project[] = [
     reason:
       "Before this module, school fee collection at Vawsum was handled entirely by hand—staff, parents, and schools juggling cash, calls, and spreadsheets. I single-handedly introduced the payments product: major changes across backend and mobile, integration with payment gateways, and an aggregator view for schools and ops. Rollout also meant training parents and school stakeholders so adoption stuck. Fee collection became a product capability instead of a manual process schools had to run on their own.",
     tech: ["Node.js", "Mobile", "Payment gateways", "MongoDB"],
+    thumbnail: "/images/projects/vawsum-payments.png",
     demoUrl: "https://vawsum.com/",
     futureWork: [],
   },
@@ -271,6 +282,7 @@ export const projects: Project[] = [
     reason:
       "Startups often discover their breaking points in production—the first viral post or the first enterprise pilot—not in a planned test. I built Startup Stress Tester as a hands-on way to probe those weaknesses earlier: simulate load, see where latency spikes, and learn which assumptions in an architecture fall apart first. It is intentionally a learning and demo tool rather than a full commercial load platform, but it reflects how I think about reliability—make failure modes visible before users do. The project is also a playground for Next.js and TypeScript patterns I reuse on client work.",
     tech: ["Next.js", "TypeScript"],
+    thumbnail: "/images/projects/startup-stress-tester.png",
     demoUrl: "https://startup-stress-tester.vercel.app/",
     futureWork: ["More scenario presets", "Exportable reports"],
   },
@@ -285,6 +297,7 @@ export const projects: Project[] = [
     reason:
       "Single-agent chat UIs hide a lot of interesting AI design space. AI Debator explores multi-perspective conversation: opposing arguments, turn-taking, and the feeling of a live debate rather than one assistant agreeing with you. I built it to experiment with prompt structure, agent roles, and real-time interaction patterns in a UI that is fun enough to share and technical enough to learn from. It is a product sketch for how structured disagreement and transparency might work in tools that go beyond Q&A—useful for interviews, demos, and sharpening my instincts on conversational product design.",
     tech: ["Next.js", "OpenAI", "TypeScript"],
+    thumbnail: "/images/projects/ai-debator.png",
     demoUrl: "https://ai-debator-liart.vercel.app/",
     futureWork: ["Topic packs", "Shareable debate transcripts"],
   },
@@ -300,6 +313,7 @@ export const projects: Project[] = [
     reason:
       "Most chat tools stop at a single reply. Chat & More is built for actually learning from a question—first a clear answer, then a short summary, then multiple-choice questions to verify you understood it, and finally suggested follow-ups for the next thing to ask. LangGraph orchestrates that multi-step pipeline so each stage runs in order with clear handoffs; Gemini generates the content at each step. The flow mirrors how people study: read, recap, test yourself, then continue. I built it as a product experiment in graph-based AI workflows and UX beyond a one-shot completion, deployed on Vercel for fast iteration.",
     tech: ["Next.js", "TypeScript", "React", "Gemini", "LangGraph", "Vercel"],
+    thumbnail: "/images/projects/chat-and-more.png",
     demoUrl: "https://chat-and-more.vercel.app/",
     futureWork: [
       "Session history and saved study threads",
@@ -318,6 +332,7 @@ export const projects: Project[] = [
     reason:
       "Not every AI product needs a dashboard. Daily Motivation AI is the opposite—a deliberately small surface where the only job is to deliver something encouraging or useful once a day: an AI-generated quote and story, presented without noise. I wanted to test how little UI you need when the value is habitual and emotional rather than transactional, and how scheduling plus generation quality affects whether people actually return. A Make.com scenario closes the loop by posting a LinkedIn summary of each day's quote and story, so distribution runs without manual copy-paste—the same lightweight ops mindset as the app itself. Deployed on Vercel so I could iterate quickly on copy, prompts, and the automation flow without overbuilding infrastructure.",
     tech: ["Next.js", "OpenAI", "Make.com", "TypeScript"],
+    thumbnail: "/images/projects/daily-motivation-ai.png",
     demoUrl: "https://daily-motivation-ai-qfin.vercel.app/",
     futureWork: ["Personalization by mood/goals", "Push notifications"],
   },
@@ -333,6 +348,7 @@ export const projects: Project[] = [
     reason:
       "I wanted a small game that is easy to open and hard to put down — no account, no tutorial wall, just a photo and a single word to figure out. Guess the Pic is that loop: show a striking image, let the player guess, and keep the UI light enough to work on mobile. I built it on Next.js and deployed to Vercel so I could iterate on image sourcing, difficulty, and feedback without overbuilding backend infrastructure. It sits in my portfolio as a contrast to dashboards and agents: product craft focused on delight, pacing, and clarity in a few seconds of play.",
     tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
+    thumbnail: "/images/projects/guess-the-pic.png",
     demoUrl: "https://guess-the-pic.vercel.app/",
     futureWork: [
       "Daily challenge mode and streaks",

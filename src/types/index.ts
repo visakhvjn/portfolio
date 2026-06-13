@@ -9,6 +9,8 @@ export type Project = {
   resumeLine?: string;
   reason: string;
   tech: string[];
+  /** Image under public/, e.g. /images/projects/rolush.jpg. Defaults to /images/projects/{slug}.jpg */
+  thumbnail?: string;
   demoUrl?: string;
   repoUrl?: string;
   futureWork: string[];

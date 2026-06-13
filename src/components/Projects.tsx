@@ -1,14 +1,11 @@
 "use client";
 
 import { projects } from "@/data/projects";
-import {
-  projectTypeBadgeClass,
-  projectTypeFilterLabel,
-  projectTypeLabel,
-} from "@/lib/projectType";
+import { projectTypeFilterLabel } from "@/lib/projectType";
 import type { Project } from "@/types";
 import { useMemo, useState } from "react";
 import { AnimateIn } from "./AnimateIn";
+import { ProjectCard } from "./ProjectCard";
 import { ProjectModal } from "./ProjectModal";
 import { SectionHeading } from "./SectionHeading";
 
@@ -54,7 +51,11 @@ export function Projects() {
   return (
     <section className="py-14 sm:py-20">
       <AnimateIn>
-        <SectionHeading id="projects" title="Projects" subtitle="Tap a card for the full story — reason, stack, links, and what I am building next." />
+        <SectionHeading
+          id="projects"
+          title="Projects"
+          subtitle="Browse the work — open a live demo from the card or view details for the full story, stack, and roadmap."
+        />
       </AnimateIn>
       <AnimateIn delay={100}>
         <div className="mt-8 flex flex-wrap gap-2">
@@ -77,28 +78,10 @@ export function Projects() {
         {visibleProjects.map((project, i) => (
           <AnimateIn key={project.slug} delay={i * 50} className="h-full">
             <li className="h-full">
-              <button
-                type="button"
-                onClick={() => setSelected(project)}
-                className="group flex h-full min-h-[220px] w-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-left transition hover:border-emerald-500/30 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-              >
-                <div className="mb-3 flex min-h-[2.75rem] items-start justify-between gap-2">
-                  <h3 className="line-clamp-2 font-semibold leading-snug text-white group-hover:text-emerald-300">
-                    {project.heading}
-                  </h3>
-                  <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase ${projectTypeBadgeClass(project.type)}`}>
-                    {projectTypeLabel(project.type)}
-                  </span>
-                </div>
-                <p className="clamp-3 min-h-[4.5rem] text-sm leading-6 text-slate-400">
-                  {project.summary}
-                </p>
-                <div className="mt-4 flex min-h-[2.25rem] flex-wrap content-start gap-1.5">
-                  {project.tech.slice(0, 4).map((t) => <span key={t} className="rounded bg-white/5 px-1.5 py-0.5 text-[10px] text-slate-500">{t}</span>)}
-                  {project.tech.length > 4 && <span className="text-[10px] text-slate-600">+{project.tech.length - 4}</span>}
-                </div>
-                <p className="mt-auto pt-4 text-xs font-medium text-emerald-400/80 group-hover:text-emerald-400">View details →</p>
-              </button>
+              <ProjectCard
+                project={project}
+                onViewDetails={() => setSelected(project)}
+              />
             </li>
           </AnimateIn>
         ))}
