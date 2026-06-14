@@ -1,40 +1,21 @@
 "use client";
 
-import { projects } from "@/data/projects";
+import { getAllProjects } from "@/lib/projects";
 import { projectTypeFilterLabel } from "@/lib/projectType";
-import type { Project } from "@/types";
 import { useMemo, useState } from "react";
 import { AnimateIn } from "./AnimateIn";
 import { ProjectCard } from "./ProjectCard";
-import { ProjectModal } from "./ProjectModal";
 import { SectionHeading } from "./SectionHeading";
 
 const filters = ["all", "office", "personal", "ai", "games"] as const;
 type Filter = (typeof filters)[number];
 const INITIAL_VISIBLE = 6;
 
-function hasProjectLink(project: Project) {
-  return !!(project.demoUrl || project.repoUrl);
-}
-
 export function Projects() {
-  const [selected, setSelected] = useState<Project | null>(null);
   const [filter, setFilter] = useState<Filter>("all");
   const [showAll, setShowAll] = useState(false);
 
-  const sortedProjects = useMemo(
-    () =>
-      projects
-        .map((project, index) => ({ project, index }))
-        .sort((a, b) => {
-          const aHasLink = hasProjectLink(a.project);
-          const bHasLink = hasProjectLink(b.project);
-          if (aHasLink !== bHasLink) return aHasLink ? -1 : 1;
-          return a.index - b.index;
-        })
-        .map(({ project }) => project),
-    [],
-  );
+  const sortedProjects = useMemo(() => getAllProjects(), []);
 
   const filtered = useMemo(() => {
     if (filter === "all") return sortedProjects;
@@ -78,10 +59,7 @@ export function Projects() {
         {visibleProjects.map((project, i) => (
           <AnimateIn key={project.slug} delay={i * 50} className="h-full">
             <li className="h-full">
-              <ProjectCard
-                project={project}
-                onViewDetails={() => setSelected(project)}
-              />
+              <ProjectCard project={project} />
             </li>
           </AnimateIn>
         ))}
@@ -97,7 +75,6 @@ export function Projects() {
           </button>
         </div>
       )}
-      <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }

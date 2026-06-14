@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { DownloadResumeDropdown } from "./DownloadResumeDropdown";
 
 type NavbarProps = {
-  onContactClick: () => void;
+  onContactClick?: () => void;
 };
 
 type NavId = (typeof navItems)[number]["id"];
@@ -115,13 +115,22 @@ export function Navbar({ onContactClick }: NavbarProps) {
 
         <div className="hidden items-center gap-2 sm:flex">
           <DownloadResumeDropdown />
-          <button
-            type="button"
-            onClick={onContactClick}
-            className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
-          >
-            Contact
-          </button>
+          {onContactClick ? (
+            <button
+              type="button"
+              onClick={onContactClick}
+              className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+            >
+              Contact
+            </button>
+          ) : (
+            <a
+              href="/#me"
+              className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+            >
+              Contact
+            </a>
+          )}
         </div>
 
         <button
@@ -173,16 +182,26 @@ export function Navbar({ onContactClick }: NavbarProps) {
               className="mt-2"
               onSelect={() => setMenuOpen(false)}
             />
-            <button
-              type="button"
-              onClick={() => {
-                setMenuOpen(false);
-                onContactClick();
-              }}
-              className="mt-2 rounded-lg bg-emerald-500 px-3 py-3 text-sm font-semibold text-slate-950"
-            >
-              Contact me
-            </button>
+            {onContactClick ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  onContactClick();
+                }}
+                className="mt-2 rounded-lg bg-emerald-500 px-3 py-3 text-sm font-semibold text-slate-950"
+              >
+                Contact me
+              </button>
+            ) : (
+              <a
+                href="/#me"
+                onClick={() => setMenuOpen(false)}
+                className="mt-2 block rounded-lg bg-emerald-500 px-3 py-3 text-center text-sm font-semibold text-slate-950"
+              >
+                Contact me
+              </a>
+            )}
           </nav>
         </div>
       )}

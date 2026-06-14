@@ -7,20 +7,24 @@ import {
 } from "@/lib/projectType";
 import type { Project } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 type ProjectCardProps = {
   project: Project;
-  onViewDetails: () => void;
 };
 
-export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
   const [imageError, setImageError] = useState(false);
   const thumbnailSrc = projectThumbnailPath(project);
+  const detailHref = `/projects/${project.slug}`;
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-emerald-500/30 hover:bg-white/[0.06]">
-      <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-white/10 bg-slate-900">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-emerald-500/30 hover:bg-white/[0.06]">
+      <Link
+        href={detailHref}
+        className="relative block aspect-[16/10] w-full overflow-hidden border-b border-white/10 bg-slate-900"
+      >
         {imageError ? (
           <div className="flex h-full items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 px-6 text-center">
             <p className="text-sm font-medium text-slate-400">{project.heading}</p>
@@ -31,16 +35,18 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
             alt={`${project.heading} preview`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover object-top"
+            className="object-cover object-top transition group-hover:scale-[1.02]"
             onError={() => setImageError(true)}
           />
         )}
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col p-5">
         <div className="mb-3 flex items-start justify-between gap-2">
           <h3 className="line-clamp-2 font-semibold leading-snug text-white">
-            {project.heading}
+            <Link href={detailHref} className="hover:text-emerald-400">
+              {project.heading}
+            </Link>
           </h3>
           <span
             className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase ${projectTypeBadgeClass(project.type)}`}
@@ -75,6 +81,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-3.5 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
             >
               Live demo
@@ -85,18 +92,18 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-3.5 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
             >
               GitHub
             </a>
           )}
-          <button
-            type="button"
-            onClick={onViewDetails}
+          <Link
+            href={detailHref}
             className="inline-flex items-center justify-center rounded-xl border border-white/15 px-3.5 py-2 text-sm font-semibold text-white transition hover:border-emerald-500/30 hover:bg-white/5"
           >
             View details
-          </button>
+          </Link>
         </div>
       </div>
     </article>
