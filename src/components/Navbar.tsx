@@ -1,6 +1,8 @@
 "use client";
 
 import { navItems, site } from "@/data/site";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DownloadResumeDropdown } from "./DownloadResumeDropdown";
 
@@ -12,13 +14,21 @@ type NavId = (typeof navItems)[number]["id"];
 
 const HEADER_OFFSET = 88;
 
+function isNavSectionId(id: string): id is NavId {
+  return navItems.some((item) => item.id === id && !("href" in item && item.href));
+}
+
 export function Navbar({ onContactClick }: NavbarProps) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [active, setActive] = useState<NavId>("me");
   const [menuOpen, setMenuOpen] = useState(false);
   const scrollLockRef = useRef<NavId | null>(null);
   const scrollLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const updateActiveSection = useCallback(() => {
+    if (!isHome) return;
+
     if (scrollLockRef.current) {
       setActive(scrollLockRef.current);
       return;
@@ -39,9 +49,11 @@ export function Navbar({ onContactClick }: NavbarProps) {
     }
 
     setActive(current);
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
+    if (!isHome) return;
+
     updateActiveSection();
 
     const onScroll = () => {
@@ -56,7 +68,28 @@ export function Navbar({ onContactClick }: NavbarProps) {
       window.removeEventListener("resize", updateActiveSection);
       if (scrollLockTimerRef.current) clearTimeout(scrollLockTimerRef.current);
     };
-  }, [updateActiveSection]);
+  }, [isHome, updateActiveSection]);
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    const scrollToHash = () => {
+      const hash = window.location.hash.slice(1);
+      if (!isNavSectionId(hash)) return;
+
+      const el = document.getElementById(hash);
+      if (!el) return;
+
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ behavior: "smooth" });
+        setActive(hash);
+      });
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+    return () => window.removeEventListener("hashchange", scrollToHash);
+  }, [isHome, pathname]);
 
   const scrollTo = (id: NavId) => {
     setMenuOpen(false);
@@ -72,17 +105,40 @@ export function Navbar({ onContactClick }: NavbarProps) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const sectionLinkClass = (id: NavId, mobile = false) =>
+    mobile
+      ? `rounded-lg px-3 py-3 text-left text-sm font-medium ${
+          isHome && active === id ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
+        }`
+      : `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+          isHome && active === id
+            ? "bg-white/10 text-white"
+            : "text-slate-400 hover:text-white"
+        }`;
+
+  const logo = (
+    <>
+      {site.name.split(" ")[0]}
+      <span className="text-emerald-400">.</span>
+    </>
+  );
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#070b14]/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <button
-          type="button"
-          onClick={() => scrollTo("me")}
-          className="font-semibold tracking-tight text-white"
-        >
-          {site.name.split(" ")[0]}
-          <span className="text-emerald-400">.</span>
-        </button>
+        {isHome ? (
+          <button
+            type="button"
+            onClick={() => scrollTo("me")}
+            className="font-semibold tracking-tight text-white"
+          >
+            {logo}
+          </button>
+        ) : (
+          <Link href="/#me" className="font-semibold tracking-tight text-white">
+            {logo}
+          </Link>
+        )}
 
         <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) =>
@@ -96,19 +152,23 @@ export function Navbar({ onContactClick }: NavbarProps) {
               >
                 {item.label}
               </a>
-            ) : (
+            ) : isHome ? (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => scrollTo(item.id)}
-                className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                  active === item.id
-                    ? "bg-white/10 text-white"
-                    : "text-slate-400 hover:text-white"
-                }`}
+                className={sectionLinkClass(item.id)}
               >
                 {item.label}
               </button>
+            ) : (
+              <Link
+                key={item.id}
+                href={`/#${item.id}`}
+                className={sectionLinkClass(item.id)}
+              >
+                {item.label}
+              </Link>
             ),
           )}
         </nav>
@@ -164,17 +224,24 @@ export function Navbar({ onContactClick }: NavbarProps) {
                 >
                   {item.label}
                 </a>
-              ) : (
+              ) : isHome ? (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => scrollTo(item.id)}
-                  className={`rounded-lg px-3 py-3 text-left text-sm font-medium ${
-                    active === item.id ? "bg-white/10 text-white" : "text-slate-400"
-                  }`}
+                  className={sectionLinkClass(item.id, true)}
                 >
                   {item.label}
                 </button>
+              ) : (
+                <Link
+                  key={item.id}
+                  href={`/#${item.id}`}
+                  onClick={() => setMenuOpen(false)}
+                  className={sectionLinkClass(item.id, true)}
+                >
+                  {item.label}
+                </Link>
               ),
             )}
             <DownloadResumeDropdown
