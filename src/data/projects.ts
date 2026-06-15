@@ -72,6 +72,33 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "quiz-prep",
+    heading: "QuizPrep",
+    type: "personal",
+    featured: true,
+    summary:
+      "AI quiz builder for interview candidates, teachers, and study groups — turn topics into focused practice rounds with instant feedback, explanations, public sharing, and attempt tracking.",
+    resumeLine:
+      "AI quiz platform for interview prep and educators — topic-based generation, public sharing, and attempt tracking.",
+    reason:
+      "Most people don't fail interviews or assessments because they never studied — they freeze when a question lands differently than expected, or they spend hours building a quiz by hand. QuizPrep turns topics into practice under light pressure: one question at a time, four options, immediate answers with explanations, and weak spots that show up fast when you miss the same kind of question twice. Job seekers can rehearse system design, behavioral STAR stories, SQL, JavaScript, and more in five-minute drills between meetings. Teachers spin up unit reviews and see where students struggled. Study groups share one link, collect attempts, and compare scores without an LMS. I built the product end-to-end — AI-powered generation from topics, private and public quiz flows, a community library, and tiered plans from free hobby runs to premium document-grounded quizzes.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "OpenAI",
+      "Vercel",
+    ],
+    thumbnail: "/images/projects/quiz-prep.png",
+    demoUrl: "https://quiz-prep-sigma.vercel.app/",
+    futureWork: [
+      "Premium billing and document upload (PDFs, notes) for source-grounded quizzes",
+      "Advanced AI models for longer, richer assessments",
+      "Deeper analytics for educators and study-group leaders",
+    ],
+  },
+  {
     slug: "dumpd",
     heading: "Dumpd!",
     type: "ai",
