@@ -30,8 +30,14 @@ export const skillCategories: SkillCategory[] = [
     items: ["AWS", "Terraform", "Docker", "Kubernetes"],
   },
   {
-    title: "AI & tooling",
-    items: ["RAGs", "LangChain", "LangGraph", "MCP"],
+    title: "AI engineering & tooling",
+    items: [
+      "RAGs",
+      "LangChain",
+      "LangGraph",
+      "Model Context Protocol (MCP)",
+      "Cursor",
+    ],
   },
   {
     title: "Also worked with",

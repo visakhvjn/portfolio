@@ -2,7 +2,7 @@ export const site = {
   name: "Visakh Vijayan",
   title: "Senior Full-Stack Engineer",
   resumeTitle:
-    "Senior Full-Stack Engineer · Node.js, React, MongoDB, AWS, AI",
+    "Senior Full-Stack Engineer | Node.js • React • MongoDB • AWS • AI • Golang",
   tagline: "8+ years building SaaS, fintech, health & edtech products",
   email: "vjnvisakh@gmail.com",
   phone: "+91-7980-544-891",

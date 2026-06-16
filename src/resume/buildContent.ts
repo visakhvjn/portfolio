@@ -36,9 +36,10 @@ function buildEducation() {
 /** Personal projects included in the resume PROJECTS section (order preserved). */
 const resumePersonalProjectSlugs = [
   "dumpd",
-  "innovative-strategic",
-  "ai-debator",
   "ident-dental",
+  "quiz-prep",
+  "ai-debator",
+  "innovative-strategic",
 ] as const;
 
 function resumeOneLiner(project: Project): string {

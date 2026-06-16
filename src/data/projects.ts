@@ -2,43 +2,30 @@ import type { Project } from "@/types";
 
 export const projects: Project[] = [
   {
-    slug: "rolush",
-    heading: "Rolush Cafe",
-    type: "personal",
+    slug: "dumpd",
+    heading: "Dumpd!",
+    type: "ai",
     featured: true,
     summary:
-      "Custom cake studio web app for a Kannur bakery — browse categories, customise orders, cart checkout, and WhatsApp-led enquiries. A full customer-facing storefront built for celebrations from birthdays to weddings.",
+      "Content engine with an MCP server for AI assistants — draft, publish, and manage markdown posts from Cursor and other clients; public blogs at /username and a dashboard for manual edits.",
     resumeLine:
-      "Custom cake studio storefront with categories, cart checkout, and WhatsApp-led orders.",
+      "MCP-powered content engine: manage drafts and publishing from AI assistants, with public /username blogs and a creator dashboard.",
     reason:
-      "Rolush needed more than a static menu online: a real storefront where customers in Kannur could explore cakes by occasion, see featured picks, customise orders, and reach the studio without friction. I built the web app end-to-end — product browsing by category (birthdays, weddings, anniversaries, and more), detailed cake pages, cart flows, a customise-your-cake path, and WhatsApp as the primary conversion channel for orders and questions. The site reflects how I approach small-business products: clear UX for non-technical owners, mobile-friendly layouts, and a stack that is fast to deploy and easy to extend as the menu and seasons change.",
-    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
-    thumbnail: "/images/projects/rolush.png",
-    demoUrl: "https://rolush-web-app.vercel.app/",
-    futureWork: [
-      "Online payment integration beyond WhatsApp-led orders",
-      "Admin tooling for menu and seasonal featured cakes",
-      "Delivery slot booking and order tracking",
+      "Builders who live in Cursor and other AI assistants still treat publishing as a context switch—drafts pile up in the editor while nothing ships publicly. Dumpd is a content engine built around that workflow: an MCP server so assistants can create, draft, and publish markdown posts; a dashboard when you want to edit by hand; and a public blog at /username so output becomes a portfolio you maintain, not local files. Google sign-in, API keys for MCP clients, and tools like create_post with draft vs published status complete the loop. It is my bet on AI assistants as a real management surface for content—not just generation in chat, but operating a live publication from the same session where you work.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "MCP",
+      "Google OAuth",
+      "Markdown",
+      "Vercel",
     ],
-  },
-  {
-    slug: "innovative-strategic",
-    heading: "Innovative & Strategic F.Z.E",
-    type: "personal",
-    featured: true,
-    summary:
-      "Marketing site for a UAE accounting and management consultancy in Ajman Free Zone — seven service areas, packages, FAQ, testimonials, and consultation booking for clients across the UAE, UK, and Georgia.",
-    resumeLine:
-      "Consultancy marketing site with service pages, packages, FAQ, and consultation booking for a UAE accounting firm.",
-    reason:
-      "Accounting and tax firms need a site that earns trust before the first call—clear services, compliance signals, and a simple path to book a consultation. Innovative & Strategic F.Z.E needed that for their Ajman Free Zone practice: corporate tax, VAT, audit, bookkeeping, AML, and advisory work across the UAE, UK, and Georgia. I built the marketing site end-to-end—navigation across seven practice areas, packages and FAQ pages, client testimonials, track-record highlights, and contact and consultation flows so prospects see what they offer and how to reach the team. The design leans into credibility for regulated industries: readable service copy, FTA and compliance cues, and mobile-friendly layouts on Vercel so the firm can iterate as services and regulations change.",
-    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
-    thumbnail: "/images/projects/innovative-strategic.png",
-    demoUrl: "https://www.innovativestrategic.com/",
+    thumbnail: "/images/projects/dumpd.png",
+    demoUrl: "https://dumpd.in/",
     futureWork: [
-      "Insights or blog section for UAE tax and VAT updates",
-      "Integrated online consultation scheduling",
-      "Multilingual support (English / Arabic)",
+      "Custom domain support",
+      "Post analytics",
+      "Additional MCP tools for scheduling and SEO",
     ],
   },
   {
@@ -99,30 +86,58 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "dumpd",
-    heading: "Dumpd!",
+    slug: "ai-debator",
+    heading: "AI Debator",
     type: "ai",
+    summary:
+      "Multi-agent AI debate experience with opposing viewpoints and turn-taking. Experiments with prompt roles, real-time interaction, and UI patterns beyond single-assistant chat.",
+    resumeLine:
+      "Multi-agent AI debate app with opposing viewpoints and turn-taking beyond single-chat UIs.",
+    reason:
+      "Single-agent chat UIs hide a lot of interesting AI design space. AI Debator explores multi-perspective conversation: opposing arguments, turn-taking, and the feeling of a live debate rather than one assistant agreeing with you. I built it to experiment with prompt structure, agent roles, and real-time interaction patterns in a UI that is fun enough to share and technical enough to learn from. It is a product sketch for how structured disagreement and transparency might work in tools that go beyond Q&A—useful for interviews, demos, and sharpening my instincts on conversational product design.",
+    tech: ["Next.js", "OpenAI", "TypeScript"],
+    thumbnail: "/images/projects/ai-debator.png",
+    demoUrl: "https://ai-debator-liart.vercel.app/",
+    futureWork: ["Topic packs", "Shareable debate transcripts"],
+  },
+  {
+    slug: "innovative-strategic",
+    heading: "Innovative & Strategic F.Z.E",
+    type: "personal",
     featured: true,
     summary:
-      "Content engine with an MCP server for AI assistants — draft, publish, and manage markdown posts from Cursor and other clients; public blogs at /username and a dashboard for manual edits.",
+      "Marketing site for a UAE accounting and management consultancy in Ajman Free Zone — seven service areas, packages, FAQ, testimonials, and consultation booking for clients across the UAE, UK, and Georgia.",
     resumeLine:
-      "MCP-powered content engine: manage drafts and publishing from AI assistants, with public /username blogs and a creator dashboard.",
+      "Consultancy marketing site with service pages, packages, FAQ, and consultation booking for a UAE accounting firm.",
     reason:
-      "Builders who live in Cursor and other AI assistants still treat publishing as a context switch—drafts pile up in the editor while nothing ships publicly. Dumpd is a content engine built around that workflow: an MCP server so assistants can create, draft, and publish markdown posts; a dashboard when you want to edit by hand; and a public blog at /username so output becomes a portfolio you maintain, not local files. Google sign-in, API keys for MCP clients, and tools like create_post with draft vs published status complete the loop. It is my bet on AI assistants as a real management surface for content—not just generation in chat, but operating a live publication from the same session where you work.",
-    tech: [
-      "Next.js",
-      "TypeScript",
-      "MCP",
-      "Google OAuth",
-      "Markdown",
-      "Vercel",
-    ],
-    thumbnail: "/images/projects/dumpd.png",
-    demoUrl: "https://dumpd.in/",
+      "Accounting and tax firms need a site that earns trust before the first call—clear services, compliance signals, and a simple path to book a consultation. Innovative & Strategic F.Z.E needed that for their Ajman Free Zone practice: corporate tax, VAT, audit, bookkeeping, AML, and advisory work across the UAE, UK, and Georgia. I built the marketing site end-to-end—navigation across seven practice areas, packages and FAQ pages, client testimonials, track-record highlights, and contact and consultation flows so prospects see what they offer and how to reach the team. The design leans into credibility for regulated industries: readable service copy, FTA and compliance cues, and mobile-friendly layouts on Vercel so the firm can iterate as services and regulations change.",
+    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
+    thumbnail: "/images/projects/innovative-strategic.png",
+    demoUrl: "https://www.innovativestrategic.com/",
     futureWork: [
-      "Custom domain support",
-      "Post analytics",
-      "Additional MCP tools for scheduling and SEO",
+      "Insights or blog section for UAE tax and VAT updates",
+      "Integrated online consultation scheduling",
+      "Multilingual support (English / Arabic)",
+    ],
+  },
+  {
+    slug: "rolush",
+    heading: "Rolush Cafe",
+    type: "personal",
+    featured: true,
+    summary:
+      "Custom cake studio web app for a Kannur bakery — browse categories, customise orders, cart checkout, and WhatsApp-led enquiries. A full customer-facing storefront built for celebrations from birthdays to weddings.",
+    resumeLine:
+      "Custom cake studio storefront with categories, cart checkout, and WhatsApp-led orders.",
+    reason:
+      "Rolush needed more than a static menu online: a real storefront where customers in Kannur could explore cakes by occasion, see featured picks, customise orders, and reach the studio without friction. I built the web app end-to-end — product browsing by category (birthdays, weddings, anniversaries, and more), detailed cake pages, cart flows, a customise-your-cake path, and WhatsApp as the primary conversion channel for orders and questions. The site reflects how I approach small-business products: clear UX for non-technical owners, mobile-friendly layouts, and a stack that is fast to deploy and easy to extend as the menu and seasons change.",
+    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
+    thumbnail: "/images/projects/rolush.png",
+    demoUrl: "https://rolush-web-app.vercel.app/",
+    futureWork: [
+      "Online payment integration beyond WhatsApp-led orders",
+      "Admin tooling for menu and seasonal featured cakes",
+      "Delivery slot booking and order tracking",
     ],
   },
   {
@@ -312,21 +327,6 @@ export const projects: Project[] = [
     thumbnail: "/images/projects/startup-stress-tester.png",
     demoUrl: "https://startup-stress-tester.vercel.app/",
     futureWork: ["More scenario presets", "Exportable reports"],
-  },
-  {
-    slug: "ai-debator",
-    heading: "AI Debator",
-    type: "ai",
-    summary:
-      "Multi-agent AI debate experience with opposing viewpoints and turn-taking. Experiments with prompt roles, real-time interaction, and UI patterns beyond single-assistant chat.",
-    resumeLine:
-      "Multi-agent AI debate app with opposing viewpoints and turn-taking beyond single-chat UIs.",
-    reason:
-      "Single-agent chat UIs hide a lot of interesting AI design space. AI Debator explores multi-perspective conversation: opposing arguments, turn-taking, and the feeling of a live debate rather than one assistant agreeing with you. I built it to experiment with prompt structure, agent roles, and real-time interaction patterns in a UI that is fun enough to share and technical enough to learn from. It is a product sketch for how structured disagreement and transparency might work in tools that go beyond Q&A—useful for interviews, demos, and sharpening my instincts on conversational product design.",
-    tech: ["Next.js", "OpenAI", "TypeScript"],
-    thumbnail: "/images/projects/ai-debator.png",
-    demoUrl: "https://ai-debator-liart.vercel.app/",
-    futureWork: ["Topic packs", "Shareable debate transcripts"],
   },
   {
     slug: "chat-and-more",
