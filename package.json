@@ -10,6 +10,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@mcp-b/react-webmcp": "^3.0.0",
+    "@mcp-b/webmcp-polyfill": "^3.0.0",
     "@react-pdf/renderer": "^4.5.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
@@ -17,7 +19,9 @@
     "react": "19.2.4",
     "react-calendly": "^4.4.0",
     "react-dom": "19.2.4",
-    "resend": "^6.12.3"
+    "resend": "^6.12.3",
+    "zod": "^4.4.3",
+    "zod-to-json-schema": "^3.25.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

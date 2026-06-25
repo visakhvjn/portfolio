@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { PersonJsonLd } from "@/components/PersonJsonLd";
+import { WebMcpProvider } from "@/components/webmcp/WebMcpProvider";
 import { WebSiteJsonLd } from "@/components/WebSiteJsonLd";
 import { site } from "@/data/site";
 import "./globals.css";
@@ -50,7 +51,7 @@ export default function RootLayout({
       <body className="mesh-bg min-h-full antialiased">
         <PersonJsonLd />
         <WebSiteJsonLd />
-        {children}
+        <WebMcpProvider>{children}</WebMcpProvider>
         <Analytics />
         <SpeedInsights />
       </body>
