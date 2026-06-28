@@ -3,8 +3,8 @@ import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import { skillCategories } from "@/data/skills";
 import { site } from "@/data/site";
-import type { Project } from "@/types";
 import { buildLinkedBulletsForJob } from "./linkBullets";
+import { resumeProjectCopy } from "./projectCopy";
 import type {
   ResumeContent,
   ResumeProjectEntry,
@@ -36,29 +36,31 @@ function buildEducation() {
 /** Personal projects included in the resume PROJECTS section (order preserved). */
 const resumePersonalProjectSlugs = [
   "dumpd",
+  "pdf-rag",
   "ident-dental",
   "quiz-prep",
   "ai-debator",
   "innovative-strategic",
 ] as const;
 
-function resumeOneLiner(project: Project): string {
-  if (project.resumeLine) return project.resumeLine;
-  const first = project.summary.split(/(?<=[.!?])\s+/)[0];
-  return first ?? project.summary;
-}
-
 function buildResumeProjects(): ResumeProjectEntry[] {
   const bySlug = Object.fromEntries(projects.map((p) => [p.slug, p]));
 
-  return resumePersonalProjectSlugs
-    .map((slug) => bySlug[slug])
-    .filter((p): p is Project => p !== undefined)
-    .map((p) => ({
-      name: p.heading,
-      description: resumeOneLiner(p),
-      url: p.demoUrl ?? p.repoUrl,
-    }));
+  return resumePersonalProjectSlugs.flatMap((slug) => {
+    const project = bySlug[slug];
+    const copy = resumeProjectCopy[slug];
+    if (!project || !copy) return [];
+    return [
+      {
+        title: copy.title,
+        description: copy.description,
+        url:
+          project.demoUrl ??
+          project.repoUrl ??
+          `${site.portfolioUrl}/projects/${project.slug}`,
+      },
+    ];
+  });
 }
 
 export function buildResumeContent(

@@ -61,7 +61,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
             Why
           </h2>
-          <p className="mt-2 text-base leading-relaxed text-slate-300">
+          <p className="mt-2 whitespace-pre-line text-base leading-relaxed text-slate-300">
             {project.reason}
           </p>
         </section>

@@ -27,11 +27,30 @@ function Section({
   );
 }
 
-function LinkedProjectName({ name, url }: { name: string; url?: string }) {
+function LinkedProjectTitle({ title, url }: { title: string; url?: string }) {
   if (url) {
-    return <Link src={url}>{name}</Link>;
+    return <Link src={url}>{title}</Link>;
   }
-  return <>{name}</>;
+  return <>{title}</>;
+}
+
+/** Renders plain text with **bold** segments for react-pdf. */
+function RichText({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return (
+    <Text style={s.projectDescription}>
+      {parts.map((part, i) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return (
+            <Text key={i} style={{ fontFamily: "Helvetica-Bold" }}>
+              {part.slice(2, -2)}
+            </Text>
+          );
+        }
+        return part;
+      })}
+    </Text>
+  );
 }
 
 function BulletItem({ children }: { children: ReactNode }) {
@@ -137,17 +156,21 @@ export function ResumeDocument({ content }: Props) {
         </Section>
 
         <Section title="PROJECTS">
-          {content.projects.map((project, i) => (
-            <Text key={project.name} style={s.numberedBlock}>
-              {i + 1}. <LinkedProjectName name={project.name} url={project.url} />
-              {" — "}
-              {project.description}
-            </Text>
+          {content.projects.map((project) => (
+            <View key={project.title} style={s.projectBlock}>
+              <Text style={s.projectTitle}>
+                <LinkedProjectTitle title={project.title} url={project.url} />
+              </Text>
+              <RichText text={project.description} />
+            </View>
           ))}
-          <Text style={s.numberedBlock}>
-            {content.projects.length + 1}. Many more at{" "}
-            <Link src={content.portfolioUrl}>{portfolioHost}</Link>
-          </Text>
+          <View style={s.projectBlock}>
+            <Text style={s.projectTitle}>Portfolio</Text>
+            <Text style={s.projectDescription}>
+              Additional projects and technical case studies available at{" "}
+              <Link src={content.portfolioUrl}>{portfolioHost}</Link>.
+            </Text>
+          </View>
         </Section>
 
         <View style={s.compactMeta}>

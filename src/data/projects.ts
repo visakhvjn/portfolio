@@ -36,11 +36,11 @@ export const projects: Project[] = [
     type: "ai",
     featured: true,
     summary:
-      "Dockerized retrieval-augmented generation over PDFs — upload documents, chunk and embed into Qdrant, and query them through a web UI backed by a Node API.",
+      "Chat with your PDFs — upload a document, ask questions in plain English, and get cited answers from a self-hosted RAG stack you can spin up with one Docker command.",
     resumeLine:
-      "Containerized PDF RAG: Qdrant vector store, Node backend, and React frontend orchestrated with Docker Compose.",
+      "Self-hosted PDF RAG chat: upload documents, ask questions, get cited answers — Qdrant vector store, Node API, React UI, and Docker Compose with health-checked startup.",
     reason:
-      "Most RAG demos stop at a notebook. This project packages a full document Q&A flow for local or self-hosted deployment. Qdrant stores embedded PDF chunks in a pdf_chunks collection with persistent storage across restarts. A Node backend (port 3000) handles ingestion, file uploads, and retrieval against that index, with configuration via environment variables and a /health endpoint. A React frontend (port 5173) gives users a UI to upload PDFs and ask questions. Docker Compose wires all three services with health checks and ordered startup: Qdrant must be healthy before the backend starts, and the backend must pass /health before the frontend comes up. Uploaded files and vector data live in named volumes (backend-uploads, qdrant-storage) so the stack survives container restarts. Published images on Docker Hub (vjnvisakh/rag-backend, vjnvisakh/rag-frontend) make it runnable with a single docker compose up.",
+      "You download a dense PDF—a textbook, a report, a contract—and need answers fast. Skimming hundreds of pages or pasting chunks into a generic chatbot loses context and trust. PDF RAG is built for that moment: drag a file into the sidebar, ask for a bullet-point summary or a specific detail, and get a response grounded in your document with source citations so you can verify every claim.\n\nUnder the hood it is a three-service stack meant to run anywhere, not just on a laptop in a Jupyter notebook. Qdrant holds embedded chunks in a pdf_chunks collection with persistent storage across restarts. A Node backend ingests uploads, chunks and embeds PDFs, and runs retrieval-augmented generation against that index. A React frontend is the chat surface you see in the demo—upload on the left, conversation on the right. Docker Compose ties it together with ordered health checks: Qdrant must be healthy before the API starts, and the API must pass /health before the UI comes up. Named volumes keep uploads and vector data between runs. Pre-built images on Docker Hub (vjnvisakh/rag-backend, vjnvisakh/rag-frontend) mean docker compose up is enough to go from zero to chatting with your own files.",
     tech: [
       "Docker Compose",
       "Qdrant",

@@ -71,6 +71,16 @@ export const resumeStyles = StyleSheet.create({
   numberedBlock: {
     marginBottom: 3,
   },
+  projectBlock: {
+    marginBottom: 8,
+  },
+  projectTitle: {
+    fontFamily: "Helvetica-Bold",
+    marginBottom: 2,
+  },
+  projectDescription: {
+    textAlign: "justify",
+  },
   numberedTitle: {
     fontFamily: "Helvetica-Bold",
     marginBottom: 2,
