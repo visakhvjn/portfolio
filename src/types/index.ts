@@ -1,5 +1,11 @@
 export type ProjectType = "office" | "personal" | "ai" | "games";
 
+export type ProjectRunStep = {
+  title: string;
+  description?: string;
+  code?: string;
+};
+
 export type Project = {
   slug: string;
   heading: string;
@@ -16,6 +22,10 @@ export type Project = {
   futureWork: string[];
   featured?: boolean;
   nda?: boolean;
+  /** Optional docker-compose.yml shown on the project detail page. */
+  dockerCompose?: string;
+  /** Optional setup / run instructions for the project detail page. */
+  runSteps?: ProjectRunStep[];
 };
 
 export type ExperienceEntry = {

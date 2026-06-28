@@ -1,3 +1,5 @@
+import { pdfRagDockerCompose } from "@/data/pdf-rag-docker-compose";
+import { pdfRagRunSteps } from "@/data/pdf-rag-run-steps";
 import type { Project } from "@/types";
 
 export const projects: Project[] = [
@@ -26,6 +28,36 @@ export const projects: Project[] = [
       "Custom domain support",
       "Post analytics",
       "Additional MCP tools for scheduling and SEO",
+    ],
+  },
+  {
+    slug: "pdf-rag",
+    heading: "PDF RAG",
+    type: "ai",
+    featured: true,
+    summary:
+      "Dockerized retrieval-augmented generation over PDFs — upload documents, chunk and embed into Qdrant, and query them through a web UI backed by a Node API.",
+    resumeLine:
+      "Containerized PDF RAG: Qdrant vector store, Node backend, and React frontend orchestrated with Docker Compose.",
+    reason:
+      "Most RAG demos stop at a notebook. This project packages a full document Q&A flow for local or self-hosted deployment. Qdrant stores embedded PDF chunks in a pdf_chunks collection with persistent storage across restarts. A Node backend (port 3000) handles ingestion, file uploads, and retrieval against that index, with configuration via environment variables and a /health endpoint. A React frontend (port 5173) gives users a UI to upload PDFs and ask questions. Docker Compose wires all three services with health checks and ordered startup: Qdrant must be healthy before the backend starts, and the backend must pass /health before the frontend comes up. Uploaded files and vector data live in named volumes (backend-uploads, qdrant-storage) so the stack survives container restarts. Published images on Docker Hub (vjnvisakh/rag-backend, vjnvisakh/rag-frontend) make it runnable with a single docker compose up.",
+    tech: [
+      "Docker Compose",
+      "Qdrant",
+      "RAG",
+      "Node.js",
+      "React",
+      "PDF",
+      "Vector search",
+    ],
+    thumbnail: "/images/projects/pdf-rag.png",
+    runSteps: pdfRagRunSteps,
+    dockerCompose: pdfRagDockerCompose,
+    futureWork: [
+      "Auth and multi-tenant collections",
+      "Streaming answers in the UI",
+      "Hybrid search (keyword + vector)",
+      "Single-VPS deploy with TLS",
     ],
   },
   {

@@ -82,6 +82,47 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           </div>
         </section>
 
+        {project.runSteps && project.runSteps.length > 0 && (
+          <section className="mt-8">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
+              How to run
+            </h2>
+            <ol className="mt-4 space-y-6">
+              {project.runSteps.map((step, index) => (
+                <li key={step.title} className="flex gap-4">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-semibold text-emerald-400">
+                    {index + 1}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-medium text-white">{step.title}</h3>
+                    {step.description && (
+                      <p className="mt-1 text-sm leading-relaxed text-slate-300">
+                        {step.description}
+                      </p>
+                    )}
+                    {step.code && (
+                      <pre className="mt-2 overflow-x-auto rounded-lg border border-white/10 bg-slate-950/80 p-3 text-xs leading-relaxed text-slate-300 sm:text-sm">
+                        <code>{step.code}</code>
+                      </pre>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {project.dockerCompose && (
+          <section className="mt-8">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
+              Docker Compose
+            </h2>
+            <pre className="mt-2 overflow-x-auto rounded-xl border border-white/10 bg-slate-950/80 p-4 text-xs leading-relaxed text-slate-300 sm:text-sm">
+              <code>{project.dockerCompose}</code>
+            </pre>
+          </section>
+        )}
+
         {(project.demoUrl || project.repoUrl) && (
           <section className="mt-8 flex flex-col gap-2 sm:flex-row">
             {project.demoUrl && (
