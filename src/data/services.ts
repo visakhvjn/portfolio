@@ -26,7 +26,7 @@ export const services: ServiceOffering[] = [
       "Databases, caching, and data modeling",
       "Payment gateways and transactional flows",
     ],
-    tech: ["Node.js", "Express", "NestJS", "PostgreSQL", "MongoDB", "Golang"],
+    tech: ["Node.js", "Express", "NestJS", "PostgreSQL", "MongoDB"],
   },
   {
     id: "ai",

@@ -14,7 +14,6 @@ export const skillCategories: SkillCategory[] = [
       "Next.js",
       "React",
       "NestJS",
-      "Golang",
     ],
   },
   {
