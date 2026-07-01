@@ -34,13 +34,19 @@ function LinkedProjectTitle({ title, url }: { title: string; url?: string }) {
   return <>{title}</>;
 }
 
+type ProjectTableColumnStyle =
+  | typeof s.projectTableSnoCol
+  | typeof s.projectTableNameCol
+  | typeof s.projectTableDescCol
+  | typeof s.projectTableTechCol;
+
 function ProjectTableCell({
   children,
   columnStyle,
   last,
 }: {
   children: ReactNode;
-  columnStyle: object;
+  columnStyle: ProjectTableColumnStyle;
   last?: boolean;
 }) {
   return (
