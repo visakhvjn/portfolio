@@ -1,6 +1,7 @@
 export type ResumeProjectEntry = {
   title: string;
   description: string;
+  tech: string;
   url?: string;
 };
 

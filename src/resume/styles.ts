@@ -2,24 +2,24 @@ import { StyleSheet } from "@react-pdf/renderer";
 
 export const resumeStyles = StyleSheet.create({
   page: {
-    paddingTop: 36,
-    paddingBottom: 40,
+    paddingTop: 32,
+    paddingBottom: 32,
     paddingHorizontal: 42,
     fontFamily: "Helvetica",
     fontSize: 9.5,
-    lineHeight: 1.35,
+    lineHeight: 1.32,
     color: "#111",
   },
   headerRow: {
     flexDirection: "row",
     alignItems: "flex-start",
-    marginBottom: 10,
+    marginBottom: 8,
   },
   avatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    marginRight: 14,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginRight: 12,
     objectFit: "cover",
   },
   headerText: {
@@ -44,7 +44,7 @@ export const resumeStyles = StyleSheet.create({
     lineHeight: 1.4,
   },
   bio: {
-    marginBottom: 8,
+    marginBottom: 5,
     textAlign: "justify",
   },
   linkRow: {
@@ -53,13 +53,13 @@ export const resumeStyles = StyleSheet.create({
     lineHeight: 1.4,
   },
   section: {
-    marginTop: 10,
-    marginBottom: 4,
+    marginTop: 8,
+    marginBottom: 2,
   },
   sectionTitle: {
     fontFamily: "Helvetica-Bold",
     fontSize: 10,
-    marginBottom: 8,
+    marginBottom: 5,
     letterSpacing: 0.3,
     textDecoration: "underline",
     textDecorationColor: "#111",
@@ -71,33 +71,80 @@ export const resumeStyles = StyleSheet.create({
   numberedBlock: {
     marginBottom: 3,
   },
-  projectBlock: {
-    marginBottom: 8,
-  },
-  projectTitle: {
-    fontFamily: "Helvetica-Bold",
-    marginBottom: 2,
-  },
   projectDescription: {
     textAlign: "justify",
+    fontSize: 8.5,
+    lineHeight: 1.3,
+  },
+  projectTable: {
+    borderWidth: 1,
+    borderColor: "#bbb",
+  },
+  projectTableRow: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#bbb",
+  },
+  projectTableRowLast: {
+    borderBottomWidth: 0,
+  },
+  projectTableHeaderRow: {
+    flexDirection: "row",
+    backgroundColor: "#f2f2f2",
+    borderBottomWidth: 1,
+    borderBottomColor: "#bbb",
+  },
+  projectTableCell: {
+    paddingVertical: 3,
+    paddingHorizontal: 4,
+    borderRightWidth: 1,
+    borderRightColor: "#bbb",
+  },
+  projectTableCellLast: {
+    borderRightWidth: 0,
+  },
+  projectTableHeaderText: {
+    fontFamily: "Helvetica-Bold",
+    fontSize: 8.5,
+  },
+  projectTableCellText: {
+    fontSize: 8.5,
+    lineHeight: 1.3,
+  },
+  projectTableSnoCol: {
+    width: "6%",
+  },
+  projectTableNameCol: {
+    width: "20%",
+  },
+  projectTableDescCol: {
+    width: "46%",
+  },
+  projectTableTechCol: {
+    width: "28%",
+  },
+  projectTableFootnote: {
+    marginTop: 4,
+    fontSize: 8.5,
+    color: "#333",
   },
   numberedTitle: {
     fontFamily: "Helvetica-Bold",
     marginBottom: 2,
   },
   experienceJobBlock: {
-    marginBottom: 12,
+    marginBottom: 8,
   },
   experienceCompanyLine: {
     fontFamily: "Helvetica-Bold",
-    marginBottom: 8,
+    marginBottom: 5,
   },
   experienceCompanyName: {
     fontSize: 11.5,
   },
   experienceRoleLine: {
     fontSize: 10,
-    marginBottom: 6,
+    marginBottom: 4,
     color: "#333",
   },
   bulletRow: {
@@ -115,11 +162,11 @@ export const resumeStyles = StyleSheet.create({
     color: "#333",
   },
   compactMeta: {
-    marginTop: 10,
+    marginTop: 6,
   },
   compactMetaLine: {
-    marginBottom: 2,
-    fontSize: 9.5,
+    marginBottom: 1,
+    fontSize: 9,
     color: "#333",
   },
   compactMetaLabel: {

@@ -40,7 +40,6 @@ const resumePersonalProjectSlugs = [
   "ident-dental",
   "quiz-prep",
   "ai-debator",
-  "innovative-strategic",
 ] as const;
 
 function buildResumeProjects(): ResumeProjectEntry[] {
@@ -54,6 +53,7 @@ function buildResumeProjects(): ResumeProjectEntry[] {
       {
         title: copy.title,
         description: copy.description,
+        tech: project.tech.join(", "),
         url:
           project.demoUrl ??
           project.repoUrl ??

@@ -6,27 +6,27 @@ export const resumeProjectCopy: Record<
   dumpd: {
     title: "Dumpd! – AI-Powered Content Management Platform",
     description:
-      "MCP-powered content publishing platform enabling AI assistants to create, manage, and publish blogs. Features creator dashboard, draft management, public /username blogs, and AI-assisted publishing workflows.",
+      "MCP-powered publishing for AI assistants—creator dashboard, drafts, and public /username blogs.",
   },
   "pdf-rag": {
     title: "PDF RAG – Self-Hosted Retrieval-Augmented Generation System",
     description:
-      "Built an AI document question-answering platform using **Node.js, React, Qdrant, OpenAI Embeddings, and Docker Compose**. Supports PDF ingestion, semantic search, citation-based responses, health-checked microservices, and self-hosted deployment.",
+      "Self-hosted PDF Q&A with semantic search, cited answers, and health-checked microservices.",
   },
   "ident-dental": {
     title: "iDent Dental – Healthcare Website & Appointment Platform",
     description:
-      "Developed a responsive dental clinic website with appointment booking, doctor profiles, treatment pages, patient testimonials, before/after galleries, and SEO optimization using **Next.js, AWS, and serverless APIs**.",
+      "Dental clinic site with appointment booking, doctor profiles, testimonials, and SEO.",
   },
   "quiz-prep": {
     title: "QuizPrep – AI Quiz Generation Platform",
     description:
-      "Built an AI-powered assessment platform for interview preparation and educators with topic-based quiz generation, public quiz sharing, attempt tracking, and performance analytics.",
+      "AI quiz platform for interview prep and educators with sharing and attempt tracking.",
   },
   "ai-debator": {
     title: "AI Debator – Multi-Agent LLM Debate Application",
     description:
-      "Developed a multi-agent AI system where independent LLM agents debate opposing viewpoints using structured turn-taking, conversation memory, and orchestration workflows.",
+      "Multi-agent debate app with opposing viewpoints, turn-taking, and orchestration.",
   },
   "innovative-strategic": {
     title: "Innovative & Strategic F.Z.E – Corporate Consultancy Website",

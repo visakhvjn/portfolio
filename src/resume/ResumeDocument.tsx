@@ -34,6 +34,87 @@ function LinkedProjectTitle({ title, url }: { title: string; url?: string }) {
   return <>{title}</>;
 }
 
+function ProjectTableCell({
+  children,
+  columnStyle,
+  last,
+}: {
+  children: ReactNode;
+  columnStyle: object;
+  last?: boolean;
+}) {
+  return (
+    <View
+      style={[
+        s.projectTableCell,
+        columnStyle,
+        ...(last ? [s.projectTableCellLast] : []),
+      ]}
+    >
+      {children}
+    </View>
+  );
+}
+
+function ProjectsTable({
+  projects,
+  portfolioUrl,
+}: {
+  projects: ResumeContent["projects"];
+  portfolioUrl: string;
+}) {
+  const portfolioHost = portfolioUrl.replace(/^https?:\/\//, "");
+
+  return (
+    <>
+      <View style={s.projectTable}>
+        <View style={s.projectTableHeaderRow}>
+          <ProjectTableCell columnStyle={s.projectTableSnoCol}>
+            <Text style={s.projectTableHeaderText}>SNo</Text>
+          </ProjectTableCell>
+          <ProjectTableCell columnStyle={s.projectTableNameCol}>
+            <Text style={s.projectTableHeaderText}>Project Name</Text>
+          </ProjectTableCell>
+          <ProjectTableCell columnStyle={s.projectTableDescCol}>
+            <Text style={s.projectTableHeaderText}>Project Description</Text>
+          </ProjectTableCell>
+          <ProjectTableCell columnStyle={s.projectTableTechCol} last>
+            <Text style={s.projectTableHeaderText}>Tech Stack used</Text>
+          </ProjectTableCell>
+        </View>
+        {projects.map((project, index) => (
+          <View
+            key={project.title}
+            style={[
+              s.projectTableRow,
+              ...(index === projects.length - 1 ? [s.projectTableRowLast] : []),
+            ]}
+          >
+            <ProjectTableCell columnStyle={s.projectTableSnoCol}>
+              <Text style={s.projectTableCellText}>{index + 1}</Text>
+            </ProjectTableCell>
+            <ProjectTableCell columnStyle={s.projectTableNameCol}>
+              <Text style={s.projectTableCellText}>
+                <LinkedProjectTitle title={project.title} url={project.url} />
+              </Text>
+            </ProjectTableCell>
+            <ProjectTableCell columnStyle={s.projectTableDescCol}>
+              <RichText text={project.description} />
+            </ProjectTableCell>
+            <ProjectTableCell columnStyle={s.projectTableTechCol} last>
+              <Text style={s.projectTableCellText}>{project.tech}</Text>
+            </ProjectTableCell>
+          </View>
+        ))}
+      </View>
+      <Text style={s.projectTableFootnote}>
+        Additional projects and technical case studies available at{" "}
+        <Link src={portfolioUrl}>{portfolioHost}</Link>.
+      </Text>
+    </>
+  );
+}
+
 /** Renders plain text with **bold** segments for react-pdf. */
 function RichText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
@@ -98,7 +179,6 @@ function HeaderLinks({
 }
 
 export function ResumeDocument({ content }: Props) {
-  const portfolioHost = content.portfolioUrl.replace(/^https?:\/\//, "");
   const headerLinks = [
     { label: "Portfolio", url: content.portfolioUrl },
     ...content.links,
@@ -132,6 +212,14 @@ export function ResumeDocument({ content }: Props) {
           ))}
         </Section>
 
+        <Section title="EDUCATION">
+          {content.education.map((e, i) => (
+            <Text key={e.line} style={s.numberedBlock}>
+              {i + 1}. {e.line}
+            </Text>
+          ))}
+        </Section>
+
         <Section title="WORK EXPERIENCE (8+ years)">
           {content.workExperience.map((job, i) => (
             <View key={`${job.company}-${i}`} style={s.experienceJobBlock}>
@@ -147,30 +235,11 @@ export function ResumeDocument({ content }: Props) {
           ))}
         </Section>
 
-        <Section title="EDUCATION">
-          {content.education.map((e, i) => (
-            <Text key={e.line} style={s.numberedBlock}>
-              {i + 1}. {e.line}
-            </Text>
-          ))}
-        </Section>
-
         <Section title="PROJECTS">
-          {content.projects.map((project) => (
-            <View key={project.title} style={s.projectBlock}>
-              <Text style={s.projectTitle}>
-                <LinkedProjectTitle title={project.title} url={project.url} />
-              </Text>
-              <RichText text={project.description} />
-            </View>
-          ))}
-          <View style={s.projectBlock}>
-            <Text style={s.projectTitle}>Portfolio</Text>
-            <Text style={s.projectDescription}>
-              Additional projects and technical case studies available at{" "}
-              <Link src={content.portfolioUrl}>{portfolioHost}</Link>.
-            </Text>
-          </View>
+          <ProjectsTable
+            projects={content.projects}
+            portfolioUrl={content.portfolioUrl}
+          />
         </Section>
 
         <View style={s.compactMeta}>
