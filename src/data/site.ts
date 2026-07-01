@@ -7,7 +7,7 @@ export const site = {
   email: "vjnvisakh@gmail.com",
   phone: "+91-7980-544-891",
   whatsapp: "7980544891",
-  whatsappUrl: "https://wa.me/9179805444891",
+  whatsappUrl: "https://wa.me/917980544891",
   calendlyUrl: "https://calendly.com/vjnvisakh/discussion",
   profileImage: "/images/profile.png",
   resumePath: "/resume/Visakh_Vijayan_Resume.pdf",
