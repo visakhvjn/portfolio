@@ -11,6 +11,7 @@ import { Hero } from "./Hero";
 import { Projects } from "./Projects";
 import { Recommendations } from "./Recommendations";
 import { SiteChrome } from "./SiteChrome";
+import { Videos } from "./Videos";
 
 export function Portfolio() {
   const [contactOpen, setContactOpen] = useState(false);
@@ -28,6 +29,7 @@ export function Portfolio() {
         <Education />
         <Recommendations />
         <Certificates />
+        <Videos />
       </SiteChrome>
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
       <ServicesModal
