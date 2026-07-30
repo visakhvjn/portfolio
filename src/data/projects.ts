@@ -4,6 +4,26 @@ import type { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    slug: "sm-academy",
+    heading: "SM Academy",
+    type: "personal",
+    featured: true,
+    summary:
+      "Open education platform for a Kolkata educator — organised study notes, worksheets, topic folders, blog updates, and direct contact paths for students learning at their own pace.",
+    resumeLine:
+      "Education resource platform with organised notes, worksheets, topic folders, blog updates, and student contact flows.",
+    reason:
+      "Useful teaching material often stays scattered across messages, drives, and printed handouts, making it difficult for students to find the right resource when they need it. I built SM Academy as a clear, welcoming home for an educator with more than fifteen years of classroom experience. Students can browse materials by topic, discover the latest notes and worksheets, read study guidance from the blog, and contact the educator without navigating a complicated learning system. The site keeps the focus on open access and straightforward organisation, with a responsive interface that works well for students arriving from a phone as easily as from a desktop.",
+    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+    thumbnail: "/images/projects/sm-academy.png",
+    demoUrl: "https://smacademykolkata.com/",
+    futureWork: [
+      "Search and filters across study materials",
+      "Student subscriptions for new-resource notifications",
+      "Expanded subject and course collections",
+    ],
+  },
+  {
     slug: "dumpd",
     heading: "Dumpd!",
     type: "ai",
@@ -394,6 +414,26 @@ export const projects: Project[] = [
     thumbnail: "/images/projects/daily-motivation-ai.png",
     demoUrl: "https://daily-motivation-ai-qfin.vercel.app/",
     futureWork: ["Personalization by mood/goals", "Push notifications"],
+  },
+  {
+    slug: "saikat-maity",
+    heading: "Saikat Maity",
+    type: "personal",
+    featured: true,
+    summary:
+      "Portfolio for a geographer and educator — presenting fifteen years of teaching, GIS and remote-sensing practice, government project work, classroom models, and field notes.",
+    resumeLine:
+      "Geographer portfolio showcasing teaching, GIS and remote-sensing work, government projects, classroom models, and field research.",
+    reason:
+      "A career spanning education, geospatial practice, and field research needs more than a conventional résumé to communicate its range. I built this portfolio to turn Saikat Maity's experience into a visual narrative: qualifications and professional focus establish the foundation, project work shows how GIS and remote sensing support real decisions, and galleries bring handmade teaching models, environmental work, and community fieldwork into view. The editorial, image-led design gives each part of the career room to breathe while keeping teaching enquiries, GIS collaborations, and research opportunities one clear step away.",
+    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+    thumbnail: "/images/projects/saikat-maity.png",
+    demoUrl: "https://saikatmaity.in/",
+    futureWork: [
+      "Dedicated case studies for GIS and government projects",
+      "Filterable archive for models and field notes",
+      "Downloadable academic profile and publications",
+    ],
   },
   {
     slug: "guess-the-pic",
