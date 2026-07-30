@@ -27,6 +27,7 @@ export const site = {
     medium: "https://medium.com/@vjnvisakh",
     leetcode: "https://leetcode.com/u/vjnvisakh",
     github: "https://github.com/visakhvjn",
+    youtube: "https://www.youtube.com/@vjnvisakh",
   },
   languages: ["English", "Hindi", "Bengali", "Malayalam"],
   interests: ["Cycling", "Reading", "Competitive Programming", "Music"],
@@ -41,5 +42,6 @@ export const navItems = [
   { id: "education", label: "Education" },
   { id: "recommendations", label: "Reviews" },
   { id: "certificates", label: "Certificates" },
+  { id: "videos", label: "Videos" },
   { id: "blog", label: "Blog", href: site.links.blog },
 ] as const;
