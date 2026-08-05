@@ -1,0 +1,19 @@
+{
+  "topics": [
+    {
+      "slug": "ai",
+      "title": "AI",
+      "description": "Notes on building with AI — assistants, agents, and practical workflows."
+    },
+    {
+      "slug": "chatgpt",
+      "title": "ChatGPT",
+      "description": "Notes on using ChatGPT, prompts, and everyday AI workflows."
+    },
+    {
+      "slug": "kubernetes",
+      "title": "Kubernetes",
+      "description": "Notes on containers, clusters, and running apps on Kubernetes."
+    }
+  ]
+}

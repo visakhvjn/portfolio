@@ -3,6 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 
 const BLOG_ROOT = path.join(process.cwd(), "blog");
+const TOPICS_PATH = path.join(BLOG_ROOT, "topics.json");
 
 export type BlogTopic = {
   slug: string;
@@ -26,9 +27,14 @@ export type BlogPost = BlogPostMeta & {
   content: string;
 };
 
-type TopicConfig = {
-  title?: string;
+type TopicDefinition = {
+  slug: string;
+  title: string;
   description?: string;
+};
+
+type TopicsFile = {
+  topics: TopicDefinition[];
 };
 
 type PostFrontmatter = {
@@ -59,35 +65,33 @@ function readingMinutesFromContent(content: string) {
   return Math.max(1, Math.ceil(words / 200));
 }
 
-function ensureBlogRoot() {
-  if (!fs.existsSync(BLOG_ROOT)) {
-    fs.mkdirSync(BLOG_ROOT, { recursive: true });
-  }
-}
-
-function readTopicConfig(topicSlug: string): TopicConfig {
-  const configPath = path.join(BLOG_ROOT, topicSlug, "topic.json");
-  if (!fs.existsSync(configPath)) return {};
+function readTopicDefinitions(): TopicDefinition[] {
+  if (!fs.existsSync(TOPICS_PATH)) return [];
 
   try {
-    return JSON.parse(fs.readFileSync(configPath, "utf8")) as TopicConfig;
+    const parsed = JSON.parse(fs.readFileSync(TOPICS_PATH, "utf8")) as TopicsFile;
+    if (!Array.isArray(parsed.topics)) return [];
+
+    return parsed.topics.filter(
+      (topic): topic is TopicDefinition =>
+        typeof topic?.slug === "string" && topic.slug.trim().length > 0,
+    );
   } catch {
-    return {};
+    return [];
   }
 }
 
-function listTopicDirs(): string[] {
-  ensureBlogRoot();
-  return fs
-    .readdirSync(BLOG_ROOT, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
-    .map((entry) => entry.name)
-    .sort((a, b) => a.localeCompare(b));
+function getTopicDefinition(topicSlug: string): TopicDefinition | undefined {
+  return readTopicDefinitions().find((topic) => topic.slug === topicSlug);
+}
+
+function topicTitle(topicSlug: string, definition?: TopicDefinition) {
+  return definition?.title?.trim() || titleFromSlug(topicSlug);
 }
 
 function parsePostFile(
   topicSlug: string,
-  topicTitle: string,
+  topicLabel: string,
   fileName: string,
 ): BlogPost | null {
   if (!fileName.endsWith(".md")) return null;
@@ -113,7 +117,7 @@ function parsePostFile(
   return {
     slug,
     topic: topicSlug,
-    topicTitle,
+    topicTitle: topicLabel,
     title,
     description,
     date,
@@ -133,13 +137,13 @@ function comparePostsByDateDesc(a: BlogPostMeta, b: BlogPostMeta) {
 }
 
 export function getTopics(): BlogTopic[] {
-  return listTopicDirs().map((slug) => {
-    const config = readTopicConfig(slug);
+  return readTopicDefinitions().map((definition) => {
+    const slug = definition.slug.trim();
     const posts = getPostsByTopic(slug);
     return {
       slug,
-      title: config.title?.trim() || titleFromSlug(slug),
-      description: config.description?.trim() || "",
+      title: topicTitle(slug, definition),
+      description: definition.description?.trim() || "",
       postCount: posts.length,
     };
   });
@@ -152,13 +156,14 @@ export function getTopicBySlug(topicSlug: string): BlogTopic | undefined {
 export function getAllPosts(): BlogPost[] {
   const posts: BlogPost[] = [];
 
-  for (const topicSlug of listTopicDirs()) {
-    const config = readTopicConfig(topicSlug);
-    const topicTitle = config.title?.trim() || titleFromSlug(topicSlug);
+  for (const definition of readTopicDefinitions()) {
+    const topicSlug = definition.slug.trim();
     const topicDir = path.join(BLOG_ROOT, topicSlug);
+    if (!fs.existsSync(topicDir)) continue;
 
+    const label = topicTitle(topicSlug, definition);
     for (const fileName of fs.readdirSync(topicDir)) {
-      const post = parsePostFile(topicSlug, topicTitle, fileName);
+      const post = parsePostFile(topicSlug, label, fileName);
       if (post) posts.push(post);
     }
   }
@@ -167,15 +172,17 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostsByTopic(topicSlug: string): BlogPost[] {
+  const definition = getTopicDefinition(topicSlug);
+  if (!definition) return [];
+
   const topicDir = path.join(BLOG_ROOT, topicSlug);
   if (!fs.existsSync(topicDir)) return [];
 
-  const config = readTopicConfig(topicSlug);
-  const topicTitle = config.title?.trim() || titleFromSlug(topicSlug);
+  const label = topicTitle(topicSlug, definition);
 
   return fs
     .readdirSync(topicDir)
-    .map((fileName) => parsePostFile(topicSlug, topicTitle, fileName))
+    .map((fileName) => parsePostFile(topicSlug, label, fileName))
     .filter((post): post is BlogPost => post !== null)
     .sort(comparePostsByDateDesc);
 }
