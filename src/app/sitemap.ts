@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
+import { getAllPosts, getTopics } from "@/lib/blog";
 import { getProjectSlugs } from "@/lib/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -8,6 +9,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: "yearly" as const,
     priority: 0.8,
+  }));
+
+  const topicEntries = getTopics().map((topic) => ({
+    url: `${site.portfolioUrl}/blog/${topic.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  const postEntries = getAllPosts().map((post) => ({
+    url: `${site.portfolioUrl}/blog/${post.topic}/${post.slug}`,
+    lastModified: post.date ? new Date(post.date) : new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
   }));
 
   return [
@@ -23,6 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${site.portfolioUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
     ...projectEntries,
+    ...topicEntries,
+    ...postEntries,
   ];
 }

@@ -12,7 +12,10 @@ const socialLinks = [
 ] as const;
 
 const pageLinks = [
-  ...navItems.map((item) => ({ label: item.label, href: `/#${item.id}` })),
+  ...navItems.map((item) => ({
+    label: item.label,
+    href: "href" in item && item.href ? item.href : `/#${item.id}`,
+  })),
   { label: "Contact", href: "/#contact" },
 ] as const;
 

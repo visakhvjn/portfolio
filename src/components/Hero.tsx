@@ -2,6 +2,7 @@
 
 import { site } from "@/data/site";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimateIn } from "./AnimateIn";
 import { CalendlyBookButton } from "./CalendlyBookButton";
 
@@ -59,6 +60,12 @@ export function Hero({ onContactClick, onServicesClick }: HeroProps) {
               >
                 LinkedIn
               </a>
+              <Link
+                href={site.links.blog}
+                className="text-slate-400 hover:text-emerald-400"
+              >
+                Blog
+              </Link>
               <a
                 href={site.links.medium}
                 target="_blank"

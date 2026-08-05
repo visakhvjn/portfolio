@@ -22,7 +22,8 @@ export const site = {
   intro:
     "I deliver reliable full-stack software across dynamic products—working closely with clients, customers, and technical stakeholders. Adaptable under pressure, from payments and migrations to AI integrations and team leadership.",
   links: {
-    blog: "https://dumpd.in/vjnvisakh",
+    blog: "/blog",
+    dumpd: "https://dumpd.in/vjnvisakh",
     linkedin: "https://www.linkedin.com/in/vjnvisakh",
     medium: "https://medium.com/@vjnvisakh",
     leetcode: "https://leetcode.com/u/vjnvisakh",
@@ -39,4 +40,5 @@ export const navItems = [
   { id: "projects", label: "Projects" },
   { id: "experience", label: "Experience" },
   { id: "about", label: "About" },
+  { id: "blog", label: "Blog", href: "/blog" },
 ] as const;

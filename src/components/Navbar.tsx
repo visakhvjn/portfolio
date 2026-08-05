@@ -22,6 +22,20 @@ function isSectionId(id: string): id is SectionId {
   return id === "me" || isNavSectionId(id);
 }
 
+function isInternalHref(href: string) {
+  return href.startsWith("/");
+}
+
+function navLinkClass(active: boolean, mobile = false) {
+  return mobile
+    ? `rounded-lg px-3 py-3 text-left text-sm font-medium ${
+        active ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
+      }`
+    : `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+        active ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
+      }`;
+}
+
 export function Navbar({ onContactClick }: NavbarProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -110,15 +124,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
   };
 
   const sectionLinkClass = (id: NavId, mobile = false) =>
-    mobile
-      ? `rounded-lg px-3 py-3 text-left text-sm font-medium ${
-          isHome && active === id ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
-        }`
-      : `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-          isHome && active === id
-            ? "bg-white/10 text-white"
-            : "text-slate-400 hover:text-white"
-        }`;
+    navLinkClass(isHome && active === id, mobile);
 
   const logo = (
     <>
@@ -146,18 +152,35 @@ export function Navbar({ onContactClick }: NavbarProps) {
 
         <div className="hidden items-center gap-1 md:flex">
           <nav className="flex items-center gap-1">
-            {navItems.map((item) =>
-              "href" in item && item.href ? (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:text-white"
-                >
-                  {item.label}
-                </a>
-              ) : isHome ? (
+            {navItems.map((item) => {
+              if ("href" in item && item.href) {
+                const href = item.href;
+                const active = isInternalHref(href) && pathname.startsWith(href);
+                if (isInternalHref(href)) {
+                  return (
+                    <Link
+                      key={item.id}
+                      href={href}
+                      className={navLinkClass(active)}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+                return (
+                  <a
+                    key={item.id}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={navLinkClass(false)}
+                  >
+                    {item.label}
+                  </a>
+                );
+              }
+
+              return isHome ? (
                 <button
                   key={item.id}
                   type="button"
@@ -174,8 +197,8 @@ export function Navbar({ onContactClick }: NavbarProps) {
                 >
                   {item.label}
                 </Link>
-              ),
-            )}
+              );
+            })}
           </nav>
           {onContactClick ? (
             <button
@@ -214,19 +237,37 @@ export function Navbar({ onContactClick }: NavbarProps) {
       {menuOpen && (
         <div className="border-t border-white/5 bg-[#070b14] px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-1">
-            {navItems.map((item) =>
-              "href" in item && item.href ? (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-lg px-3 py-3 text-left text-sm font-medium text-slate-400 hover:text-white"
-                >
-                  {item.label}
-                </a>
-              ) : isHome ? (
+            {navItems.map((item) => {
+              if ("href" in item && item.href) {
+                const href = item.href;
+                const active = isInternalHref(href) && pathname.startsWith(href);
+                if (isInternalHref(href)) {
+                  return (
+                    <Link
+                      key={item.id}
+                      href={href}
+                      onClick={() => setMenuOpen(false)}
+                      className={navLinkClass(active, true)}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+                return (
+                  <a
+                    key={item.id}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMenuOpen(false)}
+                    className={navLinkClass(false, true)}
+                  >
+                    {item.label}
+                  </a>
+                );
+              }
+
+              return isHome ? (
                 <button
                   key={item.id}
                   type="button"
@@ -244,8 +285,8 @@ export function Navbar({ onContactClick }: NavbarProps) {
                 >
                   {item.label}
                 </Link>
-              ),
-            )}
+              );
+            })}
             {onContactClick ? (
               <button
                 type="button"

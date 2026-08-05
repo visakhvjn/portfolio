@@ -47,3 +47,9 @@ body {
     radial-gradient(ellipse 60% 40% at 100% 0%, rgb(56 189 248 / 0.08), transparent),
     radial-gradient(ellipse 50% 30% at 0% 100%, rgb(139 92 246 / 0.06), transparent);
 }
+
+/* Flat reading surface for blog pages — no shifting mesh gradients */
+.blog-surface {
+  background-color: #0a0f1a;
+  background-image: none;
+}
