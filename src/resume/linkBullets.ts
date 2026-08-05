@@ -50,6 +50,10 @@ function linkCandidatesForJob(entry: ExperienceEntry): LinkCandidate[] {
     add(name, url);
   }
 
+  if (entry.companyUrl) {
+    add(entry.company, entry.companyUrl);
+  }
+
   return candidates;
 }
 

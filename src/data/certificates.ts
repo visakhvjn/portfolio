@@ -2,6 +2,20 @@ import type { Certificate } from "@/types";
 
 export const certificates: Certificate[] = [
   {
+    id: "anthropic-claude-101",
+    title: "Claude 101",
+    issuer: "Anthropic Education",
+    completedOn: "July 2026",
+    keywords: [
+      "Claude",
+      "Prompting",
+      "AI assistants",
+      "Anthropic",
+      "LLM fundamentals",
+    ],
+    credentialUrl: "https://verify.skilljar.com/c/fi7x4v2iref3",
+  },
+  {
     id: "udemy-react-quick-understanding",
     title: "React: A Quick Understanding",
     issuer: "Udemy",

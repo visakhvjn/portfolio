@@ -52,12 +52,6 @@ export function Hero({ onContactClick, onServicesClick }: HeroProps) {
             </div>
             <div className="mt-8 flex flex-wrap gap-4 text-sm">
               <a
-                href={`mailto:${site.email}`}
-                className="text-slate-400 hover:text-emerald-400"
-              >
-                {site.email}
-              </a>
-              <a
                 href={site.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"

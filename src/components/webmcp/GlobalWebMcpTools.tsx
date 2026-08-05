@@ -106,11 +106,11 @@ export function GlobalWebMcpTools() {
   useWebMCP({
     name: "get_experience",
     description:
-      "Get full details for one work experience entry by id (e.g. unify, better, seenit, vawsum).",
+      "Get full details for one work experience entry by id (e.g. adesso, unify, better, seenit, vawsum).",
     inputSchema: {
       id: z
         .string()
-        .describe("Experience id, e.g. unify, better, seenit, or vawsum"),
+        .describe("Experience id, e.g. adesso, unify, better, seenit, or vawsum"),
     },
     annotations: { readOnlyHint: true },
     handler: async ({ id }) => {

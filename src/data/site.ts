@@ -35,13 +35,8 @@ export const site = {
 } as const;
 
 export const navItems = [
-  { id: "me", label: "Me" },
-  { id: "experience", label: "Experience" },
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
-  { id: "education", label: "Education" },
-  { id: "recommendations", label: "Reviews" },
-  { id: "certificates", label: "Certificates" },
-  { id: "videos", label: "Videos" },
-  { id: "blog", label: "Blog", href: site.links.blog },
+  { id: "experience", label: "Experience" },
+  { id: "about", label: "About" },
 ] as const;

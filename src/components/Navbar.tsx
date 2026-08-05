@@ -4,13 +4,13 @@ import { navItems, site } from "@/data/site";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { DownloadResumeDropdown } from "./DownloadResumeDropdown";
 
 type NavbarProps = {
   onContactClick?: () => void;
 };
 
 type NavId = (typeof navItems)[number]["id"];
+type SectionId = NavId | "me";
 
 const HEADER_OFFSET = 88;
 
@@ -18,10 +18,14 @@ function isNavSectionId(id: string): id is NavId {
   return navItems.some((item) => item.id === id && !("href" in item && item.href));
 }
 
+function isSectionId(id: string): id is SectionId {
+  return id === "me" || isNavSectionId(id);
+}
+
 export function Navbar({ onContactClick }: NavbarProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const [active, setActive] = useState<NavId>("me");
+  const [active, setActive] = useState<NavId | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const scrollLockRef = useRef<NavId | null>(null);
   const scrollLockTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -34,7 +38,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
       return;
     }
 
-    let current: NavId = navItems[0].id;
+    let current: NavId | null = null;
 
     for (const item of navItems) {
       if ("href" in item && item.href) continue;
@@ -75,14 +79,14 @@ export function Navbar({ onContactClick }: NavbarProps) {
 
     const scrollToHash = () => {
       const hash = window.location.hash.slice(1);
-      if (!isNavSectionId(hash)) return;
+      if (!isSectionId(hash)) return;
 
       const el = document.getElementById(hash);
       if (!el) return;
 
       requestAnimationFrame(() => {
         el.scrollIntoView({ behavior: "smooth" });
-        setActive(hash);
+        setActive(isNavSectionId(hash) ? hash : null);
       });
     };
 
@@ -91,10 +95,10 @@ export function Navbar({ onContactClick }: NavbarProps) {
     return () => window.removeEventListener("hashchange", scrollToHash);
   }, [isHome, pathname]);
 
-  const scrollTo = (id: NavId) => {
+  const scrollTo = (id: SectionId) => {
     setMenuOpen(false);
-    setActive(id);
-    scrollLockRef.current = id;
+    setActive(isNavSectionId(id) ? id : null);
+    scrollLockRef.current = isNavSectionId(id) ? id : null;
 
     if (scrollLockTimerRef.current) clearTimeout(scrollLockTimerRef.current);
     scrollLockTimerRef.current = setTimeout(() => {
@@ -140,53 +144,51 @@ export function Navbar({ onContactClick }: NavbarProps) {
           </Link>
         )}
 
-        <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) =>
-            "href" in item && item.href ? (
-              <a
-                key={item.id}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:text-white"
-              >
-                {item.label}
-              </a>
-            ) : isHome ? (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => scrollTo(item.id)}
-                className={sectionLinkClass(item.id)}
-              >
-                {item.label}
-              </button>
-            ) : (
-              <Link
-                key={item.id}
-                href={`/#${item.id}`}
-                className={sectionLinkClass(item.id)}
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
-        </nav>
-
-        <div className="hidden items-center gap-2 sm:flex">
-          <DownloadResumeDropdown />
+        <div className="hidden items-center gap-1 md:flex">
+          <nav className="flex items-center gap-1">
+            {navItems.map((item) =>
+              "href" in item && item.href ? (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ) : isHome ? (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => scrollTo(item.id)}
+                  className={sectionLinkClass(item.id)}
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <Link
+                  key={item.id}
+                  href={`/#${item.id}`}
+                  className={sectionLinkClass(item.id)}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
+          </nav>
           {onContactClick ? (
             <button
               type="button"
               onClick={onContactClick}
-              className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              className="ml-1 rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
             >
               Contact
             </button>
           ) : (
             <a
-              href="/#me"
-              className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              href="/#contact"
+              className="ml-1 rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
             >
               Contact
             </a>
@@ -244,11 +246,6 @@ export function Navbar({ onContactClick }: NavbarProps) {
                 </Link>
               ),
             )}
-            <DownloadResumeDropdown
-              fullWidth
-              className="mt-2"
-              onSelect={() => setMenuOpen(false)}
-            />
             {onContactClick ? (
               <button
                 type="button"
@@ -262,7 +259,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
               </button>
             ) : (
               <a
-                href="/#me"
+                href="/#contact"
                 onClick={() => setMenuOpen(false)}
                 className="mt-2 block rounded-lg bg-emerald-500 px-3 py-3 text-center text-sm font-semibold text-slate-950"
               >

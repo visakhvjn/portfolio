@@ -35,6 +35,8 @@ export type ExperienceEntry = {
   role: string;
   period: string;
   current?: boolean;
+  /** Company website or career page. */
+  companyUrl?: string;
   collapsedPreview: string;
   summary: string;
   bullets: string[];

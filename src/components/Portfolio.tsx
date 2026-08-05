@@ -1,41 +1,38 @@
 "use client";
 
 import { useState } from "react";
-import { ContactModal } from "./ContactModal";
+import { About } from "./About";
+import { Contact } from "./Contact";
 import { ServicesModal } from "./ServicesModal";
-import { Certificates } from "./Certificates";
-import { Education } from "./Education";
 import { Experience } from "./Experience";
 import { TechStack } from "./TechStack";
 import { Hero } from "./Hero";
 import { Projects } from "./Projects";
-import { Recommendations } from "./Recommendations";
 import { SiteChrome } from "./SiteChrome";
-import { Videos } from "./Videos";
+
+function scrollToContact() {
+  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+}
 
 export function Portfolio() {
-  const [contactOpen, setContactOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   return (
     <>
-      <SiteChrome onContactClick={() => setContactOpen(true)}>
+      <SiteChrome onContactClick={scrollToContact}>
         <Hero
-          onContactClick={() => setContactOpen(true)}
+          onContactClick={scrollToContact}
           onServicesClick={() => setServicesOpen(true)}
         />
-        <Experience />
         <TechStack />
         <Projects />
-        <Education />
-        <Recommendations />
-        <Certificates />
-        <Videos />
+        <Experience />
+        <About />
+        <Contact />
       </SiteChrome>
-      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
       <ServicesModal
         open={servicesOpen}
         onClose={() => setServicesOpen(false)}
-        onContactClick={() => setContactOpen(true)}
+        onContactClick={scrollToContact}
       />
     </>
   );

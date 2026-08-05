@@ -2,12 +2,31 @@ import type { ExperienceEntry } from "@/types";
 
 export const experience: ExperienceEntry[] = [
   {
+    id: "adesso",
+    company: "Adesso India",
+    location: "Kochi, Kerala",
+    role: "Senior Associate",
+    period: "Jul 2026 – Present",
+    current: true,
+    companyUrl: "https://www.adesso.in/en/index-12.jsp",
+    collapsedPreview:
+      "Senior Associate at Adesso India, based in Kochi — delivering software across client and product engagements.",
+    summary:
+      "Senior Associate at Adesso India in Kochi, Kerala — contributing to software delivery and engineering across client engagements.",
+    bullets: [
+      "Joined Adesso India as Senior Associate in Kochi, Kerala, contributing to software delivery and engineering across client engagements.",
+    ],
+    resumeBullets: [
+      "Senior Associate at Adesso India (Kochi, Kerala) — contributing to software delivery and engineering across client engagements.",
+    ],
+    tech: [],
+  },
+  {
     id: "unify",
     company: "Unify Technologies",
     location: "Hyderabad, India",
     role: "Senior Software Engineer",
-    period: "Jun 2025 – Present",
-    current: true,
+    period: "Jun 2025 – Jun 2026",
     collapsedPreview:
       "Product research and delivery, edtech, compliance, AI health, and community products across the Unify portfolio.",
     summary:
