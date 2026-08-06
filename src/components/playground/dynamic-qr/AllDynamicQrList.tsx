@@ -14,6 +14,8 @@ export function AllDynamicQrList() {
   const [items, setItems] = useState<ListItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [copyingSlug, setCopyingSlug] = useState<string | null>(null);
+  const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
   const shortUrl = (slug: string) =>
     typeof window === "undefined" ? `/r/${slug}` : `${window.location.origin}/r/${slug}`;
 
@@ -70,6 +72,20 @@ export function AllDynamicQrList() {
     window.addEventListener("focus", onFocus);
     return () => window.removeEventListener("focus", onFocus);
   }, []);
+
+  const copyShortUrl = async (slug: string) => {
+    const url = shortUrl(slug);
+    setCopyingSlug(slug);
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedSlug(slug);
+      window.setTimeout(() => {
+        setCopiedSlug((current) => (current === slug ? null : current));
+      }, 1400);
+    } finally {
+      setCopyingSlug((current) => (current === slug ? null : current));
+    }
+  };
 
   if (loading) {
     return (
@@ -150,12 +166,15 @@ export function AllDynamicQrList() {
                       <div className="mt-3 flex flex-wrap gap-2">
                         <button
                           type="button"
-                          onClick={() =>
-                            void navigator.clipboard.writeText(shortUrl(item.slug))
-                          }
-                          className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
+                          onClick={() => void copyShortUrl(item.slug)}
+                          disabled={copyingSlug === item.slug}
+                          className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20 disabled:opacity-60"
                         >
-                          Copy link
+                          {copyingSlug === item.slug
+                            ? "Copying…"
+                            : copiedSlug === item.slug
+                              ? "Copied"
+                              : "Copy link"}
                         </button>
                         <Link
                           href={`/playground/dynamic-qr/${item.slug}`}

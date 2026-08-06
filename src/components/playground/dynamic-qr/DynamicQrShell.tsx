@@ -18,6 +18,7 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [authOpen, setAuthOpen] = useState(false);
   const [ready, setReady] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
 
   const hydrate = useEffectEvent(async () => {
     try {
@@ -48,12 +49,15 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signOut = async () => {
+    setSigningOut(true);
     try {
       const supabase = createClient();
       await supabase.auth.signOut();
       setUser(null);
     } catch {
       // ignore
+    } finally {
+      setSigningOut(false);
     }
   };
 
@@ -111,9 +115,10 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
                 <button
                   type="button"
                   onClick={() => void signOut()}
-                  className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white"
+                  disabled={signingOut}
+                  className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white disabled:opacity-60"
                 >
-                  Sign out
+                  {signingOut ? "Signing out…" : "Sign out"}
                 </button>
               </>
             ) : (

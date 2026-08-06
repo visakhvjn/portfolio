@@ -18,6 +18,8 @@ export function DynamicQrShareBlock({
   showActions = true,
 }: DynamicQrShareBlockProps) {
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
+  const [copying, setCopying] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const shortUrl = useMemo(() => {
     if (typeof window === "undefined") return `/r/${slug}`;
@@ -33,6 +35,17 @@ export function DynamicQrShareBlock({
       .then(setQrDataUrl)
       .catch(() => setQrDataUrl(null));
   }, [shortUrl, size]);
+
+  const copyShortUrl = async () => {
+    setCopying(true);
+    try {
+      await navigator.clipboard.writeText(shortUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1400);
+    } finally {
+      setCopying(false);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -65,10 +78,11 @@ export function DynamicQrShareBlock({
         <div className="flex flex-wrap justify-center gap-2">
           <button
             type="button"
-            onClick={() => void navigator.clipboard.writeText(shortUrl)}
-            className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
+            onClick={() => void copyShortUrl()}
+            disabled={copying}
+            className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20 disabled:opacity-60"
           >
-            Copy link
+            {copying ? "Copying…" : copied ? "Copied" : "Copy link"}
           </button>
           {qrDataUrl ? (
             <a
