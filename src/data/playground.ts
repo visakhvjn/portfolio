@@ -23,4 +23,12 @@ export const playgroundProjects: PlaygroundProject[] = [
     href: "/playground/qr-generator",
     ai: false,
   },
+  {
+    slug: "mcq-quiz",
+    title: "MCQ Quiz",
+    description:
+      "Paste MCQs, parse with OpenAI (BYO key), save, share, and collect logged-in responses.",
+    href: "/playground/mcq-quiz",
+    ai: true,
+  },
 ];

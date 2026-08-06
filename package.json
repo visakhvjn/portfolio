@@ -13,6 +13,8 @@
     "@mcp-b/react-webmcp": "^3.0.0",
     "@mcp-b/webmcp-polyfill": "^3.0.0",
     "@react-pdf/renderer": "^4.5.1",
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "gray-matter": "^4.0.3",
