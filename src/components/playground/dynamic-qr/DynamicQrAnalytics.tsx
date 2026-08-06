@@ -182,6 +182,16 @@ export function DynamicQrAnalytics({ slug }: Props) {
             total={total}
           />
           <ScanBreakdown
+            title="Operating systems"
+            items={countByField(scans, "os_name")}
+            total={total}
+          />
+          <ScanBreakdown
+            title="Browsers"
+            items={countByField(scans, "browser_name")}
+            total={total}
+          />
+          <ScanBreakdown
             title="Countries"
             items={countByField(scans, "country")}
             total={total}
@@ -209,8 +219,15 @@ export function DynamicQrAnalytics({ slug }: Props) {
                   className="flex flex-col gap-1 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="text-slate-300">
-                    {scan.device_type ?? "Unknown"} ·{" "}
-                    {[scan.city, scan.region, scan.country]
+                    {[scan.device_type, scan.os_name, scan.browser_name]
+                      .filter(Boolean)
+                      .join(" · ") || "Device unknown"}{" "}
+                    ·{" "}
+                    {[
+                      scan.city,
+                      scan.region || scan.country,
+                      scan.country,
+                    ]
                       .filter(Boolean)
                       .join(", ") || "Location unknown"}
                   </div>

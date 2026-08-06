@@ -7,38 +7,51 @@ type ScanChartProps = {
 };
 
 export function ScanUsageChart({ data }: ScanChartProps) {
+  const width = 100;
+  const height = 40;
   const max = Math.max(1, ...data.map((d) => d.count));
+  const points = data
+    .map((point, index) => {
+      const x = data.length > 1 ? (index / (data.length - 1)) * width : width / 2;
+      const y = height - (point.count / max) * height;
+      return `${x},${y}`;
+    })
+    .join(" ");
+  const area = `0,${height} ${points} ${width},${height}`;
 
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
       <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
         Scans (last 14 days)
       </h3>
-      <div className="mt-6 flex h-40 items-end justify-between gap-1 sm:gap-2">
-        {data.map((point) => {
-          const height = `${Math.max(4, (point.count / max) * 100)}%`;
-          return (
-            <div
-              key={point.date}
-              className="group flex min-w-0 flex-1 flex-col items-center gap-2"
-            >
-              <div className="relative flex h-full w-full items-end justify-center">
-                <div
-                  className="w-full max-w-8 rounded-t-md bg-emerald-500/80 transition group-hover:bg-emerald-400"
-                  style={{ height }}
-                  title={`${point.date}: ${point.count}`}
-                />
-              </div>
-              <span className="hidden text-[10px] text-slate-600 sm:block">
-                {point.date.slice(5)}
-              </span>
-            </div>
-          );
-        })}
+      <div className="mt-5 h-48 rounded-xl border border-white/5 bg-slate-950/30 p-3">
+        <svg viewBox={`0 0 ${width} ${height}`} className="h-full w-full">
+          <line x1="0" y1={height} x2={width} y2={height} className="stroke-white/10" />
+          <polyline points={area} fill="rgb(16 185 129 / 0.10)" />
+          <polyline
+            points={points}
+            fill="none"
+            stroke="rgb(16 185 129 / 0.95)"
+            strokeWidth="1.2"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          />
+          {data.map((point, index) => {
+            const x = data.length > 1 ? (index / (data.length - 1)) * width : width / 2;
+            const y = height - (point.count / max) * height;
+            return (
+              <g key={point.date}>
+                <circle cx={x} cy={y} r="0.9" fill="rgb(52 211 153)" />
+                <title>{`${point.date}: ${point.count}`}</title>
+              </g>
+            );
+          })}
+        </svg>
       </div>
-      <p className="mt-3 text-center text-xs text-slate-500 sm:hidden">
-        Hover bars on desktop for dates
-      </p>
+      <div className="mt-3 flex justify-between text-[10px] text-slate-500">
+        <span>{data[0]?.date.slice(5) ?? ""}</span>
+        <span>{data[data.length - 1]?.date.slice(5) ?? ""}</span>
+      </div>
     </div>
   );
 }

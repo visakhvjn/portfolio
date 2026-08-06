@@ -14,6 +14,8 @@ export type DynamicQrScanRow = {
   scanned_at: string;
   user_agent: string | null;
   device_type: string | null;
+  os_name: string | null;
+  browser_name: string | null;
   country: string | null;
   region: string | null;
   city: string | null;
@@ -60,6 +62,30 @@ export function deviceTypeFromUserAgent(ua: string | null): string {
   return "Desktop";
 }
 
+export function osNameFromUserAgent(ua: string | null): string {
+  if (!ua) return "Unknown";
+  const lower = ua.toLowerCase();
+  if (/iphone|ipad|ipod|ios/.test(lower)) return "iOS";
+  if (/android/.test(lower)) return "Android";
+  if (/windows nt|win64|win32/.test(lower)) return "Windows";
+  if (/mac os x|macintosh/.test(lower)) return "macOS";
+  if (/linux|x11/.test(lower)) return "Linux";
+  if (/cros/.test(lower)) return "ChromeOS";
+  return "Unknown";
+}
+
+export function browserNameFromUserAgent(ua: string | null): string {
+  if (!ua) return "Unknown";
+  const lower = ua.toLowerCase();
+  if (/edg\//.test(lower)) return "Edge";
+  if (/opr\/|opera/.test(lower)) return "Opera";
+  if (/firefox\//.test(lower)) return "Firefox";
+  if (/samsungbrowser\//.test(lower)) return "Samsung Internet";
+  if (/chrome\//.test(lower) && !/edg\//.test(lower)) return "Chrome";
+  if (/safari\//.test(lower) && !/chrome\//.test(lower)) return "Safari";
+  return "Unknown";
+}
+
 export type DailyScanCount = { date: string; count: number };
 
 export function aggregateScansByDay(
@@ -90,7 +116,12 @@ export function countByField(
   scans: DynamicQrScanRow[],
   field: keyof Pick<
     DynamicQrScanRow,
-    "device_type" | "country" | "region" | "city"
+    | "device_type"
+    | "os_name"
+    | "browser_name"
+    | "country"
+    | "region"
+    | "city"
   >,
   limit = 8,
 ): Array<{ label: string; count: number }> {

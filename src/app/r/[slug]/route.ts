@@ -1,5 +1,7 @@
 import {
+  browserNameFromUserAgent,
   deviceTypeFromUserAgent,
+  osNameFromUserAgent,
   type DynamicQrLinkRow,
 } from "@/lib/dynamic-qr/types";
 import { createPublicClient } from "@/lib/supabase/dynamic-qr/public";
@@ -60,19 +62,29 @@ export async function GET(request: Request, context: RouteContext) {
 
   const country =
     headers.get("x-vercel-ip-country") ??
+    headers.get("x-nf-geo-country") ??
     headers.get("cf-ipcountry") ??
     null;
   const region =
     headers.get("x-vercel-ip-country-region") ??
+    headers.get("x-vercel-region") ??
+    headers.get("x-nf-geo-region") ??
+    headers.get("x-nf-geo-subdivision") ??
     headers.get("cf-region") ??
+    headers.get("cf-region-code") ??
     null;
   const city =
-    headers.get("x-vercel-ip-city") ?? headers.get("cf-ipcity") ?? null;
+    headers.get("x-vercel-ip-city") ??
+    headers.get("x-nf-geo-city") ??
+    headers.get("cf-ipcity") ??
+    null;
 
   const { error: scanError } = await supabase.from("dynamic_qr_scans").insert({
     qr_id: row.id,
     user_agent: userAgent,
     device_type: deviceTypeFromUserAgent(userAgent),
+    os_name: osNameFromUserAgent(userAgent),
+    browser_name: browserNameFromUserAgent(userAgent),
     country,
     region,
     city,
