@@ -176,6 +176,12 @@ export function BlogGenerator() {
             </p>
           </div>
           <div className="flex min-w-0 flex-1 items-center gap-2 sm:max-w-md sm:justify-end">
+            <Link
+              href="/playground/blog-generator/about"
+              className="shrink-0 rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white"
+            >
+              About
+            </Link>
             <label className="sr-only" htmlFor="openai-key">
               OpenAI API key
             </label>

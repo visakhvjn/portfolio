@@ -57,10 +57,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${site.portfolioUrl}/playground/blog-generator/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.55,
+    },
+    {
       url: `${site.portfolioUrl}/playground/qr-generator`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${site.portfolioUrl}/playground/qr-generator/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.55,
     },
     {
       url: `${site.portfolioUrl}/playground/mcq-quiz`,
@@ -75,10 +87,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
+      url: `${site.portfolioUrl}/playground/mcq-quiz/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.55,
+    },
+    {
       url: `${site.portfolioUrl}/playground/dynamic-qr`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
+    },
+    {
+      url: `${site.portfolioUrl}/playground/dynamic-qr/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.55,
     },
     ...projectEntries,
     ...topicEntries,

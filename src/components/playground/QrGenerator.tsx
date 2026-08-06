@@ -106,6 +106,14 @@ export function QrGenerator() {
       <p className="mt-1 text-sm text-slate-400">
         Paste a URL, generate a QR, download the PNG.
       </p>
+      <div className="mt-3">
+        <Link
+          href="/playground/qr-generator/about"
+          className="inline-flex rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white"
+        >
+          About this project
+        </Link>
+      </div>
 
       <form onSubmit={generate} className="mt-8 space-y-3">
         <label htmlFor="qr-url" className="sr-only">

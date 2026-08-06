@@ -61,6 +61,8 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
   const onAll =
     pathname === "/playground/mcq-quiz" ||
     pathname === "/playground/mcq-quiz/";
+  const onAbout = pathname === "/playground/mcq-quiz/about";
+  const showLanding = ready && !user && !onAbout;
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden">
@@ -99,6 +101,9 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
               >
                 All Quizzes
               </Link>
+              <Link href="/playground/mcq-quiz/about" className={navClass(onAbout)}>
+                About
+              </Link>
             </nav>
           </div>
 
@@ -130,7 +135,7 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
       </div>
 
       <div className="min-h-0 flex-1 overflow-hidden">
-        {ready && !user ? (
+        {showLanding ? (
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-400/80">
