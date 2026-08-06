@@ -1,13 +1,16 @@
 "use client";
 
+import { DynamicQrShareBlock } from "@/components/playground/dynamic-qr/DynamicQrShareBlock";
 import { createClient } from "@/lib/supabase/dynamic-qr/client";
 import type { DynamicQrLinkRow } from "@/lib/dynamic-qr/types";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useEffectEvent, useState } from "react";
 
 type ListItem = DynamicQrLinkRow & { scan_count: number };
 
 export function AllDynamicQrList() {
+  const pathname = usePathname();
   const [items, setItems] = useState<ListItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +30,9 @@ export function AllDynamicQrList() {
 
       const { data, error: listError } = await supabase
         .from("dynamic_qr_links")
-        .select("id, owner_id, title, slug, destination_url, created_at, updated_at")
+        .select(
+          "id, owner_id, title, slug, destination_url, created_at, updated_at",
+        )
         .eq("owner_id", user.id)
         .order("created_at", { ascending: false });
 
@@ -36,11 +41,14 @@ export function AllDynamicQrList() {
       const rows = (data ?? []) as DynamicQrLinkRow[];
       const withCounts = await Promise.all(
         rows.map(async (row) => {
-          const { count } = await supabase
+          const { count, error: countError } = await supabase
             .from("dynamic_qr_scans")
             .select("id", { count: "exact", head: true })
             .eq("qr_id", row.id);
-          return { ...row, scan_count: count ?? 0 };
+          return {
+            ...row,
+            scan_count: countError ? 0 : (count ?? 0),
+          };
         }),
       );
       setItems(withCounts);
@@ -53,10 +61,13 @@ export function AllDynamicQrList() {
 
   useEffect(() => {
     void load();
-  }, []);
+  }, [pathname]);
 
-  const shortUrl = (slug: string) =>
-    `${typeof window !== "undefined" ? window.location.origin : ""}/r/${slug}`;
+  useEffect(() => {
+    const onFocus = () => void load();
+    window.addEventListener("focus", onFocus);
+    return () => window.removeEventListener("focus", onFocus);
+  }, []);
 
   if (loading) {
     return (
@@ -87,47 +98,52 @@ export function AllDynamicQrList() {
           </Link>
         </div>
         <p className="mt-1 text-sm text-slate-500">
-          Open a QR for analytics — scans, devices, and regions.
+          Every QR you create lives here — copy the link or download the PNG
+          again anytime.
         </p>
 
         {items.length === 0 ? (
           <div className="mt-8 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-6 py-10 text-center text-sm text-slate-500">
-            No dynamic QRs yet. Create one to get a trackable short link.
+            No dynamic QRs yet.{" "}
+            <Link
+              href="/playground/dynamic-qr/new"
+              className="text-emerald-400 hover:underline"
+            >
+              Create one
+            </Link>{" "}
+            to get a trackable short link and QR.
           </div>
         ) : (
-          <ul className="mt-6 space-y-3">
+          <ul className="mt-6 space-y-4">
             {items.map((item) => (
               <li key={item.id}>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                  <Link
-                    href={`/playground/dynamic-qr/${item.slug}`}
-                    className="block transition hover:opacity-90"
-                  >
-                    <h2 className="font-semibold text-white">{item.title}</h2>
-                    <p className="mt-1 truncate text-xs text-slate-500">
-                      → {item.destination_url}
-                    </p>
-                    <p className="mt-2 text-xs text-slate-500">
-                      {item.scan_count} scan{item.scan_count === 1 ? "" : "s"} ·{" "}
-                      {new Date(item.created_at).toLocaleDateString()}
-                    </p>
-                  </Link>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        void navigator.clipboard.writeText(shortUrl(item.slug))
-                      }
-                      className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-emerald-400/40 hover:text-emerald-300"
-                    >
-                      Copy short link
-                    </button>
-                    <Link
-                      href={`/playground/dynamic-qr/${item.slug}`}
-                      className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
-                    >
-                      Analytics
-                    </Link>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5">
+                  <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+                    <div className="shrink-0 self-center sm:self-start">
+                      <DynamicQrShareBlock slug={item.slug} size={128} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <Link
+                        href={`/playground/dynamic-qr/${item.slug}`}
+                        className="block transition hover:opacity-90"
+                      >
+                        <h2 className="font-semibold text-white">{item.title}</h2>
+                        <p className="mt-1 truncate text-xs text-slate-500">
+                          → {item.destination_url}
+                        </p>
+                        <p className="mt-2 text-xs text-slate-500">
+                          {item.scan_count} scan
+                          {item.scan_count === 1 ? "" : "s"} ·{" "}
+                          {new Date(item.created_at).toLocaleDateString()}
+                        </p>
+                      </Link>
+                      <Link
+                        href={`/playground/dynamic-qr/${item.slug}`}
+                        className="mt-3 inline-block rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
+                      >
+                        Analytics
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </li>

@@ -1,34 +1,20 @@
 "use client";
 
+import { DynamicQrShareBlock } from "@/components/playground/dynamic-qr/DynamicQrShareBlock";
 import {
   normalizeDestinationUrl,
   slugifyDynamicQrTitle,
 } from "@/lib/dynamic-qr/types";
 import { createClient } from "@/lib/supabase/dynamic-qr/client";
-import QRCode from "qrcode";
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 
 export function NewDynamicQrForm() {
   const [title, setTitle] = useState("");
   const [destination, setDestination] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [shortUrl, setShortUrl] = useState<string | null>(null);
-  const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
-  const [analyticsSlug, setAnalyticsSlug] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!shortUrl) {
-      setQrDataUrl(null);
-      return;
-    }
-    void QRCode.toDataURL(shortUrl, {
-      width: 400,
-      margin: 2,
-      color: { dark: "#0f172a", light: "#ffffff" },
-    }).then(setQrDataUrl);
-  }, [shortUrl]);
+  const [createdSlug, setCreatedSlug] = useState<string | null>(null);
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -40,7 +26,7 @@ export function NewDynamicQrForm() {
     const quizTitle = title.trim() || "Untitled QR";
     setSaving(true);
     setError(null);
-    setShortUrl(null);
+    setCreatedSlug(null);
 
     try {
       const supabase = createClient();
@@ -65,9 +51,7 @@ export function NewDynamicQrForm() {
         throw new Error(insertError?.message || "Could not create QR.");
       }
 
-      const url = `${window.location.origin}/r/${data.slug}`;
-      setShortUrl(url);
-      setAnalyticsSlug(data.slug);
+      setCreatedSlug(data.slug);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Save failed.");
     } finally {
@@ -125,44 +109,25 @@ export function NewDynamicQrForm() {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-          {qrDataUrl && shortUrl ? (
+          {createdSlug ? (
             <div className="flex flex-col items-center gap-4">
-              <div className="rounded-xl bg-white p-4">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={qrDataUrl}
-                  alt="Dynamic QR code"
-                  width={220}
-                  height={220}
-                  className="h-56 w-56"
-                />
-              </div>
-              <p className="break-all text-center text-xs text-slate-500">
-                {shortUrl}
+              <p className="text-center text-sm font-medium text-emerald-300/90">
+                Saved — it&apos;s on All QRs too.
               </p>
+              <DynamicQrShareBlock slug={createdSlug} size={220} />
               <div className="flex flex-wrap justify-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => void navigator.clipboard.writeText(shortUrl)}
-                  className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-300"
+                <Link
+                  href="/playground/dynamic-qr"
+                  className="rounded-lg bg-emerald-500 px-4 py-2 text-xs font-semibold text-slate-950 transition hover:bg-emerald-400"
                 >
-                  Copy link
-                </button>
-                <a
-                  href={qrDataUrl}
-                  download={`dynamic-qr-${Date.now()}.png`}
-                  className="rounded-lg border border-emerald-400/40 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-300"
+                  View All QRs
+                </Link>
+                <Link
+                  href={`/playground/dynamic-qr/${createdSlug}`}
+                  className="rounded-lg border border-white/10 px-4 py-2 text-xs font-medium text-slate-300"
                 >
-                  Download PNG
-                </a>
-                {analyticsSlug ? (
-                  <Link
-                    href={`/playground/dynamic-qr/${analyticsSlug}`}
-                    className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-300"
-                  >
-                    View analytics
-                  </Link>
-                ) : null}
+                  Analytics
+                </Link>
               </div>
             </div>
           ) : (
