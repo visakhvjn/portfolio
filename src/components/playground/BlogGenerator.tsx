@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import { Markdown } from "@/components/blog/Markdown";
 import { Modal } from "@/components/Modal";
 import Link from "next/link";
@@ -268,9 +269,10 @@ export function BlogGenerator() {
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="self-end rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 self-end rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Send
+                {loading ? <ButtonSpinner className="h-4 w-4" /> : null}
+                {loading ? "Sending…" : "Send"}
               </button>
             </div>
           </form>

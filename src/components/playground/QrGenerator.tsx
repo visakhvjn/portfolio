@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import { Modal } from "@/components/Modal";
 import Link from "next/link";
 import QRCode from "qrcode";
@@ -133,8 +134,9 @@ export function QrGenerator() {
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
+            {loading ? <ButtonSpinner className="h-4 w-4" /> : null}
             {loading ? "Generating…" : "Generate"}
           </button>
         </div>

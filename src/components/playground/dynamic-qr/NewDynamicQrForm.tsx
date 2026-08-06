@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import { DynamicQrShareBlock } from "@/components/playground/dynamic-qr/DynamicQrShareBlock";
 import {
   normalizeDestinationUrl,
@@ -101,8 +102,9 @@ export function NewDynamicQrForm() {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:opacity-50"
             >
+              {saving ? <ButtonSpinner className="h-4 w-4" /> : null}
               {saving ? "Creating…" : "Create QR"}
             </button>
           </form>

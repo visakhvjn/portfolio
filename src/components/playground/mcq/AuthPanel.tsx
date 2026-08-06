@@ -9,6 +9,7 @@ import {
   createClient as createDynamicQrClient,
   isDynamicQrSupabaseConfigured,
 } from "@/lib/supabase/dynamic-qr/client";
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import { useState } from "react";
 
 export type AuthProject = "mcq" | "dynamic-qr";
@@ -108,7 +109,11 @@ export function AuthPanel({
           disabled={status === "loading"}
           className="flex w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
         >
-          <GoogleIcon className="h-5 w-5 shrink-0" />
+          {status === "loading" ? (
+            <ButtonSpinner className="h-5 w-5" />
+          ) : (
+            <GoogleIcon className="h-5 w-5 shrink-0" />
+          )}
           {status === "loading" ? "Redirecting…" : "Continue with Google"}
         </button>
 

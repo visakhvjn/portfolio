@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import { DynamicQrShareBlock } from "@/components/playground/dynamic-qr/DynamicQrShareBlock";
 import { createClient } from "@/lib/supabase/dynamic-qr/client";
 import type { DynamicQrLinkRow } from "@/lib/dynamic-qr/types";
@@ -168,8 +169,11 @@ export function AllDynamicQrList() {
                           type="button"
                           onClick={() => void copyShortUrl(item.slug)}
                           disabled={copyingSlug === item.slug}
-                          className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20 disabled:opacity-60"
+                          className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20 disabled:opacity-60"
                         >
+                          {copyingSlug === item.slug ? (
+                            <ButtonSpinner className="h-3.5 w-3.5" />
+                          ) : null}
                           {copyingSlug === item.slug
                             ? "Copying…"
                             : copiedSlug === item.slug

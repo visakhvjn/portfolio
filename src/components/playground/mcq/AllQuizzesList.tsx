@@ -1,6 +1,7 @@
 "use client";
 
 import { createClient } from "@/lib/supabase/client";
+import { formatMcqDbError } from "@/lib/mcq/supabase-errors";
 import type { QuizRow } from "@/lib/mcq/types";
 import Link from "next/link";
 import { useEffect, useEffectEvent, useState } from "react";
@@ -45,7 +46,11 @@ export function AllQuizzesList() {
       );
       setQuizzes(withCounts);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load quizzes.");
+      setError(
+        formatMcqDbError(
+          err instanceof Error ? err.message : "Failed to load quizzes.",
+        ),
+      );
     } finally {
       setLoading(false);
     }

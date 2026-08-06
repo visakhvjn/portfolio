@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import {
   ScanBreakdown,
   ScanUsageChart,
@@ -167,8 +168,9 @@ export function DynamicQrAnalytics({ slug }: Props) {
               type="button"
               onClick={() => void saveDestination()}
               disabled={saving}
-              className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 disabled:opacity-50"
             >
+              {saving ? <ButtonSpinner className="h-4 w-4" /> : null}
               {saving ? "Saving…" : "Update URL"}
             </button>
           </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import QRCode from "qrcode";
 import { useEffect, useMemo, useState } from "react";
 
@@ -80,8 +81,9 @@ export function DynamicQrShareBlock({
             type="button"
             onClick={() => void copyShortUrl()}
             disabled={copying}
-            className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20 disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20 disabled:opacity-60"
           >
+            {copying ? <ButtonSpinner className="h-3.5 w-3.5" /> : null}
             {copying ? "Copying…" : copied ? "Copied" : "Copy link"}
           </button>
           {qrDataUrl ? (

@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import { AuthPanel } from "@/components/playground/mcq/AuthPanel";
 import { createClient } from "@/lib/supabase/dynamic-qr/client";
 import type { User } from "@supabase/supabase-js";
@@ -121,9 +122,16 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
                   type="button"
                   onClick={() => void signOut()}
                   disabled={signingOut}
-                  className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white disabled:opacity-60"
                 >
-                  {signingOut ? "Signing out…" : "Sign out"}
+                  {signingOut ? (
+                    <>
+                      <ButtonSpinner className="h-3.5 w-3.5" />
+                      Signing out…
+                    </>
+                  ) : (
+                    "Sign out"
+                  )}
                 </button>
               </>
             ) : (

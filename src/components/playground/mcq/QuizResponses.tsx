@@ -1,5 +1,6 @@
 "use client";
 
+import { formatMcqDbError } from "@/lib/mcq/supabase-errors";
 import { createClient } from "@/lib/supabase/client";
 import type {
   QuizAnswerRow,
@@ -95,7 +96,11 @@ export function QuizResponses({ slug }: Props) {
       setQuiz(quizRow as QuizRow);
       setAttempts(views);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load responses.");
+      setError(
+        formatMcqDbError(
+          err instanceof Error ? err.message : "Failed to load responses.",
+        ),
+      );
     } finally {
       setLoading(false);
     }

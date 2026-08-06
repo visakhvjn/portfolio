@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import { Modal } from "@/components/Modal";
 import {
   QuizPlayer,
@@ -8,6 +9,7 @@ import {
   type ParsedQuestion,
   slugifyTitle,
 } from "@/lib/mcq/parse";
+import { formatMcqDbError } from "@/lib/mcq/supabase-errors";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useEffectEvent, useState } from "react";
@@ -130,7 +132,9 @@ export function NewQuizMaker() {
       setShareUrl(url);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Save failed.");
+      setError(
+        formatMcqDbError(err instanceof Error ? err.message : "Save failed."),
+      );
     } finally {
       setSaving(false);
     }
@@ -234,16 +238,18 @@ export function NewQuizMaker() {
                 type="button"
                 onClick={() => void parseWithOpenAi()}
                 disabled={parsing}
-                className="rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:opacity-50"
               >
+                {parsing ? <ButtonSpinner className="h-4 w-4" /> : null}
                 {parsing ? "Parsing with AI…" : "Parse with OpenAI"}
               </button>
               <button
                 type="button"
                 onClick={() => void saveQuiz()}
                 disabled={saving || questions.length === 0}
-                className="rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-4 py-2.5 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-500/20 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-4 py-2.5 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-500/20 disabled:opacity-50"
               >
+                {saving ? <ButtonSpinner className="h-4 w-4" /> : null}
                 {saving ? "Saving…" : "Save & get share link"}
               </button>
             </div>

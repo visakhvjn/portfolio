@@ -5,6 +5,7 @@ import {
   computeScore,
 } from "@/components/playground/mcq/QuizPlayer";
 import type { ParsedQuestion } from "@/lib/mcq/parse";
+import { formatMcqDbError } from "@/lib/mcq/supabase-errors";
 import { createClient } from "@/lib/supabase/client";
 import type { QuizQuestionRow, QuizRow } from "@/lib/mcq/types";
 import Link from "next/link";
@@ -59,7 +60,9 @@ export function TakeQuiz({ slug }: TakeQuizProps) {
         })),
       );
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load quiz.");
+      setError(
+        formatMcqDbError(err instanceof Error ? err.message : "Failed to load quiz."),
+      );
     } finally {
       setLoading(false);
     }

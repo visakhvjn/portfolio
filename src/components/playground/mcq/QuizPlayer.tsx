@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonSpinner } from "@/components/playground/ButtonSpinner";
 import type { ParsedQuestion } from "@/lib/mcq/parse";
 import { useState } from "react";
 
@@ -129,8 +130,9 @@ export function QuizPlayer({
             disabled={
               submitting || answers.some((a) => a === null) || score !== null
             }
-            className="rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
+            {submitting ? <ButtonSpinner className="h-4 w-4" /> : null}
             {submitting ? "Submitting…" : "Submit quiz"}
           </button>
           {score !== null ? (
