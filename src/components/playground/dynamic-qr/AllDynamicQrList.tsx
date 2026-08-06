@@ -14,6 +14,8 @@ export function AllDynamicQrList() {
   const [items, setItems] = useState<ListItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const shortUrl = (slug: string) =>
+    typeof window === "undefined" ? `/r/${slug}` : `${window.location.origin}/r/${slug}`;
 
   const load = useEffectEvent(async () => {
     setLoading(true);
@@ -114,35 +116,54 @@ export function AllDynamicQrList() {
             to get a trackable short link and QR.
           </div>
         ) : (
-          <ul className="mt-6 space-y-4">
+          <ul className="mt-4 space-y-3">
             {items.map((item) => (
               <li key={item.id}>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5">
-                  <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-                    <div className="shrink-0 self-center sm:self-start">
-                      <DynamicQrShareBlock slug={item.slug} size={128} />
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 sm:p-4">
+                  <div className="flex items-start gap-4">
+                    <div className="shrink-0">
+                      <DynamicQrShareBlock
+                        slug={item.slug}
+                        size={96}
+                        showUrl={false}
+                        showActions={false}
+                      />
                     </div>
                     <div className="min-w-0 flex-1">
                       <Link
                         href={`/playground/dynamic-qr/${item.slug}`}
                         className="block transition hover:opacity-90"
                       >
-                        <h2 className="font-semibold text-white">{item.title}</h2>
+                        <h2 className="line-clamp-1 font-semibold text-white">{item.title}</h2>
                         <p className="mt-1 truncate text-xs text-slate-500">
                           → {item.destination_url}
                         </p>
-                        <p className="mt-2 text-xs text-slate-500">
+                        <p className="mt-1.5 truncate text-xs text-slate-500">
+                          {shortUrl(item.slug)}
+                        </p>
+                        <p className="mt-1.5 text-xs text-slate-500">
                           {item.scan_count} scan
                           {item.scan_count === 1 ? "" : "s"} ·{" "}
                           {new Date(item.created_at).toLocaleDateString()}
                         </p>
                       </Link>
-                      <Link
-                        href={`/playground/dynamic-qr/${item.slug}`}
-                        className="mt-3 inline-block rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
-                      >
-                        Analytics
-                      </Link>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            void navigator.clipboard.writeText(shortUrl(item.slug))
+                          }
+                          className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
+                        >
+                          Copy link
+                        </button>
+                        <Link
+                          href={`/playground/dynamic-qr/${item.slug}`}
+                          className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
+                        >
+                          Analytics
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

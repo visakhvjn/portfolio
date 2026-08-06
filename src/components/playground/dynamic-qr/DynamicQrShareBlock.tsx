@@ -8,12 +8,14 @@ type DynamicQrShareBlockProps = {
   /** QR image size in CSS pixels */
   size?: number;
   showUrl?: boolean;
+  showActions?: boolean;
 };
 
 export function DynamicQrShareBlock({
   slug,
   size = 140,
   showUrl = true,
+  showActions = true,
 }: DynamicQrShareBlockProps) {
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
 
@@ -59,24 +61,26 @@ export function DynamicQrShareBlock({
           {shortUrl}
         </p>
       ) : null}
-      <div className="flex flex-wrap justify-center gap-2">
-        <button
-          type="button"
-          onClick={() => void navigator.clipboard.writeText(shortUrl)}
-          className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
-        >
-          Copy link
-        </button>
-        {qrDataUrl ? (
-          <a
-            href={qrDataUrl}
-            download={`dynamic-qr-${slug}.png`}
-            className="rounded-lg border border-emerald-400/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300"
+      {showActions ? (
+        <div className="flex flex-wrap justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => void navigator.clipboard.writeText(shortUrl)}
+            className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
           >
-            Download PNG
-          </a>
-        ) : null}
-      </div>
+            Copy link
+          </button>
+          {qrDataUrl ? (
+            <a
+              href={qrDataUrl}
+              download={`dynamic-qr-${slug}.png`}
+              className="rounded-lg border border-emerald-400/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300"
+            >
+              Download PNG
+            </a>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }
