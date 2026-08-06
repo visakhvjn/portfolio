@@ -7,7 +7,7 @@ This repo uses **two Supabase projects** — one per Playground app. Migrations 
 | MCQ Quiz | [`mcq-quiz/migrations/`](mcq-quiz/migrations/) | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
 | Dynamic QR | [`dynamic-qr/migrations/`](dynamic-qr/migrations/) | `NEXT_PUBLIC_DYNAMIC_QR_SUPABASE_URL`, `NEXT_PUBLIC_DYNAMIC_QR_SUPABASE_ANON_KEY` |
 
-Auth is **per project** (separate magic-link sign-in for each app).
+Auth is **per project** (Google sign-in for each app — enable the Google provider in both Supabase dashboards).
 
 ## Apply migrations
 
@@ -30,5 +30,7 @@ Link to the MCQ ref, copy **only** `supabase/mcq-quiz/migrations/*.sql` into `su
 | Dynamic QR | `https://your-domain.com/auth/callback/dynamic-qr` |
 
 Local: replace host with `http://localhost:3000`.
+
+**Google OAuth (each project):** Authentication → Providers → Google — add your Google Cloud OAuth client ID and secret. In Google Cloud Console, authorized redirect URI is `https://<project-ref>.supabase.co/auth/v1/callback` (shown in the Supabase provider settings).
 
 See [`.env.example`](../.env.example) for all variables.

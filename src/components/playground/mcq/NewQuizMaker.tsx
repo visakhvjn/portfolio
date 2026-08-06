@@ -284,7 +284,7 @@ export function NewQuizMaker() {
               How to use
             </h4>
             <ol className="mt-2 list-decimal space-y-1.5 pl-5 marker:text-emerald-400/80">
-              <li>Sign in with an email magic link.</li>
+              <li>Sign in with Google.</li>
               <li>Paste your OpenAI key (stored in your browser only).</li>
               <li>Paste MCQ text → Parse with OpenAI → review preview.</li>
               <li>Save to get a share link. Open All Quizzes to see responses.</li>

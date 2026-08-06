@@ -9,7 +9,7 @@ import {
   createClient as createDynamicQrClient,
   isDynamicQrSupabaseConfigured,
 } from "@/lib/supabase/dynamic-qr/client";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 export type AuthProject = "mcq" | "dynamic-qr";
 
@@ -21,6 +21,29 @@ type AuthPanelProps = {
   project?: AuthProject;
 };
 
+function GoogleIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden>
+      <path
+        fill="#4285F4"
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+      />
+    </svg>
+  );
+}
+
 export function AuthPanel({
   open,
   onClose,
@@ -28,10 +51,7 @@ export function AuthPanel({
   title = "Sign in",
   project = "mcq",
 }: AuthPanelProps) {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
-    "idle",
-  );
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
 
   const configured =
@@ -41,25 +61,21 @@ export function AuthPanel({
 
   const blurb =
     project === "dynamic-qr"
-      ? "Sign in to Dynamic QR with an email magic link (this app’s own Supabase project)."
-      : "Sign in to MCQ Quiz with an email magic link (this app’s own Supabase project).";
+      ? "Sign in with Google to create dynamic QR codes and view scan analytics."
+      : "Sign in with Google to create quizzes, take shared quizzes, and view responses.";
 
-  const sendMagicLink = async (event: FormEvent) => {
-    event.preventDefault();
+  const signInWithGoogle = async () => {
     if (!configured) {
       setStatus("error");
       setMessage(
         project === "dynamic-qr"
-          ? "Dynamic QR Supabase is not configured. See supabase/dynamic-qr/ and .env.example."
-          : "MCQ Supabase is not configured. See supabase/mcq-quiz/ and .env.example.",
+          ? "Dynamic QR Supabase is not configured. See .env.example."
+          : "MCQ Supabase is not configured. See .env.example.",
       );
       return;
     }
 
-    const trimmed = email.trim();
-    if (!trimmed) return;
-
-    setStatus("sending");
+    setStatus("loading");
     setMessage(null);
 
     try {
@@ -70,56 +86,34 @@ export function AuthPanel({
           ? "/auth/callback/dynamic-qr"
           : "/auth/callback";
       const redirectTo = `${window.location.origin}${callbackPath}?next=${encodeURIComponent(nextPath)}`;
-      const { error } = await supabase.auth.signInWithOtp({
-        email: trimmed,
-        options: { emailRedirectTo: redirectTo },
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo },
       });
       if (error) throw error;
-      setStatus("sent");
-      setMessage("Check your email for the magic link.");
     } catch (err) {
       setStatus("error");
-      setMessage(err instanceof Error ? err.message : "Could not send link.");
+      setMessage(err instanceof Error ? err.message : "Could not start sign-in.");
     }
   };
-
-  const inputId =
-    project === "dynamic-qr" ? "dynamic-qr-auth-email" : "mcq-auth-email";
 
   return (
     <Modal open={open} onClose={onClose} title={title}>
       <div className="space-y-4 text-sm text-slate-300">
         <p>{blurb}</p>
 
-        <form onSubmit={sendMagicLink} className="space-y-3">
-          <label className="sr-only" htmlFor={inputId}>
-            Email
-          </label>
-          <input
-            id={inputId}
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            required
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-400/50 focus:outline-none"
-          />
-          <button
-            type="submit"
-            disabled={status === "sending" || !email.trim()}
-            className="w-full rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:opacity-50"
-          >
-            {status === "sending" ? "Sending…" : "Send magic link"}
-          </button>
-        </form>
+        <button
+          type="button"
+          onClick={() => void signInWithGoogle()}
+          disabled={status === "loading"}
+          className="flex w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
+        >
+          <GoogleIcon className="h-5 w-5 shrink-0" />
+          {status === "loading" ? "Redirecting…" : "Continue with Google"}
+        </button>
 
         {message ? (
-          <p
-            className={
-              status === "error" ? "text-rose-300" : "text-emerald-300/90"
-            }
-            role="status"
-          >
+          <p className="text-rose-300" role="status">
             {message}
           </p>
         ) : null}

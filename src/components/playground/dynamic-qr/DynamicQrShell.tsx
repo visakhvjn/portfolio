@@ -151,7 +151,7 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
                   onClick={() => setAuthOpen(true)}
                   className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
                 >
-                  Sign in with email
+                  Sign in with Google
                 </button>
                 <Link
                   href="/playground/qr-generator"

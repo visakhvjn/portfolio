@@ -150,7 +150,7 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                   onClick={() => setAuthOpen(true)}
                   className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
                 >
-                  Sign in with email
+                  Sign in with Google
                 </button>
                 <Link
                   href="/playground"
@@ -168,7 +168,7 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                   },
                   {
                     title: "Share a link",
-                    body: "Save the quiz and send one URL. Takers sign in with email and submit once.",
+                    body: "Save the quiz and send one URL. Takers sign in with Google and submit once.",
                   },
                   {
                     title: "See responses",
@@ -206,7 +206,7 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                   What you&apos;ll need
                 </h2>
                 <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-amber-100/80 marker:text-amber-400/80">
-                  <li>An email for the magic-link sign-in</li>
+                  <li>A Google account to sign in</li>
                   <li>
                     Your own OpenAI API key when you parse MCQs (stored only in
                     your browser)
@@ -216,7 +216,7 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
 
               <div className="mt-12 border-t border-white/10 pt-8 text-center">
                 <p className="text-sm text-slate-500">
-                  Ready when you are — no Google account required.
+                  Ready when you are — sign in with Google to get started.
                 </p>
                 <button
                   type="button"
