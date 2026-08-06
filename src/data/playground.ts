@@ -31,4 +31,12 @@ export const playgroundProjects: PlaygroundProject[] = [
     href: "/playground/mcq-quiz",
     ai: true,
   },
+  {
+    slug: "dynamic-qr",
+    title: "Dynamic QR",
+    description:
+      "Short links + QR that redirect and log scans — device, region, and usage charts.",
+    href: "/playground/dynamic-qr",
+    ai: false,
+  },
 ];

@@ -74,6 +74,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: `${site.portfolioUrl}/playground/dynamic-qr`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
     ...projectEntries,
     ...topicEntries,
     ...postEntries,

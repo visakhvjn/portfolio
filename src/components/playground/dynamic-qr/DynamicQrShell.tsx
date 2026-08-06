@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthPanel } from "@/components/playground/mcq/AuthPanel";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/dynamic-qr/client";
 import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,7 +13,7 @@ function navClass(active: boolean) {
   }`;
 }
 
-export function McqQuizShell({ children }: { children: React.ReactNode }) {
+export function DynamicQrShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [user, setUser] = useState<User | null>(null);
   const [authOpen, setAuthOpen] = useState(false);
@@ -59,8 +59,8 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
 
   const onNew = pathname.endsWith("/new");
   const onAll =
-    pathname === "/playground/mcq-quiz" ||
-    pathname === "/playground/mcq-quiz/";
+    pathname === "/playground/dynamic-qr" ||
+    pathname === "/playground/dynamic-qr/";
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden">
@@ -72,11 +72,11 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                 Playground
               </Link>
               <span aria-hidden>/</span>
-              <span className="text-slate-300">MCQ Quiz</span>
+              <span className="text-slate-300">Dynamic QR</span>
             </div>
             <nav className="flex items-center gap-1">
               <Link
-                href="/playground/mcq-quiz/new"
+                href="/playground/dynamic-qr/new"
                 className={navClass(onNew)}
                 onClick={(e) => {
                   if (!user) {
@@ -85,10 +85,10 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                   }
                 }}
               >
-                New Quiz
+                New QR
               </Link>
               <Link
-                href="/playground/mcq-quiz"
+                href="/playground/dynamic-qr"
                 className={navClass(onAll)}
                 onClick={(e) => {
                   if (!user) {
@@ -97,7 +97,7 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                   }
                 }}
               >
-                All Quizzes
+                All QRs
               </Link>
             </nav>
           </div>
@@ -134,15 +134,16 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-400/80">
-                Playground · MCQ Quiz
+                Playground · Dynamic QR
               </p>
               <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Paste MCQs. Ship a shareable quiz.
+                QR codes that redirect — and tell you who scanned.
               </h1>
               <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-400">
-                Drop questions from ChatGPT, Claude, or your notes. OpenAI turns
-                them into a clean quiz, you save it, share a link, and see who
-                scored what — without building a form by hand.
+                Point a QR at a short link on this site — not your final URL.
+                When someone scans, we log what we can (device, region, time),
+                then send them through. Change the destination later without
+                reprinting. Same sticker, new landing page.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <button
@@ -153,26 +154,26 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                   Sign in with email
                 </button>
                 <Link
-                  href="/playground"
+                  href="/playground/qr-generator"
                   className="rounded-xl border border-white/10 px-5 py-3 text-sm font-medium text-slate-300 transition hover:border-white/20 hover:text-white"
                 >
-                  Back to Playground
+                  Need a static QR instead?
                 </Link>
               </div>
 
               <div className="mt-14 grid gap-4 sm:grid-cols-3">
                 {[
                   {
-                    title: "Paste → parse",
-                    body: "Bring messy MCQ text. Your OpenAI key structures it into questions and answers.",
+                    title: "Create & encode",
+                    body: "Add a label and destination URL. We mint a short link like /r/your-slug and a QR PNG you can download.",
                   },
                   {
-                    title: "Share a link",
-                    body: "Save the quiz and send one URL. Takers sign in with email and submit once.",
+                    title: "Scan → redirect",
+                    body: "The QR never points at your site directly — it hits our redirect, logs the scan, then 302s to your real URL.",
                   },
                   {
-                    title: "See responses",
-                    body: "Open All Quizzes, click a quiz, and review scores plus each answer.",
+                    title: "Analytics",
+                    body: "Open All QRs, pick one, and see scans over time, devices, countries/regions, and recent hits.",
                   },
                 ].map((item) => (
                   <div
@@ -191,32 +192,53 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
 
               <section className="mt-14">
                 <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                  Why it exists
+                  Static vs dynamic
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-slate-400">
-                  AI assistants spit out great practice questions — then they
-                  die in a chat scroll. This playground keeps them alive as
-                  quizzes you can actually hand to a classmate, hiree, or study
-                  group, with responses you can revisit.
+                  Our{" "}
+                  <Link
+                    href="/playground/qr-generator"
+                    className="text-emerald-400 hover:underline"
+                  >
+                    static QR generator
+                  </Link>{" "}
+                  bakes the URL into the image — fine for one-off links, zero
+                  tracking. Dynamic QR keeps the image fixed on a short link you
+                  control: update the target URL anytime, and every scan shows up
+                  in your dashboard.
                 </p>
               </section>
 
-              <section className="mt-10 rounded-2xl border border-amber-400/20 bg-amber-400/5 px-5 py-4">
-                <h2 className="text-sm font-semibold text-amber-100">
-                  What you&apos;ll need
+              <section className="mt-10">
+                <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                  What we track per scan
                 </h2>
-                <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-amber-100/80 marker:text-amber-400/80">
-                  <li>An email for the magic-link sign-in</li>
-                  <li>
-                    Your own OpenAI API key when you parse MCQs (stored only in
-                    your browser)
-                  </li>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-slate-400 marker:text-emerald-400/80">
+                  <li>Timestamp</li>
+                  <li>Device type (mobile, desktop, tablet, bot heuristics)</li>
+                  <li>Country, region, and city when the host sends geo headers (best on Vercel prod)</li>
+                  <li>Referrer when the scanner&apos;s browser sends one</li>
                 </ul>
+                <p className="mt-3 text-sm text-slate-500">
+                  We don&apos;t show a full device fingerprint — just enough to
+                  spot patterns in a chart, not to stalk individuals.
+                </p>
+              </section>
+
+              <section className="mt-10 rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-4 font-mono text-xs text-slate-400">
+                <p className="text-slate-500">Flow</p>
+                <p className="mt-2">
+                  QR →{" "}
+                  <span className="text-emerald-300/90">yoursite.com/r/menu-abc</span>{" "}
+                  → log scan →{" "}
+                  <span className="text-slate-300">https://your-menu.com</span>
+                </p>
               </section>
 
               <div className="mt-12 border-t border-white/10 pt-8 text-center">
                 <p className="text-sm text-slate-500">
-                  Ready when you are — no Google account required.
+                  Menus, event badges, slide decks, sticker tests — if you might
+                  change the link later, go dynamic.
                 </p>
                 <button
                   type="button"
@@ -236,9 +258,13 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
       <AuthPanel
         open={authOpen}
         onClose={() => setAuthOpen(false)}
-        title="Sign in to MCQ Quiz"
-        project="mcq"
-        nextPath={pathname.startsWith("/playground/mcq-quiz") ? pathname : "/playground/mcq-quiz"}
+        title="Sign in to Dynamic QR"
+        project="dynamic-qr"
+        nextPath={
+          pathname.startsWith("/playground/dynamic-qr")
+            ? pathname
+            : "/playground/dynamic-qr"
+        }
       />
     </div>
   );

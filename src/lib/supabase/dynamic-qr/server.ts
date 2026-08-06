@@ -1,14 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-/** MCQ Quiz — Supabase project: see supabase/mcq-quiz/ */
+/** Dynamic QR — Supabase project: see supabase/dynamic-qr/ */
 export async function createClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const url = process.env.NEXT_PUBLIC_DYNAMIC_QR_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_DYNAMIC_QR_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
     throw new Error(
-      "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY (MCQ Quiz)",
+      "Missing NEXT_PUBLIC_DYNAMIC_QR_SUPABASE_URL or NEXT_PUBLIC_DYNAMIC_QR_SUPABASE_ANON_KEY",
     );
   }
 

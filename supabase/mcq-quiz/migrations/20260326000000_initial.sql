@@ -1,5 +1,5 @@
--- MCQ Quiz Maker — run in Supabase SQL editor
--- Tables + RLS for quizzes, questions, attempts, answers
+-- MCQ Quiz Maker — apply in the MCQ Quiz Supabase project only
+-- Path: supabase/mcq-quiz/migrations/
 
 create extension if not exists "pgcrypto";
 
@@ -53,13 +53,15 @@ alter table public.quiz_questions enable row level security;
 alter table public.quiz_attempts enable row level security;
 alter table public.quiz_answers enable row level security;
 
--- Quizzes
+-- Quizzes (drop first so this file is safe to re-run)
+drop policy if exists "Owners can manage own quizzes" on public.quizzes;
 create policy "Owners can manage own quizzes"
   on public.quizzes
   for all
   using (auth.uid() = owner_id)
   with check (auth.uid() = owner_id);
 
+drop policy if exists "Authenticated users can read quizzes to take them" on public.quizzes;
 create policy "Authenticated users can read quizzes to take them"
   on public.quizzes
   for select
@@ -67,6 +69,7 @@ create policy "Authenticated users can read quizzes to take them"
   using (true);
 
 -- Questions
+drop policy if exists "Owners can manage questions on own quizzes" on public.quiz_questions;
 create policy "Owners can manage questions on own quizzes"
   on public.quiz_questions
   for all
@@ -83,6 +86,7 @@ create policy "Owners can manage questions on own quizzes"
     )
   );
 
+drop policy if exists "Authenticated users can read questions" on public.quiz_questions;
 create policy "Authenticated users can read questions"
   on public.quiz_questions
   for select
@@ -90,18 +94,21 @@ create policy "Authenticated users can read questions"
   using (true);
 
 -- Attempts
+drop policy if exists "Takers can insert own attempts" on public.quiz_attempts;
 create policy "Takers can insert own attempts"
   on public.quiz_attempts
   for insert
   to authenticated
   with check (auth.uid() = taker_id);
 
+drop policy if exists "Takers can read own attempts" on public.quiz_attempts;
 create policy "Takers can read own attempts"
   on public.quiz_attempts
   for select
   to authenticated
   using (auth.uid() = taker_id);
 
+drop policy if exists "Owners can read attempts on own quizzes" on public.quiz_attempts;
 create policy "Owners can read attempts on own quizzes"
   on public.quiz_attempts
   for select
@@ -114,6 +121,7 @@ create policy "Owners can read attempts on own quizzes"
   );
 
 -- Answers
+drop policy if exists "Takers can insert answers on own attempts" on public.quiz_answers;
 create policy "Takers can insert answers on own attempts"
   on public.quiz_answers
   for insert
@@ -125,6 +133,7 @@ create policy "Takers can insert answers on own attempts"
     )
   );
 
+drop policy if exists "Takers can read own answers" on public.quiz_answers;
 create policy "Takers can read own answers"
   on public.quiz_answers
   for select
@@ -136,6 +145,7 @@ create policy "Takers can read own answers"
     )
   );
 
+drop policy if exists "Owners can read answers on own quizzes" on public.quiz_answers;
 create policy "Owners can read answers on own quizzes"
   on public.quiz_answers
   for select

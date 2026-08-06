@@ -1,11 +1,12 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function updateSession(request: NextRequest) {
+async function refreshSession(
+  request: NextRequest,
+  url: string | undefined,
+  key: string | undefined,
+) {
   let supabaseResponse = NextResponse.next({ request });
-
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
     return supabaseResponse;
@@ -31,4 +32,20 @@ export async function updateSession(request: NextRequest) {
   await supabase.auth.getUser();
 
   return supabaseResponse;
+}
+
+export async function updateMcqSession(request: NextRequest) {
+  return refreshSession(
+    request,
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  );
+}
+
+export async function updateDynamicQrSession(request: NextRequest) {
+  return refreshSession(
+    request,
+    process.env.NEXT_PUBLIC_DYNAMIC_QR_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_DYNAMIC_QR_SUPABASE_ANON_KEY,
+  );
 }

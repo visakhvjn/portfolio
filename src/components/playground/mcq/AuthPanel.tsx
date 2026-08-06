@@ -1,19 +1,32 @@
 "use client";
 
 import { Modal } from "@/components/Modal";
-import { createClient } from "@/lib/supabase/client";
+import {
+  createClient as createMcqClient,
+  isMcqSupabaseConfigured,
+} from "@/lib/supabase/client";
+import {
+  createClient as createDynamicQrClient,
+  isDynamicQrSupabaseConfigured,
+} from "@/lib/supabase/dynamic-qr/client";
 import { FormEvent, useState } from "react";
+
+export type AuthProject = "mcq" | "dynamic-qr";
 
 type AuthPanelProps = {
   open: boolean;
   onClose: () => void;
   nextPath?: string;
+  title?: string;
+  project?: AuthProject;
 };
 
 export function AuthPanel({
   open,
   onClose,
   nextPath = "/playground/mcq-quiz",
+  title = "Sign in",
+  project = "mcq",
 }: AuthPanelProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
@@ -22,14 +35,24 @@ export function AuthPanel({
   const [message, setMessage] = useState<string | null>(null);
 
   const configured =
-    Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
-    Boolean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+    project === "dynamic-qr"
+      ? isDynamicQrSupabaseConfigured()
+      : isMcqSupabaseConfigured();
+
+  const blurb =
+    project === "dynamic-qr"
+      ? "Sign in to Dynamic QR with an email magic link (this app’s own Supabase project)."
+      : "Sign in to MCQ Quiz with an email magic link (this app’s own Supabase project).";
 
   const sendMagicLink = async (event: FormEvent) => {
     event.preventDefault();
     if (!configured) {
       setStatus("error");
-      setMessage("Supabase is not configured. Add env vars from .env.example.");
+      setMessage(
+        project === "dynamic-qr"
+          ? "Dynamic QR Supabase is not configured. See supabase/dynamic-qr/ and .env.example."
+          : "MCQ Supabase is not configured. See supabase/mcq-quiz/ and .env.example.",
+      );
       return;
     }
 
@@ -40,8 +63,13 @@ export function AuthPanel({
     setMessage(null);
 
     try {
-      const supabase = createClient();
-      const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`;
+      const supabase =
+        project === "dynamic-qr" ? createDynamicQrClient() : createMcqClient();
+      const callbackPath =
+        project === "dynamic-qr"
+          ? "/auth/callback/dynamic-qr"
+          : "/auth/callback";
+      const redirectTo = `${window.location.origin}${callbackPath}?next=${encodeURIComponent(nextPath)}`;
       const { error } = await supabase.auth.signInWithOtp({
         email: trimmed,
         options: { emailRedirectTo: redirectTo },
@@ -55,20 +83,20 @@ export function AuthPanel({
     }
   };
 
+  const inputId =
+    project === "dynamic-qr" ? "dynamic-qr-auth-email" : "mcq-auth-email";
+
   return (
-    <Modal open={open} onClose={onClose} title="Sign in to MCQ Quiz">
+    <Modal open={open} onClose={onClose} title={title}>
       <div className="space-y-4 text-sm text-slate-300">
-        <p>
-          Sign in with an email magic link to create quizzes, share them, and
-          collect responses.
-        </p>
+        <p>{blurb}</p>
 
         <form onSubmit={sendMagicLink} className="space-y-3">
-          <label className="sr-only" htmlFor="mcq-auth-email">
+          <label className="sr-only" htmlFor={inputId}>
             Email
           </label>
           <input
-            id="mcq-auth-email"
+            id={inputId}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
