@@ -15,4 +15,12 @@ export const playgroundProjects: PlaygroundProject[] = [
     href: "/playground/blog-generator",
     ai: true,
   },
+  {
+    slug: "qr-generator",
+    title: "QR Generator",
+    description:
+      "Paste a URL, get a QR code, download the PNG. No accounts, no tracking — just the code.",
+    href: "/playground/qr-generator",
+    ai: false,
+  },
 ];
