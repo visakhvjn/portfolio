@@ -44,6 +44,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    {
+      url: `${site.portfolioUrl}/playground`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     ...projectEntries,
     ...topicEntries,
     ...postEntries,
