@@ -36,6 +36,7 @@ export const skillCategories: SkillCategory[] = [
       "LangGraph",
       "Model Context Protocol (MCP)",
       "Cursor",
+      "Claude Code",
     ],
   },
   {
