@@ -100,14 +100,14 @@ export function AuthPanel({
 
   return (
     <Modal open={open} onClose={onClose} title={title}>
-      <div className="space-y-4 text-sm text-slate-300">
+      <div className="space-y-4 text-sm text-ink-soft">
         <p>{blurb}</p>
 
         <button
           type="button"
           onClick={() => void signInWithGoogle()}
           disabled={status === "loading"}
-          className="flex w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 disabled:opacity-50"
+          className="flex w-full items-center justify-center gap-3 rounded-lg border border-line-strong bg-card px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface disabled:opacity-50"
         >
           {status === "loading" ? (
             <ButtonSpinner className="h-5 w-5" />
@@ -118,7 +118,7 @@ export function AuthPanel({
         </button>
 
         {message ? (
-          <p className="text-rose-300" role="status">
+          <p className="text-red-700" role="status">
             {message}
           </p>
         ) : null}

@@ -22,12 +22,12 @@ export function projectTypeFilterLabel(type: ProjectType): string {
 export function projectTypeBadgeClass(type: ProjectType): string {
   switch (type) {
     case "office":
-      return "bg-violet-500/20 text-violet-300";
+      return "bg-surface text-ink-soft border border-line";
     case "personal":
-      return "bg-sky-500/20 text-sky-300";
+      return "bg-accent-soft text-accent-strong border border-transparent";
     case "ai":
-      return "bg-fuchsia-500/20 text-fuchsia-300";
+      return "bg-ink text-canvas border border-ink";
     case "games":
-      return "bg-amber-500/20 text-amber-300";
+      return "bg-card text-ink border border-line-strong";
   }
 }

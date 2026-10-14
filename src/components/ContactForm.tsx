@@ -42,7 +42,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <p className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-5 py-8 text-center text-slate-200">
+      <p className="rounded-2xl border border-line bg-surface px-5 py-8 text-center font-serif text-lg text-ink">
         Thanks! Your message was sent. I will get back to you soon.
       </p>
     );
@@ -59,18 +59,18 @@ export function ContactForm() {
         aria-hidden="true"
       />
       <div>
-        <label htmlFor="contact-name" className="mb-1 block text-sm text-slate-400">
+        <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-ink-soft">
           Name
         </label>
         <input
           id="contact-name"
           name="name"
           required
-          className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500/50"
+          className="w-full rounded-lg border border-line-strong bg-card px-3 py-2.5 text-sm text-ink placeholder:text-faint outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
       </div>
       <div>
-        <label htmlFor="contact-email" className="mb-1 block text-sm text-slate-400">
+        <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium text-ink-soft">
           Email
         </label>
         <input
@@ -78,21 +78,21 @@ export function ContactForm() {
           name="email"
           type="email"
           required
-          className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500/50"
+          className="w-full rounded-lg border border-line-strong bg-card px-3 py-2.5 text-sm text-ink placeholder:text-faint outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
       </div>
       <div>
-        <label htmlFor="contact-subject" className="mb-1 block text-sm text-slate-400">
+        <label htmlFor="contact-subject" className="mb-1.5 block text-sm font-medium text-ink-soft">
           Subject (optional)
         </label>
         <input
           id="contact-subject"
           name="subject"
-          className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500/50"
+          className="w-full rounded-lg border border-line-strong bg-card px-3 py-2.5 text-sm text-ink placeholder:text-faint outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
       </div>
       <div>
-        <label htmlFor="contact-message" className="mb-1 block text-sm text-slate-400">
+        <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-ink-soft">
           Message
         </label>
         <textarea
@@ -101,14 +101,14 @@ export function ContactForm() {
           required
           rows={5}
           minLength={20}
-          className="w-full resize-none rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500/50"
+          className="w-full resize-none rounded-lg border border-line-strong bg-card px-3 py-2.5 text-sm text-ink placeholder:text-faint outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
       </div>
-      {status === "error" && <p className="text-sm text-red-400">{errorMsg}</p>}
+      {status === "error" && <p className="text-sm text-red-700">{errorMsg}</p>}
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:opacity-60"
+        className="w-full rounded-lg bg-ink py-3 text-sm font-medium text-canvas transition hover:bg-ink-soft disabled:opacity-60"
       >
         {status === "loading" ? "Sending…" : "Send message"}
       </button>

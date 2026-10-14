@@ -12,26 +12,33 @@ export function BlogPostCard({ post, showTopic = true }: BlogPostCardProps) {
   return (
     <Link
       href={`/blog/${post.topic}/${post.slug}`}
-      className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-emerald-500/30 hover:bg-white/[0.05]"
+      className="group flex h-full flex-col py-8"
     >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
         {showTopic ? (
-          <span className="font-medium uppercase tracking-[0.14em] text-emerald-400/90">
+          <span className="text-xs font-medium uppercase tracking-[0.14em] text-accent-strong">
             {post.topicTitle}
           </span>
         ) : null}
-        {formattedDate ? <time dateTime={post.date}>{formattedDate}</time> : null}
+        {formattedDate ? (
+          <>
+            <time dateTime={post.date}>{formattedDate}</time>
+            <span aria-hidden className="text-faint">
+              ·
+            </span>
+          </>
+        ) : null}
         <span>{post.readingMinutes} min read</span>
       </div>
-      <h2 className="mt-3 text-xl font-semibold tracking-tight text-white transition group-hover:text-emerald-300">
+      <h2 className="mt-3 font-serif text-2xl font-medium leading-snug tracking-tight text-ink transition group-hover:text-accent-strong">
         {post.title}
       </h2>
       {post.description ? (
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-soft">
           {post.description}
         </p>
       ) : null}
-      <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-emerald-400/90 transition group-hover:text-emerald-300">
+      <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-strong underline-offset-4 transition group-hover:text-ink group-hover:underline">
         Read post <span aria-hidden>→</span>
       </span>
     </Link>

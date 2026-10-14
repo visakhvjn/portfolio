@@ -25,7 +25,7 @@ export function QuizPlayer({
 
   if (questions.length === 0) {
     return (
-      <div className="flex h-full min-h-48 items-center justify-center rounded-xl border border-dashed border-white/10 bg-white/[0.02] px-6 text-center text-sm text-slate-500">
+      <div className="flex h-full min-h-48 items-center justify-center rounded-xl border border-dashed border-line-strong bg-surface px-6 text-center text-sm text-muted">
         Parsed questions will appear here as a quiz.
       </div>
     );
@@ -60,10 +60,10 @@ export function QuizPlayer({
       {questions.map((q, qi) => (
         <div
           key={q.id ?? `${qi}-${q.prompt.slice(0, 24)}`}
-          className="rounded-xl border border-white/10 bg-white/[0.03] p-4"
+          className="rounded-xl border border-line bg-card p-4"
         >
-          <p className="text-sm font-medium text-white">
-            <span className="mr-2 text-slate-500">{qi + 1}.</span>
+          <p className="text-sm font-medium text-ink">
+            <span className="mr-2 text-muted">{qi + 1}.</span>
             {q.prompt}
           </p>
           <ul className="mt-3 space-y-2">
@@ -74,14 +74,13 @@ export function QuizPlayer({
                 (mode === "take" && score !== null);
               const isCorrect = oi === q.correctIndex;
               let style =
-                "border-white/10 bg-white/[0.02] text-slate-300 hover:border-white/20";
+                "border-line bg-card text-ink-soft hover:border-line-strong hover:bg-surface hover:text-ink";
               if (selected && !showResult) {
-                style =
-                  "border-emerald-400/50 bg-emerald-500/10 text-emerald-50";
+                style = "border-accent bg-accent-soft text-ink";
               } else if (showResult && isCorrect) {
-                style = "border-emerald-400/50 bg-emerald-500/15 text-emerald-100";
+                style = "border-green-200 bg-green-50 text-green-800";
               } else if (showResult && selected && !isCorrect) {
-                style = "border-rose-400/40 bg-rose-500/10 text-rose-100";
+                style = "border-red-200 bg-red-50 text-red-700";
               }
 
               return (
@@ -92,7 +91,7 @@ export function QuizPlayer({
                     disabled={showResult}
                     className={`w-full rounded-lg border px-3 py-2 text-left text-sm transition ${style} disabled:cursor-default`}
                   >
-                    <span className="mr-2 text-slate-500">
+                    <span className="mr-2 text-muted">
                       {String.fromCharCode(65 + oi)}.
                     </span>
                     {opt}
@@ -109,14 +108,14 @@ export function QuizPlayer({
           <button
             type="button"
             onClick={checkPreview}
-            className="rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+            className="rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft"
           >
             Check answers
           </button>
           {checked && score !== null ? (
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-muted">
               Score:{" "}
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-ink">
                 {score}/{questions.length}
               </span>
             </p>
@@ -130,15 +129,15 @@ export function QuizPlayer({
             disabled={
               submitting || answers.some((a) => a === null) || score !== null
             }
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft disabled:cursor-not-allowed disabled:opacity-50"
           >
             {submitting ? <ButtonSpinner className="h-4 w-4" /> : null}
             {submitting ? "Submitting…" : "Submit quiz"}
           </button>
           {score !== null ? (
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-muted">
               Score:{" "}
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-ink">
                 {score}/{questions.length}
               </span>
             </p>

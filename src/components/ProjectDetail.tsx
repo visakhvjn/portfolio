@@ -10,6 +10,9 @@ type ProjectDetailProps = {
   project: Project;
 };
 
+const sectionLabel =
+  "text-xs font-medium uppercase tracking-[0.14em] text-muted";
+
 export function ProjectDetail({ project }: ProjectDetailProps) {
   const related = getRelatedProjects(project);
   const thumbnailSrc = projectThumbnailPath(project);
@@ -17,15 +20,36 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
   return (
     <>
       <ProjectJsonLd project={project} />
-      <article>
+      <article className="mx-auto max-w-3xl py-10 sm:py-16">
         <Link
           href="/#projects"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 transition hover:text-emerald-400"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition hover:text-ink"
         >
           <span aria-hidden>←</span> All projects
         </Link>
 
-        <div className="relative mt-6 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-900">
+        <header className="mt-8">
+          <div className="mb-5 flex flex-wrap gap-2">
+            <span
+              className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${projectTypeBadgeClass(project.type)}`}
+            >
+              {projectTypeLabel(project.type)}
+            </span>
+            {project.type === "office" && (
+              <span className="rounded-full border border-line bg-card px-2.5 py-0.5 text-xs font-medium text-muted">
+                NDA
+              </span>
+            )}
+          </div>
+          <h1 className="font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+            {project.heading}
+          </h1>
+          <p className="mt-5 text-lg leading-relaxed text-ink-soft">
+            {project.summary}
+          </p>
+        </header>
+
+        <div className="relative mt-10 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-line bg-surface">
           <Image
             src={thumbnailSrc}
             alt={`${project.heading} preview`}
@@ -36,45 +60,20 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           />
         </div>
 
-        <header className="mt-8">
-          <div className="mb-4 flex flex-wrap gap-2">
-            <span
-              className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${projectTypeBadgeClass(project.type)}`}
-            >
-              {projectTypeLabel(project.type)}
-            </span>
-            {project.type === "office" && (
-              <span className="rounded-full bg-amber-500/20 px-2.5 py-0.5 text-xs font-medium text-amber-300">
-                NDA
-              </span>
-            )}
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            {project.heading}
-          </h1>
-          <p className="mt-4 text-lg leading-relaxed text-slate-400">
-            {project.summary}
-          </p>
-        </header>
-
-        <section className="mt-8">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-            Why
-          </h2>
-          <p className="mt-2 whitespace-pre-line text-base leading-relaxed text-slate-300">
+        <section className="mt-12">
+          <h2 className={sectionLabel}>Why</h2>
+          <p className="mt-3 whitespace-pre-line text-base leading-relaxed text-ink-soft">
             {project.reason}
           </p>
         </section>
 
-        <section className="mt-8">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-            Tech
-          </h2>
-          <div className="mt-2 flex flex-wrap gap-2">
+        <section className="mt-10">
+          <h2 className={sectionLabel}>Tech</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="rounded-lg bg-white/5 px-2.5 py-1 text-xs text-slate-300"
+                className="rounded-full border border-line bg-surface px-2.5 py-0.5 text-xs text-ink-soft"
               >
                 {t}
               </span>
@@ -83,25 +82,23 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         </section>
 
         {project.runSteps && project.runSteps.length > 0 && (
-          <section className="mt-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-              How to run
-            </h2>
-            <ol className="mt-4 space-y-6">
+          <section className="mt-10">
+            <h2 className={sectionLabel}>How to run</h2>
+            <ol className="mt-5 space-y-6">
               {project.runSteps.map((step, index) => (
                 <li key={step.title} className="flex gap-4">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-semibold text-emerald-400">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-medium text-accent-strong">
                     {index + 1}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-medium text-white">{step.title}</h3>
+                    <h3 className="font-medium text-ink">{step.title}</h3>
                     {step.description && (
-                      <p className="mt-1 text-sm leading-relaxed text-slate-300">
+                      <p className="mt-1 text-sm leading-relaxed text-ink-soft">
                         {step.description}
                       </p>
                     )}
                     {step.code && (
-                      <pre className="mt-2 overflow-x-auto rounded-lg border border-white/10 bg-slate-950/80 p-3 text-xs leading-relaxed text-slate-300 sm:text-sm">
+                      <pre className="mt-3 overflow-x-auto rounded-xl border border-line bg-surface p-3 text-xs leading-relaxed text-ink sm:text-sm">
                         <code>{step.code}</code>
                       </pre>
                     )}
@@ -113,24 +110,22 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         )}
 
         {project.dockerCompose && (
-          <section className="mt-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-              Docker Compose
-            </h2>
-            <pre className="mt-2 overflow-x-auto rounded-xl border border-white/10 bg-slate-950/80 p-4 text-xs leading-relaxed text-slate-300 sm:text-sm">
+          <section className="mt-10">
+            <h2 className={sectionLabel}>Docker Compose</h2>
+            <pre className="mt-3 overflow-x-auto rounded-xl border border-line bg-surface p-4 text-xs leading-relaxed text-ink sm:text-sm">
               <code>{project.dockerCompose}</code>
             </pre>
           </section>
         )}
 
         {(project.demoUrl || project.repoUrl) && (
-          <section className="mt-8 flex flex-col gap-2 sm:flex-row">
+          <section className="mt-10 flex flex-col gap-2 sm:flex-row">
             {project.demoUrl && (
               <a
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex justify-center rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
+                className="inline-flex justify-center rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-canvas transition hover:bg-ink-soft"
               >
                 Live demo
               </a>
@@ -140,7 +135,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex justify-center rounded-xl border border-white/15 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/5"
+                className="inline-flex justify-center rounded-lg border border-line-strong bg-card px-4 py-2.5 text-sm font-medium text-ink transition hover:bg-surface"
               >
                 GitHub
               </a>
@@ -149,14 +144,14 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         )}
 
         {project.futureWork.length > 0 && (
-          <section className="mt-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-              What&apos;s next
-            </h2>
-            <ul className="mt-2 space-y-2">
+          <section className="mt-10">
+            <h2 className={sectionLabel}>What&apos;s next</h2>
+            <ul className="mt-3 space-y-2">
               {project.futureWork.map((item) => (
-                <li key={item} className="flex gap-2 text-sm text-slate-300">
-                  <span className="text-emerald-400">→</span>
+                <li key={item} className="flex gap-2 text-sm leading-relaxed text-ink-soft">
+                  <span className="text-accent" aria-hidden>
+                    →
+                  </span>
                   {item}
                 </li>
               ))}
@@ -165,25 +160,31 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         )}
 
         {project.type === "office" && (
-          <p className="mt-8 border-t border-white/10 pt-6 text-xs leading-relaxed text-slate-500">
+          <p className="mt-10 border-t border-line pt-6 text-xs leading-relaxed text-muted">
             Internal product — details shared under NDA. Reach out for context on
             my role and stack.
           </p>
         )}
 
         {related.length > 0 && (
-          <section className="mt-12 border-t border-white/10 pt-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-              More projects
-            </h2>
-            <ul className="mt-4 space-y-2">
+          <section className="mt-14 border-t border-line pt-10">
+            <h2 className={sectionLabel}>More projects</h2>
+            <ul className="mt-4 divide-y divide-line">
               {related.map((p) => (
                 <li key={p.slug}>
                   <Link
                     href={`/projects/${p.slug}`}
-                    className="text-sm text-slate-300 transition hover:text-emerald-400"
+                    className="group flex items-baseline justify-between gap-4 py-3"
                   >
-                    {p.heading}
+                    <span className="font-serif text-lg text-ink transition group-hover:text-accent-strong">
+                      {p.heading}
+                    </span>
+                    <span
+                      className="shrink-0 text-sm text-faint transition group-hover:text-accent-strong"
+                      aria-hidden
+                    >
+                      →
+                    </span>
                   </Link>
                 </li>
               ))}

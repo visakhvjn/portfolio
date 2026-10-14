@@ -23,6 +23,11 @@ export const resumeProjectCopy: Record<
     description:
       "AI quiz platform for interview prep and educators with sharing and attempt tracking.",
   },
+  "query-lab": {
+    title: "Query Lab – AI-Generated SQL Practice Platform",
+    description:
+      "Daily AI-generated Postgres schemas with graded SQL challenges and instant feedback.",
+  },
   "ai-debator": {
     title: "AI Debator – Multi-Agent LLM Debate Application",
     description:

@@ -9,8 +9,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useEffectEvent, useState } from "react";
 
 function navClass(active: boolean) {
-  return `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-    active ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
+  return `rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+    active ? "bg-card text-ink shadow-sm" : "text-muted hover:text-ink"
   }`;
 }
 
@@ -71,17 +71,17 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b border-white/10 px-4 py-3 sm:px-6">
+      <div className="shrink-0 border-b border-line bg-canvas px-4 py-3 sm:px-6">
         <div className="mx-auto flex max-w-[1600px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="mr-2 flex items-center gap-2 text-sm text-slate-500">
-              <Link href="/playground" className="hover:text-emerald-400">
+            <div className="mr-2 flex items-center gap-2 text-sm text-muted">
+              <Link href="/playground" className="hover:text-ink">
                 Playground
               </Link>
               <span aria-hidden>/</span>
-              <span className="text-slate-300">MCQ Quiz</span>
+              <span className="text-ink-soft">MCQ Quiz</span>
             </div>
-            <nav className="flex items-center gap-1">
+            <nav className="flex items-center gap-1 rounded-xl border border-line bg-surface p-1">
               <Link
                 href="/playground/mcq-quiz/new"
                 className={navClass(onNew)}
@@ -115,14 +115,14 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             {ready && user ? (
               <>
-                <span className="hidden max-w-[200px] truncate text-xs text-slate-500 sm:inline">
+                <span className="hidden max-w-[200px] truncate text-xs text-muted sm:inline">
                   {user.email}
                 </span>
                 <button
                   type="button"
                   onClick={() => void signOut()}
                   disabled={signingOut}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-lg border border-line px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink disabled:opacity-60"
                 >
                   {signingOut ? (
                     <>
@@ -138,7 +138,7 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
               <button
                 type="button"
                 onClick={() => setAuthOpen(true)}
-                className="rounded-lg bg-emerald-500 px-3 py-2 text-xs font-semibold text-slate-950 transition hover:bg-emerald-400"
+                className="rounded-lg bg-ink px-3 py-2 text-xs font-medium text-canvas transition-colors hover:bg-ink-soft"
               >
                 Sign in
               </button>
@@ -151,13 +151,13 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
         {showLanding ? (
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-400/80">
+              <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
                 Playground · MCQ Quiz
               </p>
-              <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <h1 className="mt-4 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
                 Paste MCQs. Ship a shareable quiz.
               </h1>
-              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-400">
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
                 Drop questions from ChatGPT, Claude, or your notes. OpenAI turns
                 them into a clean quiz, you save it, share a link, and see who
                 scored what — without building a form by hand.
@@ -166,19 +166,19 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                 <button
                   type="button"
                   onClick={() => setAuthOpen(true)}
-                  className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+                  className="rounded-lg bg-ink px-5 py-3 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft"
                 >
                   Sign in with Google
                 </button>
                 <Link
                   href="/playground"
-                  className="rounded-xl border border-white/10 px-5 py-3 text-sm font-medium text-slate-300 transition hover:border-white/20 hover:text-white"
+                  className="rounded-lg border border-line-strong bg-card px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-surface"
                 >
                   Back to Playground
                 </Link>
               </div>
 
-              <div className="mt-14 grid gap-4 sm:grid-cols-3">
+              <div className="mt-16 grid gap-5 sm:grid-cols-3">
                 {[
                   {
                     title: "Paste → parse",
@@ -195,12 +195,12 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+                    className="rounded-2xl border border-line bg-card p-6"
                   >
-                    <h2 className="text-sm font-semibold text-white">
+                    <h2 className="font-serif text-lg font-medium text-ink">
                       {item.title}
                     </h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
                       {item.body}
                     </p>
                   </div>
@@ -208,10 +208,10 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
               </div>
 
               <section className="mt-14">
-                <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                <h2 className="font-serif text-xl font-medium text-ink">
                   Why it exists
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                <p className="mt-3 text-base leading-relaxed text-ink-soft">
                   AI assistants spit out great practice questions — then they
                   die in a chat scroll. This playground keeps them alive as
                   quizzes you can actually hand to a classmate, hiree, or study
@@ -219,11 +219,11 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                 </p>
               </section>
 
-              <section className="mt-10 rounded-2xl border border-amber-400/20 bg-amber-400/5 px-5 py-4">
-                <h2 className="text-sm font-semibold text-amber-100">
+              <section className="mt-10 rounded-2xl border border-line bg-surface px-6 py-5">
+                <h2 className="font-serif text-lg font-medium text-ink">
                   What you&apos;ll need
                 </h2>
-                <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-amber-100/80 marker:text-amber-400/80">
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink-soft marker:text-accent">
                   <li>A Google account to sign in</li>
                   <li>
                     Your own OpenAI API key when you parse MCQs (stored only in
@@ -232,14 +232,14 @@ export function McqQuizShell({ children }: { children: React.ReactNode }) {
                 </ul>
               </section>
 
-              <div className="mt-12 border-t border-white/10 pt-8 text-center">
-                <p className="text-sm text-slate-500">
+              <div className="mt-16 border-t border-line pt-10 text-center">
+                <p className="text-sm text-muted">
                   Ready when you are — sign in with Google to get started.
                 </p>
                 <button
                   type="button"
                   onClick={() => setAuthOpen(true)}
-                  className="mt-4 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+                  className="mt-4 rounded-lg bg-ink px-5 py-3 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft"
                 >
                   Get started
                 </button>

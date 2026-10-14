@@ -31,7 +31,7 @@ export function DynamicQrShareBlock({
     void QRCode.toDataURL(shortUrl, {
       width: Math.max(size * 2, 280),
       margin: 2,
-      color: { dark: "#0f172a", light: "#ffffff" },
+      color: { dark: "#141413", light: "#ffffff" },
     })
       .then(setQrDataUrl)
       .catch(() => setQrDataUrl(null));
@@ -51,7 +51,7 @@ export function DynamicQrShareBlock({
   return (
     <div className="flex flex-col items-center gap-3">
       {qrDataUrl ? (
-        <div className="rounded-xl bg-white p-2.5">
+        <div className="rounded-xl border border-line bg-card p-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={qrDataUrl}
@@ -64,14 +64,14 @@ export function DynamicQrShareBlock({
         </div>
       ) : (
         <div
-          className="flex items-center justify-center rounded-xl bg-white/10 text-xs text-slate-500"
+          className="flex items-center justify-center rounded-xl border border-line bg-surface text-xs text-muted"
           style={{ width: size, height: size }}
         >
           …
         </div>
       )}
       {showUrl ? (
-        <p className="max-w-full break-all text-center text-[11px] leading-snug text-slate-500">
+        <p className="max-w-full break-all text-center text-[11px] leading-snug text-muted">
           {shortUrl}
         </p>
       ) : null}
@@ -81,7 +81,7 @@ export function DynamicQrShareBlock({
             type="button"
             onClick={() => void copyShortUrl()}
             disabled={copying}
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20 disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-line px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink disabled:opacity-60"
           >
             {copying ? <ButtonSpinner className="h-3.5 w-3.5" /> : null}
             {copying ? "Copying…" : copied ? "Copied" : "Copy link"}
@@ -90,7 +90,7 @@ export function DynamicQrShareBlock({
             <a
               href={qrDataUrl}
               download={`dynamic-qr-${slug}.png`}
-              className="rounded-lg border border-emerald-400/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-300"
+              className="rounded-lg border border-line-strong bg-card px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:bg-surface"
             >
               Download PNG
             </a>

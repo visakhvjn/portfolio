@@ -142,15 +142,15 @@ export function NewQuizMaker() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b border-white/5 px-4 py-2.5 sm:px-6">
+      <div className="shrink-0 border-b border-line px-4 py-2.5 sm:px-6">
         <div className="mx-auto flex max-w-[1600px] flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
-            <h1 className="text-sm font-semibold text-white">New Quiz</h1>
+            <h1 className="font-serif text-lg font-medium text-ink">New Quiz</h1>
             <button
               type="button"
               onClick={() => setInfoOpen(true)}
               aria-label="About MCQ Quiz"
-              className="rounded-full p-0.5 text-slate-500 transition hover:text-emerald-400"
+              className="rounded-full p-0.5 text-muted transition-colors hover:text-ink"
             >
               <svg
                 className="h-4 w-4"
@@ -176,12 +176,12 @@ export function NewQuizMaker() {
               placeholder="sk-… OpenAI key for parsing"
               autoComplete="off"
               spellCheck={false}
-              className="min-w-0 flex-1 rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-mono text-sm text-slate-200 placeholder:text-slate-600 focus:border-emerald-400/50 focus:outline-none"
+              className="min-w-0 flex-1 rounded-lg border border-line-strong bg-card px-3 py-2 font-mono text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
             <button
               type="button"
               onClick={() => setShowKey((v) => !v)}
-              className="shrink-0 rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white"
+              className="shrink-0 rounded-lg border border-line px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink"
             >
               {showKey ? "Hide" : "Show"}
             </button>
@@ -190,17 +190,17 @@ export function NewQuizMaker() {
       </div>
 
       <div className="mx-auto grid min-h-0 w-full max-w-[1600px] flex-1 grid-cols-1 overflow-hidden lg:grid-cols-2">
-        <section className="flex h-full min-h-0 flex-col overflow-hidden border-white/10 lg:border-r">
-          <div className="shrink-0 space-y-3 border-b border-white/5 px-4 py-3 sm:px-5">
+        <section className="flex h-full min-h-0 flex-col overflow-hidden border-line lg:border-r">
+          <div className="shrink-0 space-y-3 border-b border-line px-4 py-3 sm:px-5">
             <label className="block">
-              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+              <span className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
                 Title
               </span>
               <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Quiz title"
-                className="mt-1.5 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-400/50 focus:outline-none"
+                className="mt-1.5 w-full rounded-lg border border-line-strong bg-card px-3 py-2 text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
               />
             </label>
           </div>
@@ -209,24 +209,24 @@ export function NewQuizMaker() {
               value={raw}
               onChange={(e) => setRaw(e.target.value)}
               placeholder={`Paste MCQs from any AI assistant, e.g.\n\n1. What is…?\nA) …\nB) …\nC) …\nD) …\nAnswer: B`}
-              className="h-full min-h-[240px] w-full resize-none rounded-xl border border-white/10 bg-white/5 px-3.5 py-3 font-mono text-sm leading-relaxed text-slate-100 placeholder:text-slate-600 focus:border-emerald-400/50 focus:outline-none"
+              className="h-full min-h-[240px] w-full resize-none rounded-lg border border-line-strong bg-card px-3.5 py-3 font-mono text-sm leading-relaxed text-ink placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
           </div>
-          <div className="shrink-0 space-y-2 border-t border-white/10 p-3 sm:p-4">
+          <div className="shrink-0 space-y-2 border-t border-line p-3 sm:p-4">
             {error ? (
-              <p className="text-sm text-rose-300" role="alert">
+              <p className="text-sm text-red-700" role="alert">
                 {error}
               </p>
             ) : null}
             {shareUrl ? (
-              <p className="break-all text-sm text-emerald-300/90">
+              <p className="break-all text-sm text-green-800">
                 Saved. Share:{" "}
                 <a href={shareUrl} className="underline">
                   {shareUrl}
                 </a>
                 <button
                   type="button"
-                  className="ml-2 text-xs text-slate-400 hover:text-emerald-400"
+                  className="ml-2 text-xs text-muted hover:text-ink"
                   onClick={() => void navigator.clipboard.writeText(shareUrl)}
                 >
                   Copy
@@ -238,7 +238,7 @@ export function NewQuizMaker() {
                 type="button"
                 onClick={() => void parseWithOpenAi()}
                 disabled={parsing}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft disabled:opacity-50"
               >
                 {parsing ? <ButtonSpinner className="h-4 w-4" /> : null}
                 {parsing ? "Parsing with AI…" : "Parse with OpenAI"}
@@ -247,7 +247,7 @@ export function NewQuizMaker() {
                 type="button"
                 onClick={() => void saveQuiz()}
                 disabled={saving || questions.length === 0}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-4 py-2.5 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-500/20 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-line-strong bg-card px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface disabled:opacity-50"
               >
                 {saving ? <ButtonSpinner className="h-4 w-4" /> : null}
                 {saving ? "Saving…" : "Save & get share link"}
@@ -257,8 +257,8 @@ export function NewQuizMaker() {
         </section>
 
         <section className="flex h-full min-h-0 flex-col overflow-hidden">
-          <div className="shrink-0 border-b border-white/5 px-4 py-2.5 sm:px-5">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+          <div className="shrink-0 border-b border-line px-4 py-2.5 sm:px-5">
+            <h2 className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
               Quiz preview
             </h2>
           </div>
@@ -274,9 +274,9 @@ export function NewQuizMaker() {
         title="About MCQ Quiz"
         wide
       >
-        <div className="space-y-5 text-sm leading-relaxed text-slate-300">
+        <div className="space-y-5 text-sm leading-relaxed text-ink-soft">
           <section>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+            <h4 className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
               What this is
             </h4>
             <p className="mt-2">
@@ -286,10 +286,10 @@ export function NewQuizMaker() {
             </p>
           </section>
           <section>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+            <h4 className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
               How to use
             </h4>
-            <ol className="mt-2 list-decimal space-y-1.5 pl-5 marker:text-emerald-400/80">
+            <ol className="mt-2 list-decimal space-y-1.5 pl-5 marker:text-accent">
               <li>Sign in with Google.</li>
               <li>Paste your OpenAI key (stored in your browser only).</li>
               <li>Paste MCQ text → Parse with OpenAI → review preview.</li>

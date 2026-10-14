@@ -18,9 +18,9 @@ type TestimonialSliderProps = {
 
 function sourceBadgeClass(source?: string): string {
   if (source === "LinkedIn") {
-    return "bg-[#0A66C2]/25 text-sky-200";
+    return "border border-line bg-surface text-ink-soft";
   }
-  return "bg-emerald-500/15 text-emerald-300/90";
+  return "bg-accent-soft text-accent-strong";
 }
 
 export function TestimonialSlider({
@@ -81,14 +81,14 @@ export function TestimonialSlider({
 
   return (
     <div
-      className={embedded ? "mt-6 border-t border-white/10 pt-6" : showControls ? "mt-10" : "mt-0"}
+      className={embedded ? "mt-6 border-t border-line pt-6" : "mt-0"}
     >
       {(embedded || showControls) && (
         <div className="flex items-center justify-between gap-3">
           <h4
             className={
               embedded
-                ? "text-sm font-semibold uppercase tracking-wider text-slate-500"
+                ? "text-xs font-medium uppercase tracking-[0.14em] text-muted"
                 : "sr-only"
             }
           >
@@ -101,7 +101,7 @@ export function TestimonialSlider({
                 aria-label="Previous review"
                 disabled={!canScrollLeft}
                 onClick={() => scrollBy(-1)}
-                className="rounded-lg border border-white/10 p-1.5 text-slate-400 transition hover:bg-white/5 hover:text-white disabled:pointer-events-none disabled:opacity-30"
+                className="rounded-full border border-line-strong bg-card p-2 text-ink-soft transition hover:bg-surface hover:text-ink disabled:pointer-events-none disabled:opacity-30"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -112,7 +112,7 @@ export function TestimonialSlider({
                 aria-label="Next review"
                 disabled={!canScrollRight}
                 onClick={() => scrollBy(1)}
-                className="rounded-lg border border-white/10 p-1.5 text-slate-400 transition hover:bg-white/5 hover:text-white disabled:pointer-events-none disabled:opacity-30"
+                className="rounded-full border border-line-strong bg-card p-2 text-ink-soft transition hover:bg-surface hover:text-ink disabled:pointer-events-none disabled:opacity-30"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -125,7 +125,7 @@ export function TestimonialSlider({
 
       <div
         ref={scrollRef}
-        className={`${embedded || showControls ? "mt-4" : "mt-0"} flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 scroll-smooth [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.15)_transparent] ${
+        className={`${embedded || showControls ? "mt-4" : "mt-0"} flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
           embedded ? "-mx-5 px-5" : "-mx-4 px-4 sm:-mx-6 sm:px-6"
         }`}
         aria-label={ariaLabel}
@@ -134,12 +134,12 @@ export function TestimonialSlider({
           <article
             key={item.id}
             data-testimonial-card
-            className={`${cardWidth} shrink-0 snap-center rounded-xl border border-white/10 bg-white/[0.03] p-4 sm:p-5`}
+            className={`${cardWidth} flex shrink-0 snap-center flex-col rounded-2xl border border-line bg-card p-5 sm:p-6`}
           >
-            <p className="text-sm leading-relaxed text-slate-300">&ldquo;{item.review}&rdquo;</p>
-            <footer className="mt-4 border-t border-white/5 pt-3">
+            <p className="flex-1 font-serif text-base leading-relaxed text-ink-soft">&ldquo;{item.review}&rdquo;</p>
+            <footer className="mt-5 border-t border-line pt-4">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm font-semibold text-white">{item.clientName}</span>
+                <span className="text-sm font-medium text-ink">{item.clientName}</span>
                 {item.source && (
                   <span
                     className={`rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${sourceBadgeClass(item.source)}`}
@@ -149,10 +149,10 @@ export function TestimonialSlider({
                 )}
               </div>
               {item.headline && (
-                <p className="mt-1 line-clamp-2 text-xs text-slate-400">{item.headline}</p>
+                <p className="mt-1 line-clamp-2 text-xs text-muted">{item.headline}</p>
               )}
               {(item.relationship || item.location || item.gig) && (
-                <p className="mt-1 text-xs text-slate-500">
+                <p className="mt-1 text-xs text-faint">
                   {[item.relationship, item.location, item.gig].filter(Boolean).join(" · ")}
                 </p>
               )}

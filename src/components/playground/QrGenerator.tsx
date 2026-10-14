@@ -57,7 +57,7 @@ export function QrGenerator() {
         width: 512,
         margin: 2,
         color: {
-          dark: "#0f172a",
+          dark: "#141413",
           light: "#ffffff",
         },
       });
@@ -74,18 +74,18 @@ export function QrGenerator() {
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
-      <div className="flex items-center gap-2 text-sm text-slate-500">
-        <Link href="/playground" className="hover:text-emerald-400">
+      <div className="flex items-center gap-2 text-sm text-muted">
+        <Link href="/playground" className="hover:text-ink">
           Playground
         </Link>
         <span aria-hidden>/</span>
-        <span className="inline-flex items-center gap-1.5 text-slate-300">
+        <span className="inline-flex items-center gap-1.5 text-ink-soft">
           QR Generator
           <button
             type="button"
             onClick={() => setInfoOpen(true)}
             aria-label="About QR Generator"
-            className="rounded-full p-0.5 text-slate-500 transition hover:text-emerald-400"
+            className="rounded-full p-0.5 text-muted transition-colors hover:text-ink"
           >
             <svg
               className="h-4 w-4"
@@ -104,13 +104,13 @@ export function QrGenerator() {
           </button>
         </span>
       </div>
-      <p className="mt-1 text-sm text-slate-400">
+      <p className="mt-1 text-sm text-muted">
         Paste a URL, generate a QR, download the PNG.
       </p>
       <div className="mt-3">
         <Link
           href="/playground/qr-generator/about"
-          className="inline-flex rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white"
+          className="inline-flex rounded-lg border border-line px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink"
         >
           About this project
         </Link>
@@ -129,19 +129,19 @@ export function QrGenerator() {
             placeholder="https://example.com"
             autoComplete="off"
             spellCheck={false}
-            className="min-w-0 flex-1 rounded-xl border border-white/10 bg-white/5 px-3.5 py-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-400/50 focus:outline-none"
+            className="min-w-0 flex-1 rounded-lg border border-line-strong bg-card px-3.5 py-3 text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? <ButtonSpinner className="h-4 w-4" /> : null}
             {loading ? "Generating…" : "Generate"}
           </button>
         </div>
         {error ? (
-          <p className="text-sm text-rose-300" role="alert">
+          <p className="text-sm text-red-700" role="alert">
             {error}
           </p>
         ) : null}
@@ -149,9 +149,9 @@ export function QrGenerator() {
 
       <div className="mt-8">
         {dataUrl && encodedUrl ? (
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+          <div className="rounded-2xl border border-line bg-card p-6">
             <div className="flex flex-col items-center gap-5">
-              <div className="rounded-xl bg-white p-4 shadow-lg shadow-black/20">
+              <div className="rounded-xl border border-line bg-card p-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={dataUrl}
@@ -161,10 +161,10 @@ export function QrGenerator() {
                   className="h-64 w-64"
                 />
               </div>
-              <p className="max-w-md break-all text-center text-xs text-slate-500">
+              <p className="max-w-md break-all text-center text-xs text-muted">
                 {encodedUrl}
               </p>
-              <p className="max-w-sm text-center text-sm text-slate-400">
+              <p className="max-w-sm text-center text-sm text-muted">
                 Generating another QR replaces this preview. Downloads you already
                 saved stay on your device.
               </p>
@@ -173,14 +173,14 @@ export function QrGenerator() {
                 onClick={() =>
                   downloadPng(dataUrl, `qr-${Date.now()}.png`)
                 }
-                className="rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-300 transition hover:border-emerald-400/60 hover:bg-emerald-500/20"
+                className="rounded-lg border border-line-strong bg-card px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface"
               >
                 Download PNG
               </button>
             </div>
           </div>
         ) : (
-          <div className="flex min-h-48 items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-6 text-center text-sm text-slate-500">
+          <div className="flex min-h-48 items-center justify-center rounded-2xl border border-dashed border-line-strong bg-surface px-6 text-center text-sm text-muted">
             Your QR will show up here once you generate one.
           </div>
         )}
@@ -192,9 +192,9 @@ export function QrGenerator() {
         title="About QR Generator"
         wide
       >
-        <div className="space-y-5 text-sm leading-relaxed text-slate-300">
+        <div className="space-y-5 text-sm leading-relaxed text-ink-soft">
           <section>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+            <h4 className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
               What this is
             </h4>
             <p className="mt-2">
@@ -205,10 +205,10 @@ export function QrGenerator() {
           </section>
 
           <section>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+            <h4 className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
               How it helps day to day
             </h4>
-            <ul className="mt-2 list-disc space-y-1.5 pl-5 marker:text-emerald-400/80">
+            <ul className="mt-2 list-disc space-y-1.5 pl-5 marker:text-accent">
               <li>Put a link on a slide, poster, or business card</li>
               <li>Share a portfolio, menu, or Wi‑Fi signup page in one scan</li>
               <li>Skip the signup walls on commercial QR tools</li>
@@ -216,10 +216,10 @@ export function QrGenerator() {
           </section>
 
           <section>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+            <h4 className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
               How to use it
             </h4>
-            <ol className="mt-2 list-decimal space-y-1.5 pl-5 marker:text-emerald-400/80">
+            <ol className="mt-2 list-decimal space-y-1.5 pl-5 marker:text-accent">
               <li>Paste a URL (with or without https://).</li>
               <li>Hit Generate and check the preview.</li>
               <li>Download the PNG when you&apos;re happy.</li>

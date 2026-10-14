@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { PersonJsonLd } from "@/components/PersonJsonLd";
@@ -8,8 +8,14 @@ import { WebSiteJsonLd } from "@/components/WebSiteJsonLd";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
   display: "swap",
 });
@@ -47,8 +53,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} h-full`}>
-      <body className="mesh-bg min-h-full antialiased">
+    <html
+      lang="en"
+      className={`${inter.variable} ${sourceSerif.variable} h-full`}
+    >
+      <body className="min-h-full bg-canvas text-ink antialiased">
         <PersonJsonLd />
         <WebSiteJsonLd />
         <WebMcpProvider>{children}</WebMcpProvider>

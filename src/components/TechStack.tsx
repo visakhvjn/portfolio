@@ -6,55 +6,40 @@ import { SectionHeading } from "./SectionHeading";
 
 export function TechStack() {
   return (
-    <section className="py-10 sm:py-14">
-      <AnimateIn>
-        <SectionHeading
-          id="skills"
-          title="Skills"
-          subtitle="Stacks I use across full-stack, cloud, and AI work."
-        />
-      </AnimateIn>
+    <section className="py-16 sm:py-24">
+      <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
+        <AnimateIn className="lg:sticky lg:top-28 lg:self-start">
+          <SectionHeading
+            id="skills"
+            eyebrow="01 — Skills"
+            title="What I work with"
+            subtitle="Stacks I use across full-stack, cloud, and AI work."
+          />
+        </AnimateIn>
 
-      <AnimateIn delay={60}>
-        <div className="mt-6 overflow-x-auto rounded-xl border border-white/10">
-          <table className="w-full min-w-[32rem] border-collapse text-left text-sm">
-            <thead>
-              <tr className="border-b border-white/10 bg-white/[0.04]">
-                <th
-                  scope="col"
-                  className="whitespace-nowrap px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-emerald-400/90 sm:px-5 sm:w-48"
-                >
-                  Area
-                </th>
-                <th
-                  scope="col"
-                  className="px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-slate-500 sm:px-5"
-                >
-                  Technologies
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {skillCategories.map((category) => (
-                <tr
-                  key={category.title}
-                  className="border-b border-white/10 last:border-b-0 hover:bg-white/[0.02]"
-                >
-                  <th
-                    scope="row"
-                    className="whitespace-nowrap align-top px-4 py-2.5 font-medium text-slate-300 sm:px-5"
-                  >
-                    {category.title}
-                  </th>
-                  <td className="px-4 py-2.5 leading-snug text-slate-400 sm:px-5">
-                    {category.items.join(" · ")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </AnimateIn>
+        <AnimateIn delay={60}>
+          <dl className="divide-y divide-line border-y border-line">
+            {skillCategories.map((category) => (
+              <div
+                key={category.title}
+                className="grid gap-3 py-6 sm:grid-cols-[12rem_1fr] sm:gap-6"
+              >
+                <dt className="text-sm font-medium text-ink">{category.title}</dt>
+                <dd className="flex flex-wrap gap-2">
+                  {category.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-line bg-card px-3 py-1 text-sm text-ink-soft"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </AnimateIn>
+      </div>
     </section>
   );
 }

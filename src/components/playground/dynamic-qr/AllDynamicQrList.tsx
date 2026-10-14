@@ -90,7 +90,7 @@ export function AllDynamicQrList() {
 
   if (loading) {
     return (
-      <div className="flex h-full items-center justify-center text-sm text-slate-500">
+      <div className="flex h-full items-center justify-center text-sm text-muted">
         Loading…
       </div>
     );
@@ -98,7 +98,7 @@ export function AllDynamicQrList() {
 
   if (error) {
     return (
-      <div className="flex h-full items-center justify-center px-4 text-sm text-rose-300">
+      <div className="flex h-full items-center justify-center px-4 text-sm text-red-700">
         {error}
       </div>
     );
@@ -108,25 +108,25 @@ export function AllDynamicQrList() {
     <div className="h-full overflow-y-auto px-4 py-6 sm:px-6">
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center justify-between gap-3">
-          <h1 className="text-xl font-semibold text-white">All QRs</h1>
+          <h1 className="font-serif text-3xl font-medium tracking-tight text-ink">All QRs</h1>
           <Link
             href="/playground/dynamic-qr/new"
-            className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+            className="rounded-lg bg-ink px-3 py-2 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft"
           >
             New QR
           </Link>
         </div>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-muted">
           Every QR you create lives here — copy the link or download the PNG
           again anytime.
         </p>
 
         {items.length === 0 ? (
-          <div className="mt-8 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-6 py-10 text-center text-sm text-slate-500">
+          <div className="mt-8 rounded-2xl border border-dashed border-line-strong bg-surface px-6 py-10 text-center text-sm text-muted">
             No dynamic QRs yet.{" "}
             <Link
               href="/playground/dynamic-qr/new"
-              className="text-emerald-400 hover:underline"
+              className="text-accent-strong underline-offset-4 hover:underline"
             >
               Create one
             </Link>{" "}
@@ -136,7 +136,7 @@ export function AllDynamicQrList() {
           <ul className="mt-4 space-y-3">
             {items.map((item) => (
               <li key={item.id}>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 sm:p-4">
+                <div className="rounded-2xl border border-line bg-card p-3.5 sm:p-4">
                   <div className="flex items-start gap-4">
                     <div className="shrink-0">
                       <DynamicQrShareBlock
@@ -151,14 +151,14 @@ export function AllDynamicQrList() {
                         href={`/playground/dynamic-qr/${item.slug}`}
                         className="block transition hover:opacity-90"
                       >
-                        <h2 className="line-clamp-1 font-semibold text-white">{item.title}</h2>
-                        <p className="mt-1 truncate text-xs text-slate-500">
+                        <h2 className="line-clamp-1 font-serif text-lg font-medium text-ink">{item.title}</h2>
+                        <p className="mt-1 truncate text-xs text-muted">
                           → {item.destination_url}
                         </p>
-                        <p className="mt-1.5 truncate text-xs text-slate-500">
+                        <p className="mt-1.5 truncate text-xs text-muted">
                           {shortUrl(item.slug)}
                         </p>
-                        <p className="mt-1.5 text-xs text-slate-500">
+                        <p className="mt-1.5 text-xs text-muted">
                           {item.scan_count} scan
                           {item.scan_count === 1 ? "" : "s"} ·{" "}
                           {new Date(item.created_at).toLocaleDateString()}
@@ -169,7 +169,7 @@ export function AllDynamicQrList() {
                           type="button"
                           onClick={() => void copyShortUrl(item.slug)}
                           disabled={copyingSlug === item.slug}
-                          className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20 disabled:opacity-60"
+                          className="inline-flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink disabled:opacity-60"
                         >
                           {copyingSlug === item.slug ? (
                             <ButtonSpinner className="h-3.5 w-3.5" />
@@ -182,7 +182,7 @@ export function AllDynamicQrList() {
                         </button>
                         <Link
                           href={`/playground/dynamic-qr/${item.slug}`}
-                          className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-white/20"
+                          className="rounded-lg border border-line px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink"
                         >
                           Analytics
                         </Link>
