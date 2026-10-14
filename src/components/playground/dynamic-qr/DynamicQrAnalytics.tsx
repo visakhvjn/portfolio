@@ -101,7 +101,7 @@ export function DynamicQrAnalytics({ slug }: Props) {
 
   if (loading) {
     return (
-      <div className="flex h-full items-center justify-center text-sm text-slate-500">
+      <div className="flex h-full items-center justify-center text-sm text-muted">
         Loading analytics…
       </div>
     );
@@ -110,8 +110,8 @@ export function DynamicQrAnalytics({ slug }: Props) {
   if (error && !link) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center">
-        <p className="text-sm text-rose-300">{error}</p>
-        <Link href="/playground/dynamic-qr" className="text-sm text-emerald-400">
+        <p className="text-sm text-red-700">{error}</p>
+        <Link href="/playground/dynamic-qr" className="text-sm text-accent-strong underline-offset-4 hover:underline">
           All QRs
         </Link>
       </div>
@@ -132,43 +132,43 @@ export function DynamicQrAnalytics({ slug }: Props) {
       <div className="mx-auto max-w-4xl">
         <Link
           href="/playground/dynamic-qr"
-          className="text-sm text-slate-500 hover:text-emerald-400"
+          className="text-sm text-muted hover:text-ink"
         >
           ← All QRs
         </Link>
-        <h1 className="mt-3 text-2xl font-semibold text-white">{link.title}</h1>
-        <p className="mt-1 break-all text-sm text-slate-500">{shortUrl}</p>
-        <p className="mt-4 text-3xl font-bold text-white">
+        <h1 className="mt-3 font-serif text-3xl font-medium tracking-tight text-ink">{link.title}</h1>
+        <p className="mt-1 break-all text-sm text-muted">{shortUrl}</p>
+        <p className="mt-6 font-serif text-4xl font-medium text-ink">
           {total}{" "}
-          <span className="text-lg font-normal text-slate-500">total scans</span>
+          <span className="font-sans text-base font-normal text-muted">total scans</span>
         </p>
 
         {error ? (
-          <p className="mt-4 text-sm text-rose-300" role="alert">
+          <p className="mt-4 text-sm text-red-700" role="alert">
             {error}
           </p>
         ) : null}
         {message ? (
-          <p className="mt-4 text-sm text-emerald-300/90" role="status">
+          <p className="mt-4 text-sm text-green-800" role="status">
             {message}
           </p>
         ) : null}
 
-        <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-          <label className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+        <div className="mt-8 rounded-2xl border border-line bg-card p-4">
+          <label className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
             Destination (editable)
           </label>
           <div className="mt-2 flex flex-col gap-2 sm:flex-row">
             <input
               value={destinationEdit}
               onChange={(e) => setDestinationEdit(e.target.value)}
-              className="min-w-0 flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-100 focus:border-emerald-400/50 focus:outline-none"
+              className="min-w-0 flex-1 rounded-lg border border-line-strong bg-card px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
             <button
               type="button"
               onClick={() => void saveDestination()}
               disabled={saving}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft disabled:opacity-50"
             >
               {saving ? <ButtonSpinner className="h-4 w-4" /> : null}
               {saving ? "Saving…" : "Update URL"}
@@ -206,21 +206,21 @@ export function DynamicQrAnalytics({ slug }: Props) {
         </div>
 
         <section className="mt-8">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+          <h2 className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
             Recent scans
           </h2>
           {scans.length === 0 ? (
-            <p className="mt-4 text-sm text-slate-500">
+            <p className="mt-4 text-sm text-muted">
               No scans yet. Share the short link or print the QR.
             </p>
           ) : (
-            <ul className="mt-4 divide-y divide-white/10 rounded-2xl border border-white/10">
+            <ul className="mt-4 divide-y divide-line rounded-2xl border border-line">
               {scans.slice(0, 25).map((scan) => (
                 <li
                   key={scan.id}
                   className="flex flex-col gap-1 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="text-slate-300">
+                  <div className="text-ink-soft">
                     {[scan.device_type, scan.os_name, scan.browser_name]
                       .filter(Boolean)
                       .join(" · ") || "Device unknown"}{" "}
@@ -233,7 +233,7 @@ export function DynamicQrAnalytics({ slug }: Props) {
                       .filter(Boolean)
                       .join(", ") || "Location unknown"}
                   </div>
-                  <time className="text-xs text-slate-500">
+                  <time className="text-xs text-muted">
                     {new Date(scan.scanned_at).toLocaleString()}
                   </time>
                 </li>

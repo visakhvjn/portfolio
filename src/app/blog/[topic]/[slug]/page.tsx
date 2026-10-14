@@ -61,50 +61,55 @@ export default async function BlogPostPage({ params }: PostPageProps) {
   const related = siblings.slice(0, 2);
 
   return (
-    <article className="py-8 sm:py-12">
-      <header className="mx-auto max-w-3xl">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
+    <article className="py-10 sm:py-16">
+      <header className="mx-auto max-w-2xl">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
           <Link
             href={`/blog/${post.topic}`}
-            className="font-medium uppercase tracking-[0.14em] text-emerald-400/90 transition hover:text-emerald-300"
+            className="text-xs font-medium uppercase tracking-[0.14em] text-accent-strong underline-offset-4 transition hover:text-ink hover:underline"
           >
             {post.topicTitle}
           </Link>
           {formattedDate ? (
-            <time dateTime={post.date}>{formattedDate}</time>
+            <>
+              <time dateTime={post.date}>{formattedDate}</time>
+              <span aria-hidden className="text-faint">
+                ·
+              </span>
+            </>
           ) : null}
           <span>{post.readingMinutes} min read</span>
         </div>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl sm:leading-tight">
+        <h1 className="mt-5 font-serif text-4xl font-medium leading-tight tracking-tight text-ink sm:text-5xl">
           {post.title}
         </h1>
         {post.description ? (
-          <p className="mt-5 text-lg leading-relaxed text-slate-400">
+          <p className="mt-6 text-xl leading-relaxed text-muted">
             {post.description}
           </p>
         ) : null}
       </header>
 
-      <div className="mx-auto mt-10 max-w-3xl">
+      <div className="mx-auto mt-12 max-w-2xl border-t border-line pt-10">
         <Markdown content={post.content} />
       </div>
 
       {related.length > 0 ? (
-        <aside className="mx-auto mt-16 max-w-3xl border-t border-white/10 pt-10">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+        <aside className="mx-auto mt-20 max-w-2xl border-t border-line pt-10">
+          <h2 className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
             More in {post.topicTitle}
           </h2>
-          <ul className="mt-4 space-y-3">
+          <ul className="mt-4 divide-y divide-line">
             {related.map((item) => (
               <li key={item.slug}>
                 <Link
                   href={`/blog/${item.topic}/${item.slug}`}
-                  className="group flex items-baseline justify-between gap-4 rounded-xl border border-transparent px-1 py-2 transition hover:border-white/10 hover:bg-white/[0.03]"
+                  className="group flex items-baseline justify-between gap-4 py-4"
                 >
-                  <span className="font-medium text-slate-200 transition group-hover:text-emerald-300">
+                  <span className="font-serif text-lg font-medium text-ink transition group-hover:text-accent-strong">
                     {item.title}
                   </span>
-                  <span className="shrink-0 text-xs text-slate-500">
+                  <span className="shrink-0 text-xs text-muted">
                     {item.readingMinutes} min
                   </span>
                 </Link>

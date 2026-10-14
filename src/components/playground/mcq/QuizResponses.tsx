@@ -112,7 +112,7 @@ export function QuizResponses({ slug }: Props) {
 
   if (loading) {
     return (
-      <div className="flex h-full items-center justify-center text-sm text-slate-500">
+      <div className="flex h-full items-center justify-center text-sm text-muted">
         Loading responses…
       </div>
     );
@@ -121,10 +121,10 @@ export function QuizResponses({ slug }: Props) {
   if (error) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center">
-        <p className="text-sm text-rose-300">{error}</p>
+        <p className="text-sm text-red-700">{error}</p>
         <Link
           href="/playground/mcq-quiz"
-          className="text-sm text-emerald-400 hover:underline"
+          className="text-sm text-accent-strong underline-offset-4 hover:underline"
         >
           All Quizzes
         </Link>
@@ -137,19 +137,19 @@ export function QuizResponses({ slug }: Props) {
       <div className="mx-auto max-w-3xl">
         <Link
           href="/playground/mcq-quiz"
-          className="text-sm text-slate-500 hover:text-emerald-400"
+          className="text-sm text-muted hover:text-ink"
         >
           ← All Quizzes
         </Link>
-        <h1 className="mt-3 text-2xl font-semibold text-white">
+        <h1 className="mt-3 font-serif text-3xl font-medium tracking-tight text-ink">
           {quiz?.title}
         </h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-muted">
           {attempts.length} response{attempts.length === 1 ? "" : "s"}
         </p>
 
         {attempts.length === 0 ? (
-          <div className="mt-8 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-6 py-10 text-center text-sm text-slate-500">
+          <div className="mt-8 rounded-2xl border border-dashed border-line-strong bg-surface px-6 py-10 text-center text-sm text-muted">
             No responses yet. Share the take link and wait for submissions.
           </div>
         ) : (
@@ -159,7 +159,7 @@ export function QuizResponses({ slug }: Props) {
               return (
                 <li
                   key={attempt.id}
-                  className="rounded-2xl border border-white/10 bg-white/[0.03]"
+                  className="rounded-2xl border border-line bg-card"
                 >
                   <button
                     type="button"
@@ -171,30 +171,30 @@ export function QuizResponses({ slug }: Props) {
                     className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
                   >
                     <div>
-                      <p className="text-sm font-medium text-white">
+                      <p className="text-sm font-medium text-ink">
                         {attempt.taker_email || attempt.taker_id.slice(0, 8)}
                       </p>
-                      <p className="mt-0.5 text-xs text-slate-500">
+                      <p className="mt-0.5 text-xs text-muted">
                         {new Date(attempt.created_at).toLocaleString()}
                       </p>
                     </div>
-                    <p className="text-sm font-semibold text-emerald-300">
+                    <p className="text-sm font-medium text-ink">
                       {attempt.score}/{attempt.total}
                     </p>
                   </button>
                   {open ? (
-                    <div className="space-y-3 border-t border-white/10 px-4 py-4">
+                    <div className="space-y-3 border-t border-line px-4 py-4">
                       {attempt.answers.map((a) => {
                         const selected = a.options[a.selected_index];
                         const correct = a.options[a.correct_index];
                         const ok = a.selected_index === a.correct_index;
                         return (
                           <div key={a.id} className="text-sm">
-                            <p className="font-medium text-slate-200">
+                            <p className="font-medium text-ink">
                               {a.prompt}
                             </p>
                             <p
-                              className={`mt-1 ${ok ? "text-emerald-300/90" : "text-rose-300/90"}`}
+                              className={`mt-1 ${ok ? "text-green-800" : "text-red-700"}`}
                             >
                               Selected: {selected ?? "—"}
                               {!ok ? ` · Correct: ${correct ?? "—"}` : ""}

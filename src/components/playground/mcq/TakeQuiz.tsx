@@ -121,7 +121,7 @@ export function TakeQuiz({ slug }: TakeQuizProps) {
 
   if (loading) {
     return (
-      <div className="flex h-full items-center justify-center text-sm text-slate-500">
+      <div className="flex h-full items-center justify-center text-sm text-muted">
         Loading quiz…
       </div>
     );
@@ -130,10 +130,10 @@ export function TakeQuiz({ slug }: TakeQuizProps) {
   if (error && !quiz) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center">
-        <p className="text-sm text-rose-300">{error}</p>
+        <p className="text-sm text-red-700">{error}</p>
         <Link
           href="/playground/mcq-quiz"
-          className="text-sm text-emerald-400 hover:underline"
+          className="text-sm text-accent-strong underline-offset-4 hover:underline"
         >
           Back to quizzes
         </Link>
@@ -144,28 +144,28 @@ export function TakeQuiz({ slug }: TakeQuizProps) {
   return (
     <div className="h-full overflow-y-auto px-4 py-6 sm:px-6">
       <div className="mx-auto max-w-2xl">
-        <h1 className="text-2xl font-semibold text-white">
+        <h1 className="font-serif text-3xl font-medium tracking-tight text-ink">
           {quiz?.title ?? "Quiz"}
         </h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-muted">
           Answer every question, then submit. Your score is recorded.
         </p>
 
         {error ? (
-          <p className="mt-4 text-sm text-rose-300" role="alert">
+          <p className="mt-4 text-sm text-red-700" role="alert">
             {error}
           </p>
         ) : null}
 
         {done ? (
-          <div className="mt-8 rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-6 text-center">
-            <p className="text-sm text-emerald-200/90">Submitted</p>
-            <p className="mt-2 text-3xl font-bold text-white">
+          <div className="mt-8 rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
+            <p className="text-xs font-medium uppercase tracking-[0.14em] text-green-800">Submitted</p>
+            <p className="mt-3 font-serif text-4xl font-medium text-ink">
               {done.score}/{done.total}
             </p>
             <Link
               href="/playground/mcq-quiz"
-              className="mt-4 inline-block text-sm text-emerald-400 hover:underline"
+              className="mt-4 inline-block text-sm text-accent-strong underline-offset-4 hover:underline"
             >
               Done
             </Link>

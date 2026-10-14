@@ -49,30 +49,30 @@ export default async function BlogTopicPage({ params }: TopicPageProps) {
   const posts = getPostsByTopic(topic.slug);
 
   return (
-    <div className="py-8 sm:py-12">
+    <div className="mx-auto max-w-3xl py-10 sm:py-16">
       <Link
         href="/blog"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 transition hover:text-emerald-400"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition hover:text-ink"
       >
         <span aria-hidden>←</span> All posts
       </Link>
 
-      <header className="mt-6 max-w-3xl">
-        <p className="text-sm font-medium uppercase tracking-[0.16em] text-emerald-400/90">
+      <header className="mt-8">
+        <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
           Topic
         </p>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h1 className="mt-3 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
           {topic.title}
         </h1>
         {topic.description ? (
-          <p className="mt-4 text-lg leading-relaxed text-slate-400">
+          <p className="mt-5 text-lg leading-relaxed text-ink-soft">
             {topic.description}
           </p>
         ) : null}
       </header>
 
       {posts.length > 0 ? (
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+        <ul className="mt-12 divide-y divide-line border-y border-line">
           {posts.map((post) => (
             <li key={post.slug}>
               <BlogPostCard post={post} showTopic={false} />
@@ -80,13 +80,13 @@ export default async function BlogTopicPage({ params }: TopicPageProps) {
           ))}
         </ul>
       ) : (
-        <p className="mt-10 text-slate-400">
+        <p className="mt-12 text-ink-soft">
           No posts in this topic yet. Add a{" "}
-          <code className="rounded-md border border-white/10 bg-white/5 px-1.5 py-0.5 font-mono text-sm text-emerald-300">
+          <code className="rounded bg-surface px-1 font-mono text-sm text-accent-strong">
             .md
           </code>{" "}
           file under{" "}
-          <code className="rounded-md border border-white/10 bg-white/5 px-1.5 py-0.5 font-mono text-sm text-emerald-300">
+          <code className="rounded bg-surface px-1 font-mono text-sm text-accent-strong">
             blog/{topic.slug}/
           </code>
           .

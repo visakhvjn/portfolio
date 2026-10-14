@@ -138,6 +138,35 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "query-lab",
+    heading: "Query Lab",
+    type: "personal",
+    featured: true,
+    summary:
+      "Daily SQL practice on real-feeling Postgres databases — a fresh AI-generated schema every day with ten challenges across joins, filters, and aggregates, and instant answer checking.",
+    resumeLine:
+      "SQL practice platform with AI-generated daily Postgres schemas, ten graded challenges, and instant query feedback.",
+    reason:
+      "Most SQL practice replays the same toy tables until you memorise the answers instead of learning to think in queries. Query Lab is built to feel like working against a real database: every day OpenAI designs a new connected world of three to five related tables—a bookstore, a clinic, a fleet—with primary keys, foreign keys, and realistic seed rows, and the app provisions it in Postgres. You explore the schema, write joins, filters, and aggregates by hand across ten challenges, and run your answer to get instant feedback on whether it is correct. The framing is a daily gym for SQL: short sessions, unfamiliar schemas, and skills that grow from habit rather than from repeating one worksheet.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "PostgreSQL",
+      "OpenAI",
+      "Vercel",
+    ],
+    thumbnail: "/images/projects/query-lab.png",
+    demoUrl: "https://query-lab-mu.vercel.app/",
+    repoUrl: "https://github.com/visakhvjn/query-lab",
+    futureWork: [
+      "Streaks and progress history across daily challenges",
+      "Hints and explained solutions after attempts",
+      "Difficulty tracks for window functions and CTEs",
+    ],
+  },
+  {
     slug: "ai-debator",
     heading: "AI Debator",
     type: "ai",

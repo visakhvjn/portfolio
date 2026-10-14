@@ -29,10 +29,10 @@ function isInternalHref(href: string) {
 function navLinkClass(active: boolean, mobile = false) {
   return mobile
     ? `rounded-lg px-3 py-3 text-left text-sm font-medium ${
-        active ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
+        active ? "bg-surface text-ink" : "text-muted hover:text-ink"
       }`
     : `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-        active ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
+        active ? "bg-surface text-ink" : "text-muted hover:text-ink"
       }`;
 }
 
@@ -129,23 +129,23 @@ export function Navbar({ onContactClick }: NavbarProps) {
   const logo = (
     <>
       {site.name.split(" ")[0]}
-      <span className="text-emerald-400">.</span>
+      <span className="text-accent">.</span>
     </>
   );
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#070b14]/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-canvas/90 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         {isHome ? (
           <button
             type="button"
             onClick={() => scrollTo("me")}
-            className="font-semibold tracking-tight text-white"
+            className="font-serif text-xl font-medium tracking-tight text-ink"
           >
             {logo}
           </button>
         ) : (
-          <Link href="/#me" className="font-semibold tracking-tight text-white">
+          <Link href="/#me" className="font-serif text-xl font-medium tracking-tight text-ink">
             {logo}
           </Link>
         )}
@@ -204,14 +204,14 @@ export function Navbar({ onContactClick }: NavbarProps) {
             <button
               type="button"
               onClick={onContactClick}
-              className="ml-1 rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              className="ml-2 rounded-lg bg-ink px-4 py-2 text-sm font-medium text-canvas transition hover:bg-ink-soft"
             >
               Contact
             </button>
           ) : (
             <a
               href="/#contact"
-              className="ml-1 rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              className="ml-2 rounded-lg bg-ink px-4 py-2 text-sm font-medium text-canvas transition hover:bg-ink-soft"
             >
               Contact
             </a>
@@ -221,7 +221,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
         <button
           type="button"
           aria-label="Toggle menu"
-          className="rounded-lg p-2 text-slate-300 md:hidden"
+          className="rounded-lg p-2 text-ink-soft md:hidden"
           onClick={() => setMenuOpen((o) => !o)}
         >
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -235,7 +235,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
       </div>
 
       {menuOpen && (
-        <div className="border-t border-white/5 bg-[#070b14] px-4 py-4 md:hidden">
+        <div className="border-t border-line bg-canvas px-5 py-4 md:hidden">
           <nav className="flex flex-col gap-1">
             {navItems.map((item) => {
               if ("href" in item && item.href) {
@@ -294,7 +294,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
                   setMenuOpen(false);
                   onContactClick();
                 }}
-                className="mt-2 rounded-lg bg-emerald-500 px-3 py-3 text-sm font-semibold text-slate-950"
+                className="mt-2 rounded-lg bg-ink px-3 py-3 text-sm font-medium text-canvas"
               >
                 Contact me
               </button>
@@ -302,7 +302,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
               <a
                 href="/#contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-2 block rounded-lg bg-emerald-500 px-3 py-3 text-center text-sm font-semibold text-slate-950"
+                className="mt-2 block rounded-lg bg-ink px-3 py-3 text-center text-sm font-medium text-canvas"
               >
                 Contact me
               </a>

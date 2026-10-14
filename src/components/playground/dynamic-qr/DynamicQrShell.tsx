@@ -9,8 +9,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useEffectEvent, useState } from "react";
 
 function navClass(active: boolean) {
-  return `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-    active ? "bg-white/10 text-white" : "text-slate-400 hover:text-white"
+  return `rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+    active ? "bg-card text-ink shadow-sm" : "text-muted hover:text-ink"
   }`;
 }
 
@@ -71,17 +71,17 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b border-white/10 px-4 py-3 sm:px-6">
+      <div className="shrink-0 border-b border-line bg-canvas px-4 py-3 sm:px-6">
         <div className="mx-auto flex max-w-[1600px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="mr-2 flex items-center gap-2 text-sm text-slate-500">
-              <Link href="/playground" className="hover:text-emerald-400">
+            <div className="mr-2 flex items-center gap-2 text-sm text-muted">
+              <Link href="/playground" className="hover:text-ink">
                 Playground
               </Link>
               <span aria-hidden>/</span>
-              <span className="text-slate-300">Dynamic QR</span>
+              <span className="text-ink-soft">Dynamic QR</span>
             </div>
-            <nav className="flex items-center gap-1">
+            <nav className="flex items-center gap-1 rounded-xl border border-line bg-surface p-1">
               <Link
                 href="/playground/dynamic-qr/new"
                 className={navClass(onNew)}
@@ -115,14 +115,14 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             {ready && user ? (
               <>
-                <span className="hidden max-w-[200px] truncate text-xs text-slate-500 sm:inline">
+                <span className="hidden max-w-[200px] truncate text-xs text-muted sm:inline">
                   {user.email}
                 </span>
                 <button
                   type="button"
                   onClick={() => void signOut()}
                   disabled={signingOut}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-white/20 hover:text-white disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-lg border border-line px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink disabled:opacity-60"
                 >
                   {signingOut ? (
                     <>
@@ -138,7 +138,7 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
               <button
                 type="button"
                 onClick={() => setAuthOpen(true)}
-                className="rounded-lg bg-emerald-500 px-3 py-2 text-xs font-semibold text-slate-950 transition hover:bg-emerald-400"
+                className="rounded-lg bg-ink px-3 py-2 text-xs font-medium text-canvas transition-colors hover:bg-ink-soft"
               >
                 Sign in
               </button>
@@ -151,13 +151,13 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
         {showLanding ? (
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-400/80">
+              <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
                 Playground · Dynamic QR
               </p>
-              <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <h1 className="mt-4 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
                 QR codes that redirect — and tell you who scanned.
               </h1>
-              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-400">
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
                 Point a QR at a short link on this site — not your final URL.
                 When someone scans, we log what we can (device, region, time),
                 then send them through. Change the destination later without
@@ -167,19 +167,19 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
                 <button
                   type="button"
                   onClick={() => setAuthOpen(true)}
-                  className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+                  className="rounded-lg bg-ink px-5 py-3 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft"
                 >
                   Sign in with Google
                 </button>
                 <Link
                   href="/playground/qr-generator"
-                  className="rounded-xl border border-white/10 px-5 py-3 text-sm font-medium text-slate-300 transition hover:border-white/20 hover:text-white"
+                  className="rounded-lg border border-line-strong bg-card px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-surface"
                 >
                   Need a static QR instead?
                 </Link>
               </div>
 
-              <div className="mt-14 grid gap-4 sm:grid-cols-3">
+              <div className="mt-16 grid gap-5 sm:grid-cols-3">
                 {[
                   {
                     title: "Create & encode",
@@ -196,12 +196,12 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+                    className="rounded-2xl border border-line bg-card p-6"
                   >
-                    <h2 className="text-sm font-semibold text-white">
+                    <h2 className="font-serif text-lg font-medium text-ink">
                       {item.title}
                     </h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
                       {item.body}
                     </p>
                   </div>
@@ -209,14 +209,14 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
               </div>
 
               <section className="mt-14">
-                <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                <h2 className="font-serif text-xl font-medium text-ink">
                   Static vs dynamic
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                <p className="mt-3 text-base leading-relaxed text-ink-soft">
                   Our{" "}
                   <Link
                     href="/playground/qr-generator"
-                    className="text-emerald-400 hover:underline"
+                    className="text-accent-strong underline-offset-4 hover:underline"
                   >
                     static QR generator
                   </Link>{" "}
@@ -228,40 +228,40 @@ export function DynamicQrShell({ children }: { children: React.ReactNode }) {
               </section>
 
               <section className="mt-10">
-                <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                <h2 className="font-serif text-xl font-medium text-ink">
                   What we track per scan
                 </h2>
-                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-slate-400 marker:text-emerald-400/80">
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-base leading-relaxed text-ink-soft marker:text-accent">
                   <li>Timestamp</li>
                   <li>Device type (mobile, desktop, tablet, bot heuristics)</li>
                   <li>Country, region, and city when the host sends geo headers (best on Vercel prod)</li>
                   <li>Referrer when the scanner&apos;s browser sends one</li>
                 </ul>
-                <p className="mt-3 text-sm text-slate-500">
+                <p className="mt-3 text-sm text-muted">
                   We don&apos;t show a full device fingerprint — just enough to
                   spot patterns in a chart, not to stalk individuals.
                 </p>
               </section>
 
-              <section className="mt-10 rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-4 font-mono text-xs text-slate-400">
-                <p className="text-slate-500">Flow</p>
+              <section className="mt-10 rounded-2xl border border-line bg-surface px-6 py-5 font-mono text-xs text-ink-soft">
+                <p className="font-sans text-xs font-medium uppercase tracking-[0.14em] text-muted">Flow</p>
                 <p className="mt-2">
                   QR →{" "}
-                  <span className="text-emerald-300/90">yoursite.com/r/menu-abc</span>{" "}
+                  <span className="text-accent-strong">yoursite.com/r/menu-abc</span>{" "}
                   → log scan →{" "}
-                  <span className="text-slate-300">https://your-menu.com</span>
+                  <span className="text-ink">https://your-menu.com</span>
                 </p>
               </section>
 
-              <div className="mt-12 border-t border-white/10 pt-8 text-center">
-                <p className="text-sm text-slate-500">
+              <div className="mt-16 border-t border-line pt-10 text-center">
+                <p className="text-sm text-muted">
                   Menus, event badges, slide decks, sticker tests — if you might
                   change the link later, go dynamic.
                 </p>
                 <button
                   type="button"
                   onClick={() => setAuthOpen(true)}
-                  className="mt-4 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+                  className="mt-4 rounded-lg bg-ink px-5 py-3 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft"
                 >
                   Get started
                 </button>

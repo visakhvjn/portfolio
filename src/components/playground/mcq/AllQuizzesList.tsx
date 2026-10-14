@@ -67,7 +67,7 @@ export function AllQuizzesList() {
 
   if (loading) {
     return (
-      <div className="flex h-full items-center justify-center text-sm text-slate-500">
+      <div className="flex h-full items-center justify-center text-sm text-muted">
         Loading quizzes…
       </div>
     );
@@ -75,7 +75,7 @@ export function AllQuizzesList() {
 
   if (error) {
     return (
-      <div className="flex h-full items-center justify-center px-4 text-sm text-rose-300">
+      <div className="flex h-full items-center justify-center px-4 text-sm text-red-700">
         {error}
       </div>
     );
@@ -85,35 +85,35 @@ export function AllQuizzesList() {
     <div className="h-full overflow-y-auto px-4 py-6 sm:px-6">
       <div className="mx-auto max-w-3xl">
         <div className="flex items-center justify-between gap-3">
-          <h1 className="text-xl font-semibold text-white">All Quizzes</h1>
+          <h1 className="font-serif text-3xl font-medium tracking-tight text-ink">All Quizzes</h1>
           <Link
             href="/playground/mcq-quiz/new"
-            className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+            className="rounded-lg bg-ink px-3 py-2 text-sm font-medium text-canvas transition-colors hover:bg-ink-soft"
           >
             New Quiz
           </Link>
         </div>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-muted">
           Click a quiz to see responses. Copy the share link for takers.
         </p>
 
         {quizzes.length === 0 ? (
-          <div className="mt-8 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-6 py-10 text-center text-sm text-slate-500">
+          <div className="mt-8 rounded-2xl border border-dashed border-line-strong bg-surface px-6 py-10 text-center text-sm text-muted">
             No quizzes yet. Create one from New Quiz.
           </div>
         ) : (
           <ul className="mt-6 space-y-3">
             {quizzes.map((quiz) => (
               <li key={quiz.id}>
-                <div className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-4 sm:flex-row sm:items-center sm:justify-between">
                   <Link
                     href={`/playground/mcq-quiz/${quiz.slug}/responses`}
                     className="min-w-0 flex-1 transition hover:opacity-90"
                   >
-                    <h2 className="truncate font-semibold text-white">
+                    <h2 className="truncate font-serif text-lg font-medium text-ink">
                       {quiz.title}
                     </h2>
-                    <p className="mt-1 text-xs text-slate-500">
+                    <p className="mt-1 text-xs text-muted">
                       {new Date(quiz.created_at).toLocaleString()} ·{" "}
                       {quiz.attempt_count} response
                       {quiz.attempt_count === 1 ? "" : "s"}
@@ -123,13 +123,13 @@ export function AllQuizzesList() {
                     <button
                       type="button"
                       onClick={() => copyShare(quiz.slug)}
-                      className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-400 transition hover:border-emerald-400/40 hover:text-emerald-300"
+                      className="rounded-lg border border-line px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink"
                     >
                       Copy link
                     </button>
                     <Link
                       href={`/playground/mcq-quiz/${quiz.slug}/responses`}
-                      className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-300 transition hover:border-white/20 hover:text-white"
+                      className="rounded-lg border border-line px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:bg-surface hover:text-ink"
                     >
                       Responses
                     </Link>

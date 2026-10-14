@@ -30,23 +30,26 @@ export default function ProjectsIndexPage() {
   const allProjects = getAllProjects();
 
   return (
-    <div className="py-8 sm:py-12">
+    <div className="py-10 sm:py-16">
       <Link
         href="/#projects"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 transition hover:text-emerald-400"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition hover:text-ink"
       >
         <span aria-hidden>←</span> Back to portfolio
       </Link>
-      <header className="mt-6">
-        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      <header className="mt-8">
+        <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
+          Work
+        </p>
+        <h1 className="mt-3 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
           Projects
         </h1>
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-400">
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
           Browse the work — open a live demo from the card or view details for the
           full story, stack, and roadmap.
         </p>
       </header>
-      <ul className="mt-10 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-12 grid auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {allProjects.map((project) => (
           <li key={project.slug} className="h-full">
             <ProjectCard project={project} />

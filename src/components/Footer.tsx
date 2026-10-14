@@ -19,6 +19,8 @@ const pageLinks = [
   { label: "Contact", href: "/#contact" },
 ] as const;
 
+const linkClass = "text-sm text-muted transition hover:text-ink";
+
 type FooterProps = {
   onContactClick?: () => void;
 };
@@ -27,34 +29,34 @@ export function Footer({ onContactClick }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 border-t border-white/10 pt-12 sm:mt-20 sm:pt-14">
+    <footer className="mt-16 border-t border-line pt-12 sm:mt-20 sm:pt-14">
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-12">
         <div>
           <Link
             href="/#me"
-            className="inline-block text-lg font-semibold tracking-tight text-white transition hover:text-emerald-300"
+            className="inline-block font-serif text-2xl font-medium tracking-tight text-ink"
           >
             {site.name.split(" ")[0]}
-            <span className="text-emerald-400">.</span>
+            <span className="text-accent">.</span>
           </Link>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-400">
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-soft">
             {site.title}
           </p>
-          <p className="mt-2 max-w-sm text-sm leading-relaxed text-slate-500">
+          <p className="mt-1 max-w-sm text-sm leading-relaxed text-muted">
             {site.tagline}
           </p>
           {onContactClick ? (
             <button
               type="button"
               onClick={onContactClick}
-              className="mt-6 inline-flex items-center justify-center rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              className="mt-6 inline-flex items-center justify-center rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-canvas transition hover:bg-ink-soft"
             >
               Get in touch
             </button>
           ) : (
             <Link
               href="/#contact"
-              className="mt-6 inline-flex items-center justify-center rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              className="mt-6 inline-flex items-center justify-center rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-canvas transition hover:bg-ink-soft"
             >
               Get in touch
             </Link>
@@ -62,25 +64,18 @@ export function Footer({ onContactClick }: FooterProps) {
         </div>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+          <h2 className="text-xs font-medium uppercase tracking-[0.14em] text-faint">
             Navigate
           </h2>
           <ul className="mt-4 space-y-2.5">
             {pageLinks.map((link) => (
               <li key={link.href}>
                 {link.href === "/#contact" && onContactClick ? (
-                  <button
-                    type="button"
-                    onClick={onContactClick}
-                    className="text-sm text-slate-400 transition hover:text-white"
-                  >
+                  <button type="button" onClick={onContactClick} className={linkClass}>
                     {link.label}
                   </button>
                 ) : (
-                  <Link
-                    href={link.href}
-                    className="text-sm text-slate-400 transition hover:text-white"
-                  >
+                  <Link href={link.href} className={linkClass}>
                     {link.label}
                   </Link>
                 )}
@@ -90,18 +85,13 @@ export function Footer({ onContactClick }: FooterProps) {
         </div>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+          <h2 className="text-xs font-medium uppercase tracking-[0.14em] text-faint">
             Connect
           </h2>
           <ul className="mt-4 space-y-2.5">
             {socialLinks.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-slate-400 transition hover:text-emerald-400"
-                >
+                <a href={link.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
                   {link.label}
                 </a>
               </li>
@@ -110,11 +100,11 @@ export function Footer({ onContactClick }: FooterProps) {
         </div>
       </div>
 
-      <div className="mt-12 flex flex-col gap-3 border-t border-white/10 py-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-12 flex flex-col gap-3 border-t border-line py-6 text-sm text-faint sm:flex-row sm:items-center sm:justify-between">
         <p>
           © {year} {site.name}. All rights reserved.
         </p>
-        <p className="text-slate-600">Built with Next.js · Based in India</p>
+        <p>Built with Next.js · Based in India</p>
       </div>
     </footer>
   );
